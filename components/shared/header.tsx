@@ -1,12 +1,8 @@
 import { type FC } from 'react';
-import { AlignJustify, Search, ShoppingCart, UserRound } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { AlignJustify, Search } from 'lucide-react';
 
-import LogoImage from '@/assets/images/logo-120.png';
 import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
-import { Container, Logo } from '.';
+import { CartButton, Container, Logo, ProfileButton } from '.';
 
 interface Props {
   className?: string;
@@ -15,35 +11,27 @@ interface Props {
 export const Header: FC<Props> = ({ className }) => {
   return (
     <header className={cn('bg-[#c1876b]', className)}>
-      <Container className='flex items-center justify-between py-3'>
+      <Container className='flex items-center justify-between py-1 md:py-3'>
         {/** Левая часть */}
-        <AlignJustify size={30} className='flex md:hidden text-white cursor-pointer' />
-        <Logo className='hidden md:flex' />
+        <AlignJustify
+          size={30}
+          className='flex md:hidden text-white cursor-pointer'
+        />
+
+        <Logo />
 
         {/** Средняя часть */}
         <span className='hidden md:flex'>Поиск</span>
-        <Link href='/' className='flex md:hidden'>
-          <Image
-            src={LogoImage}
-            alt='Logo'
-            width={44}
-            height={44}
-            placeholder='blur'
-          />
-        </Link>
 
         {/** Правая часть */}
         <div className='flex gap-3'>
-          <Search size={26} className='flex md:hidden text-white cursor-pointer' />
-          <UserRound size={26} className='flex md:hidden text-white cursor-pointer' />
-          <ShoppingCart size={26} className='flex md:hidden text-white cursor-pointer' />
+          <Search
+            size={26}
+            className='flex md:hidden text-white cursor-pointer'
+          />
 
-          <Button variant='outline' className='hidden md:flex'>
-            Войти
-          </Button>
-          <Button variant='outline' className='hidden md:flex'>
-            Корзина
-          </Button>
+          <ProfileButton />
+          <CartButton />
         </div>
       </Container>
     </header>

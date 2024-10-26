@@ -11,7 +11,7 @@ interface Props {
 
 export const Logo: FC<Props> = ({ className }) => {
   return (
-    <Link href='/' className={cn('gap-3 items-center', className)}>
+    <Link href='/' className={cn('flex gap-3 items-center', className)}>
       <Image
         src={LogoImage}
         alt='Logo'
@@ -20,8 +20,8 @@ export const Logo: FC<Props> = ({ className }) => {
         placeholder='blur'
         className='object-cover'
       />
-      <div className='flex flex-col text-white'>
-        <span className='text-2xl font-bold'>Пралине</span>
+      <div className='hidden sm:flex flex-col text-white text-center'>
+        <span className='text-sm md:text-xl font-bold uppercase'>Пралине</span>
         <span>кондитерская</span>
       </div>
     </Link>
