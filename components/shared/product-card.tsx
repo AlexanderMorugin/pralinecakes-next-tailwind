@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { type FC } from 'react';
+import { Plus } from 'lucide-react';
+
 import { Title } from '.';
 import { TProduct } from './product-list';
 import { Button } from '../ui/button';
-import { Plus } from 'lucide-react';
 
 export const ProductCard: FC<TProduct> = ({
   id,
@@ -35,7 +36,7 @@ export const ProductCard: FC<TProduct> = ({
       <div className='flex items-center justify-between px-4 pb-2'>
         <span>{price} р</span>
         <Button variant='cart' className='text-base font-bold'>
-          <Plus size={20} className='mr-1' />
+          <Plus size={20} />
           Добавить
         </Button>
       </div>
