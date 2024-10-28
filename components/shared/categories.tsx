@@ -1,17 +1,18 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { categories } from '@/prisma/constants';
 import { useCategoryId } from '@/store/category';
 import { type FC } from 'react';
 
-const categories = [
-  { id: 1, name: 'Шоколадные' },
-  { id: 2, name: 'Медовые' },
-  { id: 3, name: 'Бисквитные' },
-  { id: 4, name: 'Ореховые' },
-  { id: 5, name: 'Кремовые' },
-  { id: 6, name: 'Сырные' },
-];
+// const categories = [
+//   { id: 1, name: 'Шоколадные' },
+//   { id: 2, name: 'Медовые' },
+//   { id: 3, name: 'Бисквитные' },
+//   { id: 4, name: 'Ореховые' },
+//   { id: 5, name: 'Кремовые' },
+//   { id: 6, name: 'Сырные' },
+// ];
 
 interface Props {
   className?: string;
