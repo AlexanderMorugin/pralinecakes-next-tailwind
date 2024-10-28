@@ -16,7 +16,7 @@ export const ProductCard: FC<TProduct> = ({
   return (
     <Link
       href={`/product/${id}`}
-      className='flex flex-col border border-solid border-orange-600/50 rounded-lg overflow-hidden transition duration-300 group hover:shadow hover:shadow-lg hover:shadow-gray-400'
+      className='flex flex-col border border-solid border-orange-600/50 rounded-lg overflow-hidden transition duration-300 group hover:shadow-lg hover:shadow-gray-400'
     >
       <img
         src={imageUrl}

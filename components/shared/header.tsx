@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { AlignJustify, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { CartButton, Container, Logo, ProfileButton } from '.';
+import { CartButton, Container, Logo, ProfileButton, SearchBar } from '.';
 
 interface Props {
   className?: string;
@@ -21,7 +21,8 @@ export const Header: FC<Props> = ({ className }) => {
         <Logo />
 
         {/** Средняя часть */}
-        <span className='hidden md:flex'>Поиск</span>
+        {/* <span className='hidden md:flex'>Поиск</span> */}
+        <SearchBar className='hidden md:flex' />
 
         {/** Правая часть */}
         <div className='flex gap-3'>
