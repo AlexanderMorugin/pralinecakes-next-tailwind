@@ -240,7 +240,7 @@ export default function Home() {
       <Container className='mt-5'>
         <Title text='Торты' size='xl' className='font-bold' />
       </Container>
-      <TopBar />
+      {/* <TopBar /> */}
       <Container className='flex flex-col gap-8 mt-10 mb-5'>
         <ProductList title='Шоколадные' products={chocolate} categoryId={1} />
         <ProductList title='Медовые' products={honey} categoryId={2} />

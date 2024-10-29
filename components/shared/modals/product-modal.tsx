@@ -18,7 +18,7 @@ interface Props {
   className?: string;
 }
 
-export const ChooseProductModal: FC<Props> = ({ product, className }) => {
+export const ProductModal: FC<Props> = ({ product, className }) => {
   const router = useRouter();
 
   return (

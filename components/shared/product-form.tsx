@@ -16,9 +16,11 @@ interface Props {
   className?: string;
 }
 
-export const ProductForm: FC<Props> = ({ product, className
+export const ProductForm: FC<Props> = ({
+  product,
+  className,
   // onSubmit: _onSubmit
- }) => {
+}) => {
   // const { addCartItem, loading } = useCartStore((state) => state);
 
   // const firstItem = product.items[0];
@@ -42,19 +44,17 @@ export const ProductForm: FC<Props> = ({ product, className
   //   }
   // };
 
-
-
   return (
-    <div className={cn('flex flex-1', className)}>
+    <div className={cn('flex flex-col md:flex-row', className)}>
       <div className='flex flex-1 items-center justify-center relative w-full'>
         <img
           src={product.imageUrl}
           alt={product.name}
-          className='relative left-2 top-2 transition-all duration-300 z-10 w-[400px] h-[400px] object-cover rounded-full'
+          className='relative transition-all duration-300 z-10 w-full h-full object-cover'
         />
       </div>
 
-      <div className='w-[490px] bg-[#f7f6f5] p-7'>
+      <div className='w-full bg-[#f7f6f5] p-7 md:max-w-[400px]'>
         <Title text={product.name} size='md' className='font-extrabold mb-1' />
         <p>{product.description}</p>
 

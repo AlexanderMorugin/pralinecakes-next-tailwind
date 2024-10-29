@@ -13,5 +13,10 @@ export { ProductList } from './product-list';
 export { SearchBar } from './search-bar';
 export { Scroll } from './scroll';
 export { ProductForm } from './product-form';
+export { CartDrawer } from './cart-drawer';
+export { CartDrawerItem } from './cart-drawer-item';
+export { CountButton } from './count-button';
+export { CountIconButton } from './count-icon-button';
 
 export * from './modals';
+export * from './cart-item-details';
