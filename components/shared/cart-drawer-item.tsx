@@ -27,7 +27,7 @@ export const CartDrawerItem: FC<Props> = ({
   return (
     <li
       className={cn(
-        'flex bg-white p-5 gap-6',
+        'flex bg-white p-5 gap-6 mb-2',
         // { 'opacity-50 pointer-events-none': disabled },
         className
       )}

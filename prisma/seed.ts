@@ -29,25 +29,38 @@ async function up() {
   await prisma.product.createMany({
     data: products,
   });
+
+  await prisma.cart.createMany({
+    data: [
+      { userId: 1, totalAmount: 1450, token: '111' },
+      { userId: 2, totalAmount: 0, token: '222' },
+    ],
+  });
+
+  await prisma.cartItem.create({
+    data: {
+      productId: 1,
+      cartId: 1,
+      quantity: 2,
+    },
+  });
+
+  await prisma.cartItem.create({
+    data: {
+      productId: 2,
+      cartId: 1,
+      quantity: 4,
+    },
+  });
+
+  await prisma.cartItem.create({
+    data: {
+      productId: 3,
+      cartId: 1,
+      quantity: 3,
+    },
+  });
 }
-
-// await prisma.cart.createMany({
-//   data: [
-//     { userId: 1, totalAmount: 1450, token: '111' },
-//     { userId: 2, totalAmount: 0, token: '222' },
-//   ],
-// });
-
-// await prisma.cartItem.create({
-//   data: {
-//     productItemId: 1,
-//     cartId: 1,
-//     quantity: 2,
-//     ingredients: {
-//       connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
-//     },
-//   },
-// });
 
 //   await prisma.story.createMany({
 //     data: [

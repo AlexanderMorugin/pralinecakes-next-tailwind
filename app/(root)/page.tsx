@@ -1,4 +1,6 @@
-import { Container, ProductList, Title, TopBar } from '@/components/shared';
+import { Container, ProductList, Title, 
+  // TopBar
+ } from '@/components/shared';
 
 const chocolate = [
   {

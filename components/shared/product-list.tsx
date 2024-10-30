@@ -34,7 +34,7 @@ export const ProductList: FC<Props> = ({ title, products, categoryId }) => {
     if (intersection?.isIntersecting) {
       setCategoryId(categoryId);
     }
-  }, [intersection?.isIntersecting]);
+  }, [intersection?.isIntersecting, categoryId, setCategoryId]);
 
   return (
     <div className='flex flex-col gap-2' id={title} ref={intersectionRef}>

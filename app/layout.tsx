@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <head>
+      {/* <head>
         <link data-rh='true' rel='icon' href='/logo-120.png' />
-      </head>
+      </head> */}
       <body className={cn('flex flex-col min-h-screen', nunito.className)}>
         {children}
       </body>

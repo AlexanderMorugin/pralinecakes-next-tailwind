@@ -2,6 +2,7 @@
 
 import {
   PropsWithChildren,
+  useEffect,
   //  useState,
   type FC,
 } from 'react';
@@ -22,6 +23,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { CartDrawerItem } from '.';
+import { useCartStore } from '@/store';
 // import { CartDrawerItem, Title } from '.';
 // import { getCartItemDetails } from '@/lib';
 // import { ProductSize, ProductType } from '@/constants/constants';
@@ -30,6 +32,13 @@ import { CartDrawerItem } from '.';
 // import { useCart } from '@/hooks';
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
+  const { fetchCartItems, totalAmount, cartItems } = useCartStore(
+    (state) => state
+  );
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
   // const handleClickCountButton = (
   //   id: number,
   //   quantity: number,
@@ -53,40 +62,21 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
           <SheetDescription className='hidden' />
         </SheetHeader>
 
-        <ul className='flex flex-col gap-3 -mx-6 mt-5 overflow-auto'>
-          <CartDrawerItem
-            id={1}
-            imageUrl='https://pralinecakes.ru/_next/static/media/pastry-karamelno-orehovoe-s.46d9763e.jpeg'
-            name='Пирожное Карамельно-Ореховое'
-            description='Одно из самых вкусных пирожных нашей кондитерской! Нежнейшие, сочные, шоколадные коржи бисквита пропитанные медом, с прослойками из мягкого, сливочно-творожного крема и вареного сгущенного молока. На самый нижний бисквит выложен немного соленый, бланшированный арахис, сдобренный густой карамелью.'
-            price={550}
-            // handleClickCountButton={(type) =>
-            //   handleClickCountButton(item.id, item.quantity, type)
-            // }
-            // onClickRemove={() => removeCartItem(item.id)}
-          />
-          <CartDrawerItem
-            id={2}
-            imageUrl='https://pralinecakes.ru/_next/static/media/pastry-karamelno-orehovoe-s.46d9763e.jpeg'
-            name='Пирожное Карамельно-Ореховое'
-            description='Одно из самых вкусных пирожных нашей кондитерской! Нежнейшие, сочные, шоколадные коржи бисквита пропитанные медом, с прослойками из мягкого, сливочно-творожного крема и вареного сгущенного молока. На самый нижний бисквит выложен немного соленый, бланшированный арахис, сдобренный густой карамелью.'
-            price={550}
-            // handleClickCountButton={(type) =>
-            //   handleClickCountButton(item.id, item.quantity, type)
-            // }
-            // onClickRemove={() => removeCartItem(item.id)}
-          />
-          <CartDrawerItem
-            id={3}
-            imageUrl='https://pralinecakes.ru/_next/static/media/pastry-karamelno-orehovoe-s.46d9763e.jpeg'
-            name='Пирожное Карамельно-Ореховое'
-            description='Одно из самых вкусных пирожных нашей кондитерской! Нежнейшие, сочные, шоколадные коржи бисквита пропитанные медом, с прослойками из мягкого, сливочно-творожного крема и вареного сгущенного молока. На самый нижний бисквит выложен немного соленый, бланшированный арахис, сдобренный густой карамелью.'
-            price={550}
-            // handleClickCountButton={(type) =>
-            //   handleClickCountButton(item.id, item.quantity, type)
-            // }
-            // onClickRemove={() => removeCartItem(item.id)}
-          />
+        <ul className='-mx-6 mt-5 overflow-auto flex-1'>
+          {cartItems.map((item) => (
+            <CartDrawerItem
+              key={item.id}
+              id={item.id}
+              imageUrl={item.imageUrl}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              // handleClickCountButton={(type) =>
+              //   handleClickCountButton(item.id, item.quantity, type)
+              // }
+              // onClickRemove={() => removeCartItem(item.id)}
+            />
+          ))}
         </ul>
 
         <SheetFooter className='-mx-6 bg-white p-8'>
@@ -96,7 +86,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                 Итого
                 <div className='flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2' />
               </span>
-              <span className='font-bold text-lg'>5555 руб</span>
+              <span className='font-bold text-lg'>{totalAmount} руб</span>
             </div>
 
             <Link href='/checkout'>
