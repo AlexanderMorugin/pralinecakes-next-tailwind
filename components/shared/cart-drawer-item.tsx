@@ -7,7 +7,7 @@ import { CountButton } from '.';
 
 interface Props extends CartItemProps {
   handleClickCountButton?: (type: 'plus' | 'minus') => void;
-  // onClickRemove: () => void;
+  onClickRemove: () => void;
   className?: string;
 }
 
@@ -18,9 +18,9 @@ export const CartDrawerItem: FC<Props> = ({
   name,
   description,
   price,
-  // quantity,
+  quantity,
   handleClickCountButton,
-  // onClickRemove,
+  onClickRemove,
   // disabled,
   className,
 }) => {
@@ -39,7 +39,7 @@ export const CartDrawerItem: FC<Props> = ({
         <hr className='my-3' />
 
         <div className='flex items-center justify-between'>
-          <CountButton onClick={handleClickCountButton} value={2} />
+          <CountButton onClick={handleClickCountButton} value={quantity} />
 
           <div className='flex items-center gap-3'>
             <CartItem.Price value={price} />
@@ -47,7 +47,7 @@ export const CartDrawerItem: FC<Props> = ({
             <Trash2Icon
               className='text-gray-400 cursor-pointer hover:text-gray-600'
               size={16}
-              // onClick={onClickRemove}
+              onClick={onClickRemove}
             />
           </div>
         </div>

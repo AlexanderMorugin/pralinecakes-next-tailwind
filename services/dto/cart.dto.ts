@@ -8,8 +8,6 @@ export interface CartDTO extends Cart {
   cartItems: CartItemDTO[];
 }
 
-// export interface CreateCartItemValues {
-//   productItemId: number;
-//   ingredients?: number[];
-//   // quantity: number;
-// }
+export interface CreateCartItemValues {
+  productId: number;
+}

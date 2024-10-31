@@ -32,21 +32,22 @@ import { useCartStore } from '@/store';
 // import { useCart } from '@/hooks';
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
-  const { fetchCartItems, totalAmount, cartItems } = useCartStore(
-    (state) => state
-  );
+  const { fetchCartItems, totalAmount, cartItems, updateItemQuantity, removeCartItem } =
+    useCartStore((state) => state);
 
   useEffect(() => {
     fetchCartItems();
+
   }, []);
-  // const handleClickCountButton = (
-  //   id: number,
-  //   quantity: number,
-  //   type: 'plus' | 'minus'
-  // ) => {
-  //   const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-  //   updateItemQuantity(id, newQuantity);
-  // };
+
+  const handleClickCountButton = (
+    id: number,
+    quantity: number,
+    type: 'plus' | 'minus'
+  ) => {
+    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+    updateItemQuantity(id, newQuantity);
+  };
 
   return (
     <Sheet>
@@ -54,8 +55,8 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
       <SheetContent className='flex flex-col justify-between pb-0 bg-[#f4f1ee]'>
         <SheetHeader>
           <SheetTitle>
-            В корзине
-            <span className='font-bold'>3 товара</span>
+            В корзине{' '}
+            <span className='font-bold'>{cartItems.length} товаров</span>
           </SheetTitle>
 
           {/** Скрываем ошибку в консоли по поводу Дескрипшн */}
@@ -71,10 +72,11 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
               name={item.name}
               description={item.description}
               price={item.price}
-              // handleClickCountButton={(type) =>
-              //   handleClickCountButton(item.id, item.quantity, type)
-              // }
-              // onClickRemove={() => removeCartItem(item.id)}
+              quantity={item.quantity}
+              handleClickCountButton={(type) =>
+                handleClickCountButton(item.id, item.quantity, type)
+              }
+              onClickRemove={() => removeCartItem(item.id)}
             />
           ))}
         </ul>

@@ -37,13 +37,13 @@ async function up() {
     ],
   });
 
-  await prisma.cartItem.create({
-    data: {
-      productId: 1,
-      cartId: 1,
-      quantity: 2,
-    },
-  });
+  // await prisma.cartItem.create({
+  //   data: {
+  //     productId: 1,
+  //     cartId: 1,
+  //     quantity: 2,
+  //   },
+  // });
 
   await prisma.cartItem.create({
     data: {
