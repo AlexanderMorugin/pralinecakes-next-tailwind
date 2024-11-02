@@ -1,14 +1,12 @@
 'use client';
 
 import { Product } from '@prisma/client';
-// import { ProductWithRelations } from '@/@types/prisma';
-// import { useCartStore } from '@/store/cart';
 import { type FC } from 'react';
-// import toast from 'react-hot-toast';
-// import { ChooseProductForm } from '.';
 import { cn } from '@/lib/utils';
 import { Title } from '.';
 import { Button } from '../ui';
+import { useCartStore } from '@/store';
+import toast from 'react-hot-toast';
 
 interface Props {
   product: Product;
@@ -16,33 +14,36 @@ interface Props {
   className?: string;
 }
 
+/**
+ * Компонент ProductForm - форма выбора продукта, используется в ProductModal
+ * @param {Product} product - продукт
+ * @returns
+ */
+
 export const ProductForm: FC<Props> = ({
   product,
   className,
-  // onSubmit: _onSubmit
+  onSubmit: _onSubmit,
 }) => {
-  // const { addCartItem, loading } = useCartStore((state) => state);
+  const { addCartItem, loading } = useCartStore((state) => state);
 
-  // const firstItem = product.items[0];
-  // const isProductWithItems = Boolean(firstItem.productType);
+  const onSubmit = async () => {
+    try {
+      await addCartItem({
+        productId: product.id,
+      });
 
-  // const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
-  //   try {
-  //     const itemId = productItemId ?? firstItem.id;
-
-  //     await addCartItem({
-  //       productItemId: itemId,
-  //       ingredients,
-  //     });
-
-  //     toast.success(product.name + ' успешно добавлен в корзину');
-  //     _onSubmit?.()
-  //     // router.back();
-  //   } catch (error) {
-  //     toast.error('Не удаллось добавить продукт в корзину');
-  //     console.log(error);
-  //   }
-  // };
+      toast.success(product.name + ' успешно добавлен в корзину', {
+        icon: '✅',
+      });
+      _onSubmit?.();
+    } catch (error) {
+      console.log('', error);
+      toast.error('Не удаллось добавить продукт в корзину', {
+        icon: '❌',
+      });
+    }
+  };
 
   return (
     <div className={cn('flex flex-col md:flex-row', className)}>
@@ -59,9 +60,9 @@ export const ProductForm: FC<Props> = ({
         <p>{product.description}</p>
 
         <Button
-          // loading={loading}
+          loading={loading}
           className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'
-          // onClick={() => onSubmit?.()}
+          onClick={() => onSubmit?.()}
         >
           Добавить в корзину за {product.price} р
         </Button>

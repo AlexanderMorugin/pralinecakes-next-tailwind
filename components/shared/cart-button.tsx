@@ -28,7 +28,7 @@ export const CartButton: FC<Props> = ({ className }) => {
           </span>
           <span className='h-full w-[1px] bg-black/30 mx-3' />
           <div className='flex items-center gap-2 transition duration-300 group-hover:opacity-0'>
-            <ShoppingCart size={16} strokeWidth={2} />
+            <ShoppingCart size={18} strokeWidth={2} />
             <b>5</b>
           </div>
           <ArrowRight

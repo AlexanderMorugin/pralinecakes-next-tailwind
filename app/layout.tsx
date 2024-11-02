@@ -1,4 +1,5 @@
 import { Nunito } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -21,6 +22,7 @@ export default function RootLayout({
       </head> */}
       <body className={cn('flex flex-col min-h-screen', nunito.className)}>
         {children}
+        <Toaster />
       </body>
     </html>
   );
