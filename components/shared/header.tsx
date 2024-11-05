@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { Suspense, type FC } from 'react';
 import { AlignJustify, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -21,8 +21,9 @@ export const Header: FC<Props> = ({ className }) => {
         <Logo />
 
         {/** Средняя часть */}
-        {/* <span className='hidden md:flex'>Поиск</span> */}
-        <SearchBar className='hidden md:flex' />
+        <Suspense>
+          <SearchBar className='hidden md:flex' />
+        </Suspense>
 
         {/** Правая часть */}
         <div className='flex gap-3'>
@@ -32,7 +33,9 @@ export const Header: FC<Props> = ({ className }) => {
           />
 
           <ProfileButton />
-          <CartButton />
+          <Suspense>
+            <CartButton />
+          </Suspense>
         </div>
       </Container>
     </header>

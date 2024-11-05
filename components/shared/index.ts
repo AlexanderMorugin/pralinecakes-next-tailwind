@@ -18,5 +18,6 @@ export { CartDrawerItem } from './cart-drawer-item';
 export { CountButton } from './count-button';
 export { CountIconButton } from './count-icon-button';
 
+export * from './skeleton';
 export * from './modals';
 export * from './cart-item-details';

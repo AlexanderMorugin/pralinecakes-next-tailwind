@@ -39,7 +39,7 @@ export const ProductForm: FC<Props> = ({
       _onSubmit?.();
     } catch (error) {
       console.log('', error);
-      toast.error('Не удаллось добавить продукт в корзину', {
+      toast.error(product.name + ' не удаллось добавить в корзину', {
         icon: '❌',
       });
     }
@@ -55,9 +55,15 @@ export const ProductForm: FC<Props> = ({
         />
       </div>
 
-      <div className='w-full bg-[#f7f6f5] p-7 md:max-w-[400px]'>
-        <Title text={product.name} size='md' className='font-extrabold mb-1' />
-        <p>{product.description}</p>
+      <div className='flex flex-col justify-between w-full bg-[#f7f6f5] p-7 md:max-w-[400px]'>
+        <div>
+          <Title
+            text={product.name}
+            size='md'
+            className='font-extrabold mb-1'
+          />
+          <p>{product.description}</p>
+        </div>
 
         <Button
           loading={loading}

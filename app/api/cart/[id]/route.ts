@@ -12,17 +12,19 @@ export async function PATCH(
     const token = await req.cookies.get('cartToken')?.value;
 
     if (!token) {
-      return NextResponse.json({ message: 'Cart Token Not Found' });
+      return NextResponse.json({ message: 'Cart Token Not Found'});
     }
 
-    const cartItem = await prisma.cart.findFirst({
+    const cartItem = await prisma.cartItem.findFirst({
       where: {
         id,
       },
     });
 
     if (!cartItem) {
-      return NextResponse.json({ message: 'Cart Item Not Found' });
+      return NextResponse.json({
+        message: '[API_CART_ID_PATCH] - Товар не найден',
+      });
     }
 
     await prisma.cartItem.update({

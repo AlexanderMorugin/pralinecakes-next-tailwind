@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { CartDrawerItem } from '.';
 import { useCartStore } from '@/store';
+// import { useCart } from '@/hooks/use-cart';
 // import { CartDrawerItem, Title } from '.';
 // import { getCartItemDetails } from '@/lib';
 // import { ProductSize, ProductType } from '@/constants/constants';
@@ -32,12 +33,17 @@ import { useCartStore } from '@/store';
 // import { useCart } from '@/hooks';
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
-  const { fetchCartItems, totalAmount, cartItems, updateItemQuantity, removeCartItem } =
-    useCartStore((state) => state);
+  // const { totalAmount, cartItems, updateItemQuantity, removeCartItem } = useCart();
+  const {
+    getCartItems,
+    totalAmount,
+    cartItems,
+    updateCartItemQuantity,
+    removeCartItem,
+  } = useCartStore((state) => state);
 
   useEffect(() => {
-    fetchCartItems();
-
+    getCartItems();
   }, []);
 
   const handleClickCountButton = (
@@ -45,8 +51,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
     quantity: number,
     type: 'plus' | 'minus'
   ) => {
+    // console.log(id, quantity, type)
     const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-    updateItemQuantity(id, newQuantity);
+    updateCartItemQuantity(id, newQuantity);
   };
 
   return (
@@ -55,8 +62,10 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
       <SheetContent className='flex flex-col justify-between pb-0 bg-[#f4f1ee]'>
         <SheetHeader>
           <SheetTitle>
-            В корзине{' '}
-            <span className='font-bold'>{cartItems.length} товаров</span>
+            <span>В корзине </span>
+            <span>
+              <b>{cartItems?.length}</b> товаров
+            </span>
           </SheetTitle>
 
           {/** Скрываем ошибку в консоли по поводу Дескрипшн */}

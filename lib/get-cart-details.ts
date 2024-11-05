@@ -24,7 +24,7 @@ export const getCartDetails = (data: CartDTO): ReturnProps => {
     imageUrl: item.product.imageUrl,
     price: item.product.price * item.quantity,
     disabled: false,
-  }));
+  })) as CartStateItem[];
 
   return {
     totalAmount: data.totalAmount,

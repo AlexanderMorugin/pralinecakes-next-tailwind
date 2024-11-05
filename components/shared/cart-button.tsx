@@ -1,14 +1,19 @@
-import { ArrowRight, ShoppingCart } from 'lucide-react';
+'use client';
+
+import { ArrowRight, LoaderCircle, ShoppingCart } from 'lucide-react';
 import { type FC } from 'react';
 
 import { CartDrawer } from '.';
 import { cn } from '@/lib/utils';
+import { useCartStore } from '@/store';
 
 interface Props {
   className?: string;
 }
 
 export const CartButton: FC<Props> = ({ className }) => {
+  const { totalAmount, cartItems, loading } = useCartStore((state) => state);
+
   return (
     <>
       <CartDrawer>
@@ -20,16 +25,26 @@ export const CartButton: FC<Props> = ({ className }) => {
         <div
           className={cn(
             'hidden md:inline-flex group relative bg-white/50 items-center justify-center rounded-md h-10 px-4 py-2 border border-input transition duration-300 hover:bg-primary',
+            { 'w-[120px]': cartItems.length === 0 },
             className
           )}
         >
-          <span className='font-bold transition duration-300 group-hover:text-white'>
-            1450 р
-          </span>
-          <span className='h-full w-[1px] bg-black/30 mx-3' />
+          {cartItems.length > 0 && (
+            <>
+              <span className='font-bold transition duration-300 group-hover:text-white'>
+                {totalAmount} р
+              </span>
+              <span className='h-full w-[1px] bg-black/30 mx-3' />
+            </>
+          )}
+
           <div className='flex items-center gap-2 transition duration-300 group-hover:opacity-0'>
-            <ShoppingCart size={18} strokeWidth={2} />
-            <b>5</b>
+            {loading ? (
+              <LoaderCircle size={18} className='animate-spin' />
+            ) : (
+              <ShoppingCart size={18} strokeWidth={2} />
+            )}
+            {cartItems.length > 0 && <b>{cartItems.length}</b>}
           </div>
           <ArrowRight
             size={20}

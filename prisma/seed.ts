@@ -1,6 +1,7 @@
 import { hashSync } from 'bcrypt';
 import { prisma } from './prisma-client';
-import { categories, products } from './constants';
+import { categories } from './categories';
+import { products } from './products';
 
 async function up() {
   await prisma.user.createMany({
@@ -32,32 +33,24 @@ async function up() {
 
   await prisma.cart.createMany({
     data: [
-      { userId: 1, totalAmount: 1450, token: '111' },
+      { userId: 1, totalAmount: 0, token: '111' },
       { userId: 2, totalAmount: 0, token: '222' },
     ],
   });
 
-  // await prisma.cartItem.create({
-  //   data: {
-  //     productId: 1,
-  //     cartId: 1,
-  //     quantity: 2,
-  //   },
-  // });
-
   await prisma.cartItem.create({
     data: {
-      productId: 2,
+      productId: 4,
       cartId: 1,
-      quantity: 4,
+      quantity: 3,
     },
   });
 
   await prisma.cartItem.create({
     data: {
-      productId: 3,
+      productId: 5,
       cartId: 1,
-      quantity: 3,
+      quantity: 4,
     },
   });
 }
@@ -126,8 +119,6 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
-  // await prisma.$executeRaw`TRUNCATE TABLE "ProductItem" RESTART IDENTITY CASCADE`;
-  // await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
 }
