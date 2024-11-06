@@ -90,7 +90,7 @@ export default function CheckoutPage() {
     <Container className='pt-5 md:pt-10'>
       <Title
         text='Оформление заказа'
-        className='font-extrabold mb-8 text-[26px] text-center md:text-left'
+        className='font-extrabold mb-4 text-[26px] text-center md:text-left md:mb-8'
       />
       {/* <FormProvider 
       {...form}

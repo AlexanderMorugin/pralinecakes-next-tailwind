@@ -17,10 +17,14 @@ export const CartButton: FC<Props> = ({ className }) => {
   return (
     <>
       <CartDrawer>
-        <ShoppingCart
-          size={26}
-          className='flex md:hidden text-white cursor-pointer'
-        />
+        <div className='relative flex text-white cursor-pointer md:hidden'>
+          <ShoppingCart size={26} />
+          {cartItems.length > 0 && (
+            <div className='absolute top-[-10px] right-[-10px] flex items-center justify-center w-auto px-2 py-1 rounded-full bg-[#ff0000] text-[10px] text-white font-bold'>
+              {cartItems.length}
+            </div>
+          )}
+        </div>
 
         <div
           className={cn(
