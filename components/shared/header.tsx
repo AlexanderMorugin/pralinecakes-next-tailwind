@@ -5,37 +5,60 @@ import { cn } from '@/lib/utils';
 import { CartButton, Container, Logo, ProfileButton, SearchBar } from '.';
 
 interface Props {
+  hasSearch?: boolean;
+  hasCart?: boolean;
+  hasCheckout?: boolean;
   className?: string;
 }
 
-export const Header: FC<Props> = ({ className }) => {
+export const Header: FC<Props> = ({
+  hasSearch = true,
+  hasCart = true,
+  hasCheckout = false,
+  className,
+}) => {
   return (
-    <header className={cn('bg-[#c1876b]', className)}>
-      <Container className='flex items-center justify-between py-1 md:py-3'>
+    <header
+      className={cn('bg-[#c1876b]', { 'bg-[#F4F1EE]': hasCheckout }, className)}
+    >
+      <Container
+        className={cn('flex items-center justify-between py-1 md:py-3', {
+          'border-b border-gray-300': hasCheckout,
+        })}
+      >
         {/** Левая часть */}
         <AlignJustify
           size={30}
-          className='flex md:hidden text-white cursor-pointer'
+          className={cn('flex md:hidden text-white cursor-pointer', {
+            'text-gray-800': hasCheckout,
+          })}
         />
 
-        <Logo />
+        <Logo hasCheckout={hasCheckout} />
 
         {/** Средняя часть */}
-        <Suspense>
-          <SearchBar className='hidden md:flex' />
-        </Suspense>
+        {hasSearch && (
+          <Suspense>
+            <SearchBar className='hidden md:flex' />
+          </Suspense>
+        )}
 
         {/** Правая часть */}
         <div className='flex gap-3'>
-          <Search
-            size={26}
-            className='flex md:hidden text-white cursor-pointer'
-          />
+          {hasSearch && (
+            <Search
+              size={26}
+              className='flex md:hidden text-white cursor-pointer'
+            />
+          )}
 
-          <ProfileButton />
-          <Suspense>
-            <CartButton />
-          </Suspense>
+          <ProfileButton hasCheckout={hasCheckout} />
+
+          {hasCart && (
+            <Suspense>
+              <CartButton />
+            </Suspense>
+          )}
         </div>
       </Container>
     </header>

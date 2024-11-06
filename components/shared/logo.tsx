@@ -6,21 +6,26 @@ import { cn } from '@/lib/utils';
 import LogoImage from '@/assets/images/logo-120.png';
 
 interface Props {
+  hasCheckout?: boolean;
   className?: string;
 }
 
-export const Logo: FC<Props> = ({ className }) => {
+export const Logo: FC<Props> = ({ hasCheckout, className }) => {
   return (
     <Link href='/' className={cn('flex gap-3 items-center', className)}>
       <Image
         src={LogoImage}
         alt='Logo'
-        width={52}
-        height={52}
+        width={42}
+        height={42}
         placeholder='blur'
         className='object-cover'
       />
-      <div className='hidden sm:flex flex-col text-white text-center'>
+      <div
+        className={cn('hidden sm:flex flex-col text-white text-center', {
+          'text-gray-800': hasCheckout,
+        })}
+      >
         <span className='text-sm md:text-xl font-bold uppercase'>Пралине</span>
         <span>кондитерская</span>
       </div>

@@ -1,13 +1,20 @@
 import { UserRound } from 'lucide-react';
 import { type FC } from 'react';
 import { Button } from '../ui/button';
+import { cn } from '@/lib/utils';
 
-export const ProfileButton: FC = () => {
+interface Props {
+  hasCheckout?: boolean;
+}
+
+export const ProfileButton: FC<Props> = ({ hasCheckout }) => {
   return (
     <>
       <UserRound
         size={26}
-        className='flex md:hidden text-white cursor-pointer'
+        className={cn('flex md:hidden text-white cursor-pointer', {
+          'text-gray-800': hasCheckout,
+        })}
       />
       <Button variant='outline' className='hidden md:flex'>
         <UserRound size={16} />
