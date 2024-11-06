@@ -21,14 +21,14 @@ export const CartDrawerItem: FC<Props> = ({
   quantity,
   handleClickCountButton,
   onClickRemove,
-  // disabled,
+  disabled,
   className,
 }) => {
   return (
     <li
       className={cn(
         'flex bg-white p-5 gap-6 mb-2',
-        // { 'opacity-50 pointer-events-none': disabled },
+        { 'opacity-50 pointer-events-none': disabled },
         className
       )}
     >

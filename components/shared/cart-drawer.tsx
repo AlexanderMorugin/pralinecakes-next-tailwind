@@ -1,14 +1,9 @@
 'use client';
 
-import {
-  PropsWithChildren,
-  useEffect,
-  //  useState,
-  type FC,
-} from 'react';
+import { PropsWithChildren, useEffect, type FC } from 'react';
 import {
   Sheet,
-  // SheetClose,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -18,18 +13,15 @@ import {
 } from '@/components/ui/sheet';
 import Link from 'next/link';
 import { Button } from '../ui';
-import {
-  // ArrowLeft,
-  ArrowRight,
-} from 'lucide-react';
-import { CartDrawerItem } from '.';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { CartDrawerItem, Title } from '.';
 import { useCartStore } from '@/store';
 // import { useCart } from '@/hooks/use-cart';
 // import { CartDrawerItem, Title } from '.';
 // import { getCartItemDetails } from '@/lib';
 // import { ProductSize, ProductType } from '@/constants/constants';
-// import ImageLogo from '@/public/logo-120.png';
-// import Image from 'next/image';
+import ImageLogo from '@/assets/images/logo-120.png';
+import Image from 'next/image';
 // import { useCart } from '@/hooks';
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
@@ -72,47 +64,72 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
           <SheetDescription className='hidden' />
         </SheetHeader>
 
-        <ul className='-mx-6 mt-5 overflow-auto flex-1'>
-          {cartItems.map((item) => (
-            <CartDrawerItem
-              key={item.id}
-              id={item.id}
-              imageUrl={item.imageUrl}
-              name={item.name}
-              description={item.description}
-              price={item.price}
-              quantity={item.quantity}
-              handleClickCountButton={(type) =>
-                handleClickCountButton(item.id, item.quantity, type)
-              }
-              onClickRemove={() => removeCartItem(item.id)}
+        {totalAmount > 0 && (
+          <>
+            <ul className='-mx-6 mt-5 overflow-auto flex-1'>
+              {cartItems.map((item) => (
+                <CartDrawerItem
+                  key={item.id}
+                  id={item.id}
+                  imageUrl={item.imageUrl}
+                  name={item.name}
+                  description={item.description}
+                  price={item.price}
+                  quantity={item.quantity}
+                  disabled={item.disabled}
+                  handleClickCountButton={(type) =>
+                    handleClickCountButton(item.id, item.quantity, type)
+                  }
+                  onClickRemove={() => removeCartItem(item.id)}
+                />
+              ))}
+            </ul>
+
+            <SheetFooter className='-mx-6 bg-white p-8'>
+              <div className='w-full'>
+                <div className='flex mb-4'>
+                  <span className='flex flex-1 text-lg text-neutral-500'>
+                    Итого
+                    <div className='flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2' />
+                  </span>
+                  <span className='font-bold text-lg'>{totalAmount} руб</span>
+                </div>
+
+                <Link href='/checkout'>
+                  <Button
+                    // loading={redirect}
+                    // onClick={() => setRedirect(true)}
+                    type='submit'
+                    className='w-full h-12 text-base'
+                  >
+                    Оформить заказ
+                    <ArrowRight className='w-5 ml-2' />
+                  </Button>
+                </Link>
+              </div>
+            </SheetFooter>
+          </>
+        )}
+
+        {!totalAmount && (
+          <div className='flex flex-col items-center justify-center w-72 mx-auto my-auto'>
+            <Image src={ImageLogo} alt='ImageLogo' width={120} height={120} />
+            <Title
+              size='sm'
+              className='text-center font-bold my-2'
+              text='Ваша корзина пуста'
             />
-          ))}
-        </ul>
-
-        <SheetFooter className='-mx-6 bg-white p-8'>
-          <div className='w-full'>
-            <div className='flex mb-4'>
-              <span className='flex flex-1 text-lg text-neutral-500'>
-                Итого
-                <div className='flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2' />
-              </span>
-              <span className='font-bold text-lg'>{totalAmount} руб</span>
-            </div>
-
-            <Link href='/checkout'>
-              <Button
-                // loading={redirect}
-                // onClick={() => setRedirect(true)}
-                type='submit'
-                className='w-full h-12 text-base'
-              >
-                Оформить заказ
-                <ArrowRight className='w-5 ml-2' />
-              </Button>
-            </Link>
+            <p className='text-center text-neutral-500 mb-5'>
+              Добавьте продукт, чтобы совершить заказ.
+            </p>
+            <SheetClose>
+              <div className='inline-flex items-center justify-center whitespace-nowrap rounded-md w-56 h-12 text-base bg-primary text-primary-foreground hover:bg-primary/90'>
+                <ArrowLeft className='w-5 mr-2' />
+                Вернуться назад
+              </div>
+            </SheetClose>
           </div>
-        </SheetFooter>
+        )}
       </SheetContent>
     </Sheet>
   );

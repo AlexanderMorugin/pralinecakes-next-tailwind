@@ -64,15 +64,38 @@ export const useCartStore = create<CartState>((set) => ({
     }
   },
 
-  removeCartItem: async (id: number) => {
-    try {
-      set({ loading: true, error: false });
-      const data = await Api.cart.removeCartItemService(id);
-      set(getCartDetails(data));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      set({ loading: false });
-    }
-  },
+//   removeCartItem: async (id: number) => {
+//     try {
+//       set({ loading: true, error: false });
+//       const data = await Api.cart.removeCartItemService(id);
+//       set(getCartDetails(data));
+//     } catch (error) {
+//       console.error(error);
+//     } finally {
+//       set({ loading: false });
+//     }
+//   },
+
+removeCartItem: async (id: number) => {
+  try {
+    set((state) => ({
+      loading: true,
+      error: false,
+      cartItems: state.cartItems.map((item) =>
+        item.id === id ? { ...item, disabled: true } : item
+      ),
+    }));
+    const data = await Api.cart.removeCartItemService(id);
+    set(getCartDetails(data));
+  } catch (error) {
+    console.error(error);
+    set({ error: true });
+  } finally {
+    set((state) => ({
+      loading: false,
+      cartItems: state.cartItems.map((item) => ({ ...item, disabled: false })),
+    }));
+  }
+},
 }));
+
