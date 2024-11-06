@@ -22,4 +22,4 @@ export { WhiteBlock } from './white-block';
 export * from './checkout';
 export * from './skeleton';
 export * from './modals';
-export * from './cart-item-details';
+export * as CartItem from './cart-item-details';

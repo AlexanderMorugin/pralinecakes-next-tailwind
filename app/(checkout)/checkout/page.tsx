@@ -3,6 +3,7 @@
 // import { useForm, FormProvider } from 'react-hook-form';
 // import { zodResolver } from '@hookform/resolvers/zod';
 import {
+  CheckoutCart,
   CheckoutSidebar,
   // CheckoutAddressForm,
   // CheckoutCart,
@@ -14,6 +15,7 @@ import {
 } from '@/components/shared';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useCartStore } from '@/store';
 // import { useCart } from '@/hooks';
 // import {
 //   checkoutFormSchema,
@@ -27,6 +29,13 @@ import { Textarea } from '@/components/ui/textarea';
 // import { Api } from '@/services/api-client';
 
 export default function CheckoutPage() {
+  const {
+    // getCartItems,
+    // totalAmount,
+    cartItems,
+    // updateCartItemQuantity,
+    // removeCartItem,
+  } = useCartStore((state) => state);
   // const [submiting, setSubmiting] = useState(false);
   // const { data: session } = useSession();
 
@@ -90,7 +99,7 @@ export default function CheckoutPage() {
     <Container className='pt-5 md:pt-10'>
       <Title
         text='Оформление заказа'
-        className='font-extrabold mb-4 text-[26px] text-center md:text-left md:mb-8'
+        className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
       />
       {/* <FormProvider 
       {...form}
@@ -101,9 +110,15 @@ export default function CheckoutPage() {
       <div className='flex flex-col md:flex-row gap-5'>
         {/** Левая сторона */}
         <div className='flex flex-col gap-5 w-full md:w-3/5 mb-5'>
-          <WhiteBlock title='1. Корзина' contentClassName='flex flex-col gap-5'>
+          <CheckoutCart
+            cartItems={cartItems}
+            // loading={loading}
+            // handleClickCountButton={handleClickCountButton}
+            // removeCartItem={removeCartItem}
+          />
+          {/* <WhiteBlock title='1. Корзина' contentClassName='flex flex-col gap-5'>
             sdfsdf
-          </WhiteBlock>
+          </WhiteBlock> */}
 
           <WhiteBlock title='2. Персональные данные'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>

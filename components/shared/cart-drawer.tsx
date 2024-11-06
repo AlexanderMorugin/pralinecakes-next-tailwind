@@ -43,7 +43,6 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
     quantity: number,
     type: 'plus' | 'minus'
   ) => {
-    // console.log(id, quantity, type)
     const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
     updateCartItemQuantity(id, newQuantity);
   };
@@ -51,9 +50,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Sheet>
       <SheetTrigger>{children}</SheetTrigger>
-      <SheetContent className='flex flex-col justify-between pb-0 bg-[#f4f1ee]'>
+      <SheetContent className='flex flex-col justify-between gap-0 pb-0 bg-[#f4f1ee]'>
         <SheetHeader>
-          <SheetTitle>
+          <SheetTitle className='pb-4'>
             <span>В корзине </span>
             <span>
               <b>{cartItems?.length}</b> товаров
@@ -66,7 +65,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 
         {totalAmount > 0 && (
           <>
-            <ul className='-mx-6 mt-5 overflow-auto flex-1'>
+            <ul className='-mx-6 overflow-auto flex-1'>
               {cartItems.map((item) => (
                 <CartDrawerItem
                   key={item.id}
@@ -85,7 +84,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
               ))}
             </ul>
 
-            <SheetFooter className='-mx-6 bg-white p-8'>
+            <SheetFooter className='-mx-6 bg-white px-8 py-4'>
               <div className='w-full'>
                 <div className='flex mb-4'>
                   <span className='flex flex-1 text-lg text-neutral-500'>

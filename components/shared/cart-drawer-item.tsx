@@ -1,20 +1,18 @@
 import { cn } from '@/lib/utils';
 import { type FC } from 'react';
-import * as CartItem from './cart-item-details';
+// import * as CartItem from './cart-item-details';
 import { CartItemProps } from './cart-item-details/cart-item-details.types';
 import { Trash2Icon } from 'lucide-react';
-import { CountButton } from '.';
+import { CartItem, CountButton } from '.';
 
 interface Props extends CartItemProps {
   handleClickCountButton?: (type: 'plus' | 'minus') => void;
-  onClickRemove: () => void;
+  onClickRemove?: () => void;
   className?: string;
 }
 
 export const CartDrawerItem: FC<Props> = ({
-  // id,
   imageUrl,
-  // details,
   name,
   description,
   price,
@@ -27,7 +25,7 @@ export const CartDrawerItem: FC<Props> = ({
   return (
     <li
       className={cn(
-        'flex bg-white p-5 gap-6 mb-2',
+        'flex bg-white p-5 gap-2 mb-2 sm:gap-6',
         { 'opacity-50 pointer-events-none': disabled },
         className
       )}
