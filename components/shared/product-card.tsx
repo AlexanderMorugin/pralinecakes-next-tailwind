@@ -5,40 +5,34 @@ import { Plus } from 'lucide-react';
 import { Title } from '.';
 import { TProduct } from './product-list';
 import { Button } from '../ui/button';
-// import toast from 'react-hot-toast';
-// import { useCartStore } from '@/store';
+import toast from 'react-hot-toast';
+import { useCartStore } from '@/store';
 
-export const ProductCard: FC<TProduct> = ({
-  product,
-  // id,
-  // imageUrl,
-  // name,
-  // description,
-  // price,
-}) => {
-  // const { addCartItem, loading } = useCartStore((state) => state);
+export const ProductCard: FC<TProduct> = ({ product }) => {
+  const { addCartItem, loading } = useCartStore((state) => state);
 
-  // const onSubmit = async () => {
-  //   try {
-  //     await addCartItem({
-  //       productId: product.id,
-  //     });
+  const onClick = async () => {
+    try {
+      await addCartItem({
+        productId: product.id,
+      });
 
-  //     toast.success(product.name + ' успешно добавлен в корзину', {
-  //       icon: '✅',
-  //     });
-  //   } catch (error) {
-  //     console.log('не удаллось добавить в корзину', error);
-  //     toast.error(product.name + ' не удаллось добавить в корзину', {
-  //       icon: '❌',
-  //     });
-  //   }
-  // };
+      toast.success(product.name + ' успешно добавлен в корзину', {
+        icon: '✅',
+      });
+    } catch (error) {
+      console.log('не удаллось добавить в корзину', error);
+      toast.error(product.name + ' не удаллось добавить в корзину', {
+        icon: '❌',
+      });
+    }
+  };
+
   return (
-    // <div className='relative'>
+    <div className='relative flex flex-col border border-solid border-orange-600/50 rounded-lg overflow-hidden transition duration-300 group hover:shadow-lg hover:shadow-gray-400'>
       <Link
         href={`/product/${product.id}`}
-        className='flex flex-col border border-solid border-orange-600/50 rounded-lg overflow-hidden transition duration-300 group hover:shadow-lg hover:shadow-gray-400'
+        // className=''
       >
         <img
           src={product.imageUrl}
@@ -57,18 +51,18 @@ export const ProductCard: FC<TProduct> = ({
         </div>
         <div className='flex items-center justify-between px-4 pb-2'>
           <span>{product.price} р</span>
-          <Button
+        </div>
+      </Link>
+
+      <Button
         variant='cart'
-        className='text-base font-bold'
-        // onSubmit={() => onSubmit()}
-        // loading={loading}
+        className='absolute bottom-1 right-2 z-20 text-base font-bold'
+        onClick={onClick}
+        loading={loading}
       >
         <Plus size={20} />
         Добавить
       </Button>
-        </div>
-      </Link>
-
-    // </div>
+    </div>
   );
 };

@@ -7,6 +7,7 @@ import { Title } from '.';
 import { Button } from '../ui';
 import { useCartStore } from '@/store';
 import toast from 'react-hot-toast';
+import { ArrowRight } from 'lucide-react';
 
 interface Props {
   product: Product;
@@ -55,7 +56,7 @@ export const ProductForm: FC<Props> = ({
         />
       </div>
 
-      <div className='flex flex-col justify-between w-full bg-[#f7f6f5] p-7 md:max-w-[400px]'>
+      <div className='flex flex-col justify-between w-full bg-[#f7f6f5] p-3 md:max-w-[400px] md:p-7'>
         <div>
           <Title
             text={product.name}
@@ -63,14 +64,18 @@ export const ProductForm: FC<Props> = ({
             className='font-extrabold mb-1'
           />
           <p>{product.description}</p>
+          <p className='flex w-full justify-end'>
+            цена:&nbsp;<b>{product.price}</b>&nbsp;р
+          </p>
         </div>
 
         <Button
           loading={loading}
-          className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'
+          className='h-[55px] px-4 text-base rounded-[18px] w-full mt-10 md:px-10'
           onClick={() => onSubmit?.()}
         >
-          Добавить в корзину за {product.price} р
+          Добавить в корзину
+          <ArrowRight className='w-5 ml-2' />
         </Button>
       </div>
     </div>
