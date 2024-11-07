@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-export const CartItemInfo: FC<Props> = ({ name, details, className }) => {
+export const CartItemDetailsInfo: FC<Props> = ({ name, details, className }) => {
   return (
     <div
       className={cn('flex flex-col justify-between', className)}

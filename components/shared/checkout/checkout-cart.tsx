@@ -4,22 +4,11 @@ import { CheckoutCartItem, WhiteBlock } from '..';
 
 interface Props {
   cartItems: CartStateItem[];
-  // loading?: boolean;
 }
 
-export const CheckoutCart: FC<Props> = ({
-  cartItems,
-  // handleClickCountButton,
-  // removeCartItem,
-  // loading,
-}) => {
+export const CheckoutCart: FC<Props> = ({ cartItems }) => {
   return (
     <WhiteBlock title='1. Корзина' contentClassName='flex flex-col gap-5'>
-      {/* // {loading
-      //   ? [...Array(4)].map((_, index) => (
-      //       <CheckoutItemSkeleton key={index} className='h-20' />
-      //     ))
-      //   :  */}
       <ul className='flex flex-col gap-5'>
         {cartItems.map((item) => (
           <CheckoutCartItem
