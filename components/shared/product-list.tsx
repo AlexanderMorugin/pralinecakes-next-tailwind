@@ -11,16 +11,10 @@ import { Product } from '@prisma/client';
 
 export type TProduct = {
   product: Product
-  // id: number;
-  // imageUrl: string;
-  // name: string;
-  // description: string;
-  // price: number;
 };
 
 interface Props {
   title: string;
-  // products: TProduct[];
   products: Product[];
   categoryId: number;
 }
@@ -43,18 +37,13 @@ export const ProductList: FC<Props> = ({ title, products, categoryId }) => {
 
   return (
     <li className='flex flex-col gap-2' id={title} ref={intersectionRef}>
-      <Title text={title} size='lg' className='font-bold px-6 mt-[100px]' />
+      <Title text={title} size='lg' className='font-bold px-6 mt-[70px]' />
       <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
         {products.map((product) => (
           // <ProductCardSkeleton key={product.id} />
           <ProductCard
             key={product.id}
             product={product}
-            // id={product.id}
-            // imageUrl={product.imageUrl}
-            // name={product.name}
-            // description={product.description}
-            // price={product.price}
           />
         ))}
       </ul>

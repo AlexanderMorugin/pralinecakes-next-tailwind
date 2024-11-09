@@ -5,19 +5,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CheckoutAddressForm,
   CheckoutCart,
+  CheckoutModal,
   CheckoutPersonalForm,
   CheckoutSidebar,
   Container,
   Title,
-  WhiteBlock,
 } from '@/components/shared';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { useCart } from '@/hooks/use-cart';
 import {
   checkoutFormSchema,
   CheckoutFormValues,
 } from '@/components/shared/checkout/checkout-form-schema';
+import { useState } from 'react';
 
 // import {
 //   checkoutFormSchema,
@@ -32,6 +31,15 @@ import {
 
 export default function CheckoutPage() {
   const { totalAmount, cartItems } = useCart();
+  const [showModal, setShowModal] = useState(false);
+  const [dataModal, setDataModal] = useState<CheckoutFormValues>({
+    email: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    address: '',
+    comment: '',
+  });
   // const [submiting, setSubmiting] = useState(false);
   // const { data: session } = useSession();
 
@@ -66,7 +74,9 @@ export default function CheckoutPage() {
   // }, [session]);
 
   const onSubmit = (data: CheckoutFormValues) => {
-    console.log('ON SUBMIT');
+    console.log(data, cartItems, totalAmount);
+    setShowModal(true);
+    setDataModal(data);
   };
 
   // const onSubmit = async (data: CheckoutFormValues) => {
@@ -96,37 +106,41 @@ export default function CheckoutPage() {
   // };
 
   return (
-    <Container className='pt-5 md:pt-10'>
-      <Title
-        text='Оформление заказа'
-        className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
-      />
+    <>
+      <Container className='pt-5 md:pt-10'>
+        <Title
+          text='Оформление заказа'
+          className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
+        />
 
-      <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='flex flex-col md:flex-row gap-5'>
-            {/** Левая сторона */}
-            <div className='flex flex-col gap-5 w-full md:w-3/5 mb-5'>
-              <CheckoutCart cartItems={cartItems} />
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className='flex flex-col md:flex-row gap-5'>
+              {/** Левая сторона */}
+              <div className='flex flex-col gap-5 w-full md:w-3/5 mb-5'>
+                <CheckoutCart cartItems={cartItems} />
 
-              <CheckoutPersonalForm
-              // className={loading ? 'opacity-40 pointer-events-none' : ''}
-              />
+                <CheckoutPersonalForm
+                // className={loading ? 'opacity-40 pointer-events-none' : ''}
+                />
 
-              <CheckoutAddressForm
-              // className={loading ? 'opacity-40 pointer-events-none' : ''}
+                <CheckoutAddressForm
+                // className={loading ? 'opacity-40 pointer-events-none' : ''}
+                />
+              </div>
+
+              {/** Правая сторона */}
+              <CheckoutSidebar
+                totalAmount={totalAmount}
+
+                // loading={loading || submiting}
               />
             </div>
+          </form>
+        </FormProvider>
+      </Container>
 
-            {/** Правая сторона */}
-            <CheckoutSidebar
-              totalAmount={totalAmount}
-
-              // loading={loading || submiting}
-            />
-          </div>
-        </form>
-      </FormProvider>
-    </Container>
+      <CheckoutModal showModal={showModal} data={dataModal} />
+    </>
   );
 }

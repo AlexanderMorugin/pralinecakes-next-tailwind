@@ -2,13 +2,9 @@
 
 import { type FC } from 'react';
 import { FormInput, FormTextarea, WhiteBlock } from '..';
-import { useFormContext } from 'react-hook-form';
+// import { useFormContext } from 'react-hook-form';
 
-interface Props {
-  className?: string;
-}
-
-export const CheckoutAddressForm: FC<Props> = ({ className }) => {
+export const CheckoutAddressForm: FC = () => {
   // const { control } = useFormContext();
 
   return (
@@ -19,8 +15,6 @@ export const CheckoutAddressForm: FC<Props> = ({ className }) => {
           className='text-base'
           placeholder='Адрес доставки...'
         />
-
-
 
         <FormTextarea
           name='comment'

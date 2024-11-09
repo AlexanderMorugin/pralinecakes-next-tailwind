@@ -4,3 +4,7 @@ export { CheckoutItemDetails } from './checkout-item-details';
 export { CheckoutCartItem } from './checkout-cart-item';
 export { CheckoutPersonalForm } from './checkout-personal-form';
 export { CheckoutAddressForm } from './checkout-address-form';
+export { CheckoutModal } from './checkout-modal';
+export { СheckoutSendForm } from './checkout-send-form';
+export { CheckoutSendPersonalForm } from './checkout-send-personal-form';
+export { CheckoutSendCart } from './checkout-send-cart';

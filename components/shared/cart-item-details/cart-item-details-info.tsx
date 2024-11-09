@@ -3,7 +3,7 @@ import { type FC } from 'react';
 
 interface Props {
   name: string;
-  details: string;
+  details?: string;
   className?: string;
 }
 

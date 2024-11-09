@@ -2,10 +2,12 @@ import { cn } from '@/lib/utils';
 import { type FC } from 'react';
 
 interface Props {
-  src: string;
+  src?: string;
   className?: string;
 }
 
 export const CartItemDetailsImage: FC<Props> = ({ src, className }) => {
-  return <img className={cn('w-[60px] h-[60px]', className)} src={src} />;
+  return (
+    src && <img className={cn('w-[60px] h-[60px]', className)} src={src} />
+  );
 };

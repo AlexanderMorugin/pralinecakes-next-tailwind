@@ -56,7 +56,7 @@ export const ProductCard: FC<TProduct> = ({ product }) => {
 
       <Button
         variant='cart'
-        className='absolute bottom-1 right-2 z-20 text-base font-bold'
+        className='absolute bottom-1 right-2 z-10 text-base font-bold'
         onClick={onClick}
         loading={loading}
       >

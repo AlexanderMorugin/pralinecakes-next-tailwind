@@ -7,6 +7,7 @@ import { CartItem } from '..';
 interface Props extends CartItemProps {
   onClickRemove?: () => void;
   handleClickCountButton?: (type: 'plus' | 'minus') => void;
+  isCheckoutSendCart?: boolean
   className?: string;
 }
 
@@ -16,12 +17,14 @@ export const CheckoutCartItem: FC<Props> = ({
   description,
   price,
   quantity,
+  isCheckoutSendCart = false,
   className,
 }) => {
   return (
     <li
       className={cn(
         'flex flex-col border-b border-gray-100 pb-3 sm:flex-row',
+        {'flex-row pb-1': isCheckoutSendCart},
         className
       )}
     >
@@ -32,7 +35,7 @@ export const CheckoutCartItem: FC<Props> = ({
 
       <div className='flex items-center justify-end gap-2 ml-3'>
         <span className='text-[14px] text-gray-800'>{quantity} шт</span>
-        <Equal size={14} className='text-gray-400' />
+        {price && <Equal size={14} className='text-gray-400' />}
         <CartItem.Price value={price} />
       </div>
     </li>
