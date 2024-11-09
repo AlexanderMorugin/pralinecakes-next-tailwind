@@ -11,14 +11,15 @@ import { type FC } from 'react';
 import { CheckoutFormValues } from './checkout-form-schema';
 import { СheckoutSendForm } from '.';
 import { useRouter } from 'next/navigation';
+import { CartItem } from '@prisma/client';
 
 interface Props {
-  data: CheckoutFormValues;
   showModal: boolean;
+  data: CheckoutFormValues;
   className?: string;
 }
 
-export const CheckoutModal: FC<Props> = ({ data, showModal, className }) => {
+export const CheckoutModal: FC<Props> = ({ showModal, data, className }) => {
   const router = useRouter();
 
   return (

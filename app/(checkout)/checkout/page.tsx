@@ -30,9 +30,9 @@ import { useState } from 'react';
 // import { Api } from '@/services/api-client';
 
 export default function CheckoutPage() {
-  const { totalAmount, cartItems } = useCart();
+  const { totalAmount, cartItems, loading } = useCart();
   const [showModal, setShowModal] = useState(false);
-  const [dataModal, setDataModal] = useState<CheckoutFormValues>({
+  const [personalInfo, setPersonalInfo] = useState<CheckoutFormValues>({
     email: '',
     firstName: '',
     lastName: '',
@@ -74,9 +74,8 @@ export default function CheckoutPage() {
   // }, [session]);
 
   const onSubmit = (data: CheckoutFormValues) => {
-    console.log(data, cartItems, totalAmount);
     setShowModal(true);
-    setDataModal(data);
+    setPersonalInfo(data);
   };
 
   // const onSubmit = async (data: CheckoutFormValues) => {
@@ -118,29 +117,33 @@ export default function CheckoutPage() {
             <div className='flex flex-col md:flex-row gap-5'>
               {/** Левая сторона */}
               <div className='flex flex-col gap-5 w-full md:w-3/5 mb-5'>
-                <CheckoutCart cartItems={cartItems} />
+                <CheckoutCart cartItems={cartItems} loading={loading} totalAmount={totalAmount}/>
 
                 <CheckoutPersonalForm
-                // className={loading ? 'opacity-40 pointer-events-none' : ''}
+                  className={
+                    loading || !totalAmount
+                      ? 'opacity-40 pointer-events-none'
+                      : ''
+                  }
                 />
 
                 <CheckoutAddressForm
-                // className={loading ? 'opacity-40 pointer-events-none' : ''}
+                  className={
+                    loading || !totalAmount
+                      ? 'opacity-40 pointer-events-none'
+                      : ''
+                  }
                 />
               </div>
 
               {/** Правая сторона */}
-              <CheckoutSidebar
-                totalAmount={totalAmount}
-
-                // loading={loading || submiting}
-              />
+              <CheckoutSidebar totalAmount={totalAmount} loading={loading} />
             </div>
           </form>
         </FormProvider>
       </Container>
 
-      <CheckoutModal showModal={showModal} data={dataModal} />
+      <CheckoutModal showModal={showModal} data={personalInfo} />
     </>
   );
 }

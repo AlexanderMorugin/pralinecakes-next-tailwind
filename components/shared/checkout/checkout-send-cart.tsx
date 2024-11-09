@@ -4,9 +4,11 @@ import { type FC } from 'react';
 
 import { CheckoutCartItem } from '..';
 import { useCart } from '@/hooks/use-cart';
+import { useTotalPrice } from '@/hooks/use-total-price';
 
 export const CheckoutSendCart: FC = () => {
   const { totalAmount, cartItems } = useCart();
+  const { totalPrice } = useTotalPrice(totalAmount);
   return (
     <>
       <span>Заказ</span>
@@ -21,10 +23,8 @@ export const CheckoutSendCart: FC = () => {
         ))}
       </ul>
       <div className='flex justify-between py-4'>
-        <span>Сумма заказа:</span>
-        <span>
-          <b>{totalAmount}</b> р
-        </span>
+        <span>Сумма к оплате:</span>
+        <span className='font-bold'>{totalPrice} р</span>
       </div>
     </>
   );
