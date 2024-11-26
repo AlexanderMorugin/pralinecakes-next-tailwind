@@ -17,17 +17,8 @@ import {
   CheckoutFormValues,
 } from '@/components/shared/checkout/checkout-form-schema';
 import { useState } from 'react';
-
-// import {
-//   checkoutFormSchema,
-//   CheckoutFormValues,
-// } from '@/components/shared/checkout/checkout-form-schema';
-// import { createOrder } from '@/app/actions';
-// import toast from 'react-hot-toast';
-// import { Fish, FishOff } from 'lucide-react';
-// import { useEffect, useState } from 'react';
-// import { useSession } from 'next-auth/react';
-// import { Api } from '@/services/api-client';
+import { createOrder } from '@/app/api/actions';
+import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
   const { totalAmount, cartItems, loading } = useCart();
@@ -40,11 +31,7 @@ export default function CheckoutPage() {
     address: '',
     comment: '',
   });
-  // const [submiting, setSubmiting] = useState(false);
-  // const { data: session } = useSession();
-
-  // const { totalAmount, items, updateItemQuantity, removeCartItem, loading } =
-  //   useCart();
+  const [submiting, setSubmiting] = useState(false);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
@@ -58,51 +45,27 @@ export default function CheckoutPage() {
     },
   });
 
-  // useEffect(() => {
-  //   async function fetchUserInfo() {
-  //     const data = await Api.auth.getMe();
-  //     const [firstName, lastName] = data.fullName.split(' ');
+  const onSubmit = async (data: CheckoutFormValues) => {
+    try {
+      setSubmiting(true);
+      setShowModal(true);
+      setPersonalInfo(data);
 
-  //     form.setValue('firstName', firstName);
-  //     form.setValue('lastName', lastName);
-  //     form.setValue('email', data.email);
-  //   }
+      const url = await createOrder(data);
 
-  //   if (session) {
-  //     fetchUserInfo();
-  //   }
-  // }, [session]);
+      toast.success('Заказ успешно оформлен', {
+        icon: '✅',
+      });
 
-  const onSubmit = (data: CheckoutFormValues) => {
-    setShowModal(true);
-    setPersonalInfo(data);
+      if (url) {
+        location.href = url;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Не удалось создать заказ', { icon: '❌' });
+      setSubmiting(false);
+    }
   };
-
-  // const onSubmit = async (data: CheckoutFormValues) => {
-  //   try {
-  //     setSubmiting(true);
-  //     const url = await createOrder(data);
-
-  //     toast.success('Заказ успешно оформлен', { icon: <Fish /> });
-
-  //     if (url) {
-  //       location.href = url;
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     setSubmiting(false);
-  //     toast.error('Не удалось отправить заказ', { icon: <FishOff /> });
-  //   }
-  // };
-
-  // const handleClickCountButton = (
-  //   id: number,
-  //   quantity: number,
-  //   type: 'plus' | 'minus'
-  // ) => {
-  //   const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-  //   // updateItemQuantity(id, newQuantity);
-  // };
 
   return (
     <>
@@ -117,7 +80,11 @@ export default function CheckoutPage() {
             <div className='flex flex-col md:flex-row gap-5'>
               {/** Левая сторона */}
               <div className='flex flex-col gap-5 w-full md:w-3/5 mb-5'>
-                <CheckoutCart cartItems={cartItems} loading={loading} totalAmount={totalAmount}/>
+                <CheckoutCart
+                  cartItems={cartItems}
+                  loading={loading}
+                  totalAmount={totalAmount}
+                />
 
                 <CheckoutPersonalForm
                   className={
@@ -137,7 +104,10 @@ export default function CheckoutPage() {
               </div>
 
               {/** Правая сторона */}
-              <CheckoutSidebar totalAmount={totalAmount} loading={loading} />
+              <CheckoutSidebar
+                totalAmount={totalAmount}
+                loading={loading || submiting}
+              />
             </div>
           </form>
         </FormProvider>

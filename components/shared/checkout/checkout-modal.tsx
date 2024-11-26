@@ -11,7 +11,6 @@ import { type FC } from 'react';
 import { CheckoutFormValues } from './checkout-form-schema';
 import { СheckoutSendForm } from '.';
 import { useRouter } from 'next/navigation';
-import { CartItem } from '@prisma/client';
 
 interface Props {
   showModal: boolean;
@@ -24,7 +23,12 @@ export const CheckoutModal: FC<Props> = ({ showModal, data, className }) => {
 
   return (
     <Dialog open={Boolean(showModal)} onOpenChange={() => router.back()}>
-      <DialogContent className={cn('p-5 w-full max-h-full overflow-auto bg-white', className)}>
+      <DialogContent
+        className={cn(
+          'p-5 w-full max-h-full overflow-auto bg-white',
+          className
+        )}
+      >
         <DialogTitle className='hidden' />
         <DialogDescription className='flex flex-col text-base text-black'>
           <span className='text-lg font-bold'>Благодарим за заказ!</span>

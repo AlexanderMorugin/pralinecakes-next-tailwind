@@ -18,6 +18,7 @@ export { CountButton } from './count-button';
 export { CountIconButton } from './count-icon-button';
 export { WhiteBlock } from './white-block';
 
+export * from './resend-templates';
 export * from './form';
 export * from './checkout';
 export * from './skeleton';
