@@ -1,8 +1,8 @@
 import { Nunito } from 'next/font/google';
-import { Toaster } from 'react-hot-toast';
 
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { Providers } from '@/components/shared/providers';
 
 const nunito = Nunito({
   subsets: ['cyrillic'],
@@ -21,8 +21,7 @@ export default function RootLayout({
         <link data-rh='true' rel='icon' href='/logo-120.png' />
       </head> */}
       <body className={cn('flex flex-col min-h-screen', nunito.className)}>
-        {children}
-        <Toaster />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

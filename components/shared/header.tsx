@@ -1,8 +1,11 @@
-import { Suspense, type FC } from 'react';
+'use client';
+
+import { Suspense, useState, type FC } from 'react';
 import { AlignJustify, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { CartButton, Container, Logo, ProfileButton, SearchBar } from '.';
+import { AuthModal } from './modals/auth-modal';
 
 interface Props {
   hasSearch?: boolean;
@@ -17,6 +20,8 @@ export const Header: FC<Props> = ({
   hasCheckout = false,
   className,
 }) => {
+  const [openAuthModal, setOpenAuthModal] = useState(false);
+
   return (
     <header
       className={cn('bg-[#c1876b]', { 'bg-[#F4F1EE]': hasCheckout }, className)}
@@ -52,7 +57,13 @@ export const Header: FC<Props> = ({
             />
           )}
 
-          <ProfileButton hasCheckout={hasCheckout} />
+          <Suspense>
+            <AuthModal
+              open={openAuthModal}
+              onClose={() => setOpenAuthModal(false)}
+            />
+            <ProfileButton handleClickSignIn={() => setOpenAuthModal(true)} />
+          </Suspense>
 
           {hasCart && (
             <Suspense>
