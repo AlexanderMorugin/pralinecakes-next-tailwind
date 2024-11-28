@@ -1,19 +1,18 @@
-import NextAuth
-//  { AuthOptions }
- from 'next-auth';
+import { AuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
+// import GoogleProvider from 'next-auth/providers/google';
+
 import { prisma } from '@/prisma/prisma-client';
 import { compare, hashSync } from 'bcrypt';
 import { UserRole } from '@prisma/client';
 
-// export const authOptions: AuthOptions = {
-export const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
+    // TODO: GoogleProvider 
     GitHubProvider({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
-
       profile(profile) {
         return {
           id: profile.id,
@@ -30,7 +29,6 @@ export const handler = NextAuth({
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-
       async authorize(credentials) {
         if (!credentials) {
           return null;
@@ -126,6 +124,7 @@ export const handler = NextAuth({
         return false;
       }
     },
+
     async jwt({ token }) {
       if (!token.email) {
         return token;
@@ -156,8 +155,4 @@ export const handler = NextAuth({
       return session;
     },
   },
-});
-
-// const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
+};

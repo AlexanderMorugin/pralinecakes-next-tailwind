@@ -49,7 +49,7 @@ export const Header: FC<Props> = ({
         )}
 
         {/** Правая часть */}
-        <div className='flex gap-3'>
+        <div className='flex items-center gap-3'>
           {hasSearch && (
             <Search
               size={26}

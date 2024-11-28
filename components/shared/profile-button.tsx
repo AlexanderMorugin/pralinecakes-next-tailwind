@@ -35,4 +35,3 @@ export const ProfileButton: FC<Props> = ({ handleClickSignIn }) => {
     </>
   );
 };
-

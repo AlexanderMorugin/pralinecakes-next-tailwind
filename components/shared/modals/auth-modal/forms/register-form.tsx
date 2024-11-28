@@ -4,17 +4,19 @@ import { type FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
-import { registerUser } from '@/app/actions';
 import { TFormRegisterValues, formRegisterSchema } from './schemas';
 import { FormInput } from '../../../form';
 import { Button } from '@/components/ui';
+import { registerUser } from '@/app/api/actions';
 
 interface Props {
   onClose?: VoidFunction;
   onClickLogin?: VoidFunction;
 }
 
-export const RegisterForm: FC<Props> = ({ onClose, onClickLogin }) => {
+export const RegisterForm: FC<Props> = ({ onClose
+  // , onClickLogin
+ }) => {
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {
@@ -39,6 +41,7 @@ export const RegisterForm: FC<Props> = ({ onClose, onClickLogin }) => {
 
       onClose?.();
     } catch (error) {
+      console.log(error);
       return toast.error('Неверный E-Mail или пароль', {
         icon: '❌',
       });
