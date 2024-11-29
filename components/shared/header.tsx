@@ -1,11 +1,13 @@
 'use client';
 
-import { Suspense, useState, type FC } from 'react';
+import { Suspense, useEffect, useState, type FC } from 'react';
 import { AlignJustify, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { CartButton, Container, Logo, ProfileButton, SearchBar } from '.';
 import { AuthModal } from './modals/auth-modal';
+import { useRouter, useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 interface Props {
   hasSearch?: boolean;
@@ -21,6 +23,23 @@ export const Header: FC<Props> = ({
   className,
 }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    let toastMessage = '';
+
+    if (searchParams.has('verified')) {
+      toastMessage = 'Почта успешно подтверждена';
+    }
+
+    if (toastMessage) {
+      setTimeout(() => {
+        router.replace('/');
+        toast.success(toastMessage, { duration: 3000 });
+      }, 1000);
+    }
+  }, []);
 
   return (
     <header

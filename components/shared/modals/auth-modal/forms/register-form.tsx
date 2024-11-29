@@ -11,7 +11,7 @@ import { registerUser } from '@/app/api/actions';
 
 interface Props {
   onClose?: VoidFunction;
-  onClickLogin?: VoidFunction;
+  // onClickLogin?: VoidFunction;
 }
 
 export const RegisterForm: FC<Props> = ({ onClose

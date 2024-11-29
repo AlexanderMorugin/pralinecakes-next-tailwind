@@ -80,14 +80,9 @@ export async function POST(req: NextRequest) {
 
     const updatedUserCart = await updateCartTotalAmount(token);
 
-    const response = NextResponse.json(updatedUserCart);
-
-    if (!token) {
-      response.cookies.set('cartToken', token);
-    }
-    // response.cookies.set('cartToken', token);
-
-    return response;
+    const resp = NextResponse.json(updatedUserCart);
+    resp.cookies.set('cartToken', token);
+    return resp;
   } catch (error) {
     console.log('[CART_POST] Server error', error);
     return NextResponse.json(

@@ -16,13 +16,17 @@ import {
   checkoutFormSchema,
   CheckoutFormValues,
 } from '@/components/shared/checkout/checkout-form-schema';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createOrder } from '@/app/api/actions';
 import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
+import { Api } from '@/services/api-client';
 
 export default function CheckoutPage() {
   const { totalAmount, cartItems, loading } = useCart();
   const [showModal, setShowModal] = useState(false);
+  const { data: session } = useSession();
+
   const [personalInfo, setPersonalInfo] = useState<CheckoutFormValues>({
     email: '',
     firstName: '',
@@ -44,6 +48,21 @@ export default function CheckoutPage() {
       comment: '',
     },
   });
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      const data = await Api.auth.getMe();
+      const [firstName, lastName] = data.fullName.split(' ');
+
+      form.setValue('firstName', firstName);
+      form.setValue('lastName', lastName);
+      form.setValue('email', data.email);
+    }
+
+    if (session) {
+      fetchUserInfo();
+    }
+  }, [session]);
 
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
