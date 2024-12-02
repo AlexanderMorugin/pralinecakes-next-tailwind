@@ -3,11 +3,11 @@
 import { type FC } from 'react';
 
 import { CheckoutCartItem } from '..';
-import { useCart } from '@/hooks/use-cart';
 import { useTotalPrice } from '@/hooks/use-total-price';
+import { useCartStore } from '@/store';
 
 export const CheckoutSendCart: FC = () => {
-  const { totalAmount, cartItems } = useCart();
+  const { totalAmount, cartItems } = useCartStore((state) => state);
   const { totalPrice } = useTotalPrice(totalAmount);
   return (
     <>

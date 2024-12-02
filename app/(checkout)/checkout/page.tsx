@@ -11,7 +11,6 @@ import {
   Container,
   Title,
 } from '@/components/shared';
-import { useCart } from '@/hooks/use-cart';
 import {
   checkoutFormSchema,
   CheckoutFormValues,
@@ -21,9 +20,10 @@ import { createOrder } from '@/app/api/actions';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { Api } from '@/services/api-client';
+import { useCartStore } from '@/store';
 
 export default function CheckoutPage() {
-  const { totalAmount, cartItems, loading } = useCart();
+  const { totalAmount, cartItems, loading } = useCartStore((state) => state);
   const [showModal, setShowModal] = useState(false);
   const { data: session } = useSession();
 

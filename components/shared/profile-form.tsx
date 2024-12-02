@@ -52,51 +52,53 @@ export const ProfileForm: FC<Props> = ({ data }) => {
   };
 
   return (
-    <Container className='my-10'>
-      <Title
-        text={`Личные данные | #${data.id}`}
-        size='md'
-        className='font-bold'
-      />
-      <FormProvider {...form}>
-        <form
-          className='flex flex-col gap-5 w-96 mt-10'
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <FormInput name='email' label='Email' required />
-          <FormInput name='fullName' label='Полное имя' required />
-          <FormInput
-            type='password'
-            name='password'
-            label='Новый пароль'
-            required
-          />
-          <FormInput
-            type='password'
-            name='confirmPassword'
-            label='Подтвердите пароль'
-            required
-          />
 
-          <Button
-            type='submit'
-            disabled={form.formState.isSubmitting}
-            className='text-base mt-10'
+      <Container className='flex flex-col items-center w-full my-10 px-4'>
+        <Title
+          text='Редактировать профиль'
+          size='md'
+          className='font-bold'
+        />
+        <FormProvider {...form}>
+          <form
+            className='flex flex-col gap-5 mt-10 w-full sm:w-96'
+            onSubmit={form.handleSubmit(onSubmit)}
           >
-            Сохранить
-          </Button>
+            <FormInput name='email' label='Email' required />
+            <FormInput name='fullName' label='Полное имя' required />
+            <FormInput
+              type='password'
+              name='password'
+              label='Новый пароль'
+              required
+            />
+            <FormInput
+              type='password'
+              name='confirmPassword'
+              label='Подтвердите пароль'
+              required
+            />
 
-          <Button
-            type='button'
-            disabled={form.formState.isSubmitting}
-            variant='secondary'
-            className='text-base'
-            onClick={onClickSignOut}
-          >
-            Выйти
-          </Button>
-        </form>
-      </FormProvider>
-    </Container>
+            <Button
+              type='submit'
+              disabled={form.formState.isSubmitting}
+              className='text-base mt-10'
+            >
+              Сохранить
+            </Button>
+
+            <Button
+              type='button'
+              disabled={form.formState.isSubmitting}
+              variant='secondary'
+              className='text-base'
+              onClick={onClickSignOut}
+            >
+              Выйти
+            </Button>
+          </form>
+        </FormProvider>
+      </Container>
+
   );
 };

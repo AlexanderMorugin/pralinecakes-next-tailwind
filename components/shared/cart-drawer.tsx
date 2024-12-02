@@ -17,11 +17,11 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { CartDrawerItem, Title } from '.';
 import ImageLogo from '@/assets/images/logo-120.png';
 import Image from 'next/image';
-import { useCart } from '@/hooks/use-cart';
+import { useCartStore } from '@/store';
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
   const { totalAmount, cartItems, updateCartItemQuantity, removeCartItem } =
-    useCart();
+    useCartStore((state) => state);
 
   const handleClickCountButton = (
     id: number,

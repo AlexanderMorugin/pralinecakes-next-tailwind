@@ -28,32 +28,45 @@ export const CartButton: FC<Props> = ({ className }) => {
 
         <div
           className={cn(
-            'hidden md:inline-flex group relative bg-white/50 items-center justify-center rounded-md h-10 px-4 py-2 border border-input transition duration-300 hover:bg-primary',
-            { 'w-[120px]': cartItems.length === 0 },
+            'hidden md:inline-flex group relative bg-transparent items-center justify-center rounded-md h-10 px-4 py-2 border border-input transition duration-300 hover:bg-primary',
+            { 'w-[130px]': cartItems.length === 0 },
             className
           )}
         >
           {cartItems.length > 0 && (
             <>
-              <span className='font-bold transition duration-300 group-hover:text-white'>
+              <span className='font-bold transition duration-500 group-hover:text-white'>
                 {totalAmount} р
               </span>
-              <span className='h-full w-[1px] bg-black/30 mx-3' />
+              <span className='h-full w-[1px] bg-black/30 mx-3 transition duration-500 group-hover:bg-white' />
             </>
           )}
 
-          <div className='flex items-center gap-2 transition duration-300 group-hover:opacity-0'>
+          <div className='flex items-center gap-2 transition duration-300'>
             {loading ? (
               <LoaderCircle size={18} className='animate-spin' />
             ) : (
-              <ShoppingCart size={18} strokeWidth={2} />
+              <ShoppingCart
+                size={18}
+                strokeWidth={2}
+                className={cn(
+                  'transition duration-500 group-hover:-translate-x-5 group-hover:text-white',
+                  { 'group-hover:-translate-x-0': cartItems.length > 0 }
+                )}
+              />
             )}
-            {cartItems.length > 0 && <b>{cartItems.length}</b>}
+            {cartItems.length > 0 && (
+              <span className='font-bold text-black transition duration-500 group-hover:text-white'>
+                {cartItems.length}
+              </span>
+            )}
           </div>
-          <ArrowRight
-            size={20}
-            className='absolute right-5 text-black transition duration-500 -translate-x-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-white'
-          />
+          {cartItems.length <= 0 && (
+            <ArrowRight
+              size={20}
+              className='absolute right-5 text-black transition duration-500 -translate-x-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-white'
+            />
+          )}
         </div>
       </CartDrawer>
     </>
