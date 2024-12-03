@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1 align="center">Интернет-магазин "Пралине"</h1>
 
-## Getting Started
+Пет проект https://pralinecakes-next-tailwind.vercel.app/
 
-First, run the development server:
+![Pralinecakes Demo](/praline-tailwind.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## О проекте
+
+Проект написан на Next.js 14 - TypeScript, с использованием Tailwind в качестве стилизации.
+
+Состоит из фонтенд и бекенд частей, где бекенд сделан тоже в Next.js и хостится на сервере Vercel в виде реляционной PostgreSQL базы данных. Там же располагается и фронт часть. Связь Бека с Фронтом осуществляет Prisma.
+
+В качестве стейт менеджера используется Zustand, а аутентификацию делает Next-auth. Приложение адаптировано для различных разрешений экрана и браузеров.
+
+## Что умеет приложение
+
+- Незарегистрированный пользователь может выбрать товары и сделать покупку. Никакой статистики он не увидит, но в базу попадает с новым токеном. После того как пользователь оформит заказ, ему на почту приходит письмо с просьбой перейти по ссылке для оплаты заказа.
+
+- Оплата не настроена, но сделан поиск товаров имеющихся в базе.
+  
+- Зарегистрированный пользователь может редактировать свой профиль, делать покупку товаров, смотреть свою историю, статистику и остальное что и незарегестрированный пользователь.
+
+- Все данные хранятся на бесплатном сервере, т.к. это приложение не коммерческое. Там же данные редактируются, фильтруются и выдаются пользователю в клиентской части сайта.
+
+- Так же существует часть сайта для компании-производителя. Там видно поступившие заказы с расшифровкой. Компания может смотреть статистику и редактировать статус заказа (готов, доставлен или нет). Для входа логин: Praline, пароль: Praline
+
+## Используемые технологии и решения
+
+- Next.js (фреймворк проекта)
+- TypeScript (язык проекта)
+- Shadcn/ui (библиотека готовых ui компонентов)
+- Tailwind (язык стилей)
+- Lucide Icons (набор иконок)
+- React-use - библиотека хуков из которой мы используем хуки useIntersection (он дает нам возможность связи панели TopBar с компонентом ProductsGroupList, который отрисовывает продукцию), useClickAway (используется в компоненте SearchInput и отменяет фокус при клике вне поиска), useSet (используется в хуке useFilters и ставит запятую в массиве для бекенда, вместо % в строке запроса HTTP )
+- Zustand (библиотека управления состоянием, типа Redux)
+- Prisma (это ORM позволяющая работать с реляционной PostgreSQL базой данных с помощью JavaScript или TypeScript без использования SQL)
+- vercel.com (сервер хранения нашей базой PostgreSQL)
+- bcrypt (библиотека генерирующая пароли)
+- axios (библиотека http запросов на сервер)
+- react-hot-toast (всплывающее окно с текстом вверху страницы)
+- react-hook-form (создание сложных форм)
+- zod (библиотека валидации и типизации форм)
+- react-dadata (компонент для подсказок адресов, работает с сервисом DaData)
+- resend (утилита которая рассылает что то по почтовым ящикам)
+- next-auth (пакет аутентификации и авторизации)
+- nextjs-toploader (библиотека которая отображает вверху страницы прогрес бар)
+- react-insta-stories (компонент для показа картинок типа Инстаграмм)
+
+## Как запустить проект:
+
+Клонирование репозитория
+
+```
+git clone https://github.com/AlexanderMorugin/pralinecakes-next-tailwind
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Установка зависимостей
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm i
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Запуск проекта
 
-## Learn More
+```
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Александр Моругин\
+декабрь 2024г
