@@ -39,7 +39,7 @@ export const Header: FC<Props> = ({
         toast.success(toastMessage, { duration: 3000 });
       }, 1000);
     }
-  }, []);
+  }, [router, searchParams]);
 
   return (
     <header
