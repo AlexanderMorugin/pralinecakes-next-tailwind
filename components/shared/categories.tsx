@@ -20,7 +20,7 @@ export const Categories: FC<Props> = ({ className }) => {
           <li
             key={category.id}
             className={cn(
-              'text-[#f8f4ff] border-b-2 border-[#c1876b]',
+              'text-[#f8f4ff] border-b-2 border-[#a65317]',
               categoryActiveId === category.id &&
                 'border-b-2 border-[#ddeeff]',
               className

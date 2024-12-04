@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { type FC } from 'react';
 import { Button } from '../ui';
-import { User, UserRound } from 'lucide-react';
+import { UserRound } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
@@ -27,13 +27,13 @@ export const ProfileButton: FC<Props> = ({ handleClickSignIn }) => {
           <Button
             onClick={handleClickSignIn}
             variant='outline'
-            className='hidden md:flex items-center gap-1 w-[130px] group'
+            className='hidden md:flex items-center gap-2 w-[130px] group'
           >
-            <User
+            <UserRound
               size={16}
-              className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'
+              className='flex items-center gap-1 text-[#cd9575] transition duration-300 group-hover:opacity-0'
             />
-            <span className='flex items-center gap-1 tracking-wide transition duration-300 group-hover:text-white group-hover:-translate-x-2'>
+            <span className='flex items-center gap-1 text-[#cd9575] tracking-wide transition duration-300 group-hover:text-white group-hover:-translate-x-2'>
               Войти
             </span>
           </Button>

@@ -50,7 +50,7 @@ export const CartButton: FC<Props> = ({ className }) => {
                 size={18}
                 strokeWidth={2}
                 className={cn(
-                  'transition duration-500 group-hover:-translate-x-5 group-hover:text-white',
+                  'text-[#cd9575] transition duration-500 group-hover:-translate-x-5 group-hover:text-white',
                   { 'group-hover:-translate-x-0': cartItems.length > 0 }
                 )}
               />

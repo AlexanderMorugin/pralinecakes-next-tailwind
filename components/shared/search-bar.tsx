@@ -42,7 +42,7 @@ export const SearchBar: FC<Props> = ({ className }) => {
     <>
       {/** Затемнение экрана */}
       {focused && (
-        <div className='fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-30' />
+        <div className='fixed top-0 right-0 bottom-0 left-0 bg-black/80 z-30' />
       )}
 
       {/** Поисковый блок */}
