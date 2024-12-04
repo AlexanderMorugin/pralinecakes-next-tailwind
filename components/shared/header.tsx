@@ -51,13 +51,13 @@ export const Header: FC<Props> = ({
   return (
     <header
       className={cn(
-        'sticky top-0 z-20 bg-[#c1876b] pb-2',
+        'sticky top-0 z-20 bg-[#c1876b] pb-1 md:pb-2',
         { 'bg-[#F4F1EE]': hasCheckout },
         className
       )}
     >
       <Container
-        className={cn('flex items-center justify-between py-4 ', {
+        className={cn('flex items-center justify-between border-b border-[#cd9575] pt-4 pb-2 md:pb-4', {
           'border-b border-gray-300': hasCheckout,
         })}
       >

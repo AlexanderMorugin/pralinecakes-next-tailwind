@@ -37,7 +37,7 @@ export const ProductList: FC<Props> = ({ title, products, categoryId }) => {
 
   return (
     <li className='flex flex-col gap-2' id={title} ref={intersectionRef}>
-      <Title text={title} size='lg' className='font-bold px-6 mt-[120px]' />
+      <Title text={title} size='lg' className='font-bold px-6 mt-[100px] md:mt-[120px]' />
       <ul className='grid grid-cols-1 gap-2 xs:grid-cols-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6'>
         {products.map((product) => (
           // <ProductCardSkeleton key={product.id} />

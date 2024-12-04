@@ -20,13 +20,13 @@ export const Categories: FC<Props> = ({ className }) => {
           <li
             key={category.id}
             className={cn(
-              'text-white border-b-2 border-[#c1876b]',
+              'text-[#f8f4ff] border-b-2 border-[#c1876b]',
               categoryActiveId === category.id &&
-                'border-b-2 border-white',
+                'border-b-2 border-[#ddeeff]',
               className
             )}
           >
-            <a href={`/#${category.name}`}>{category.name}</a>
+            <a href={`/#${category.name}`} className='text-[12px] md:text-[16px]'>{category.name}</a>
           </li>
         ))}
       </ul>
