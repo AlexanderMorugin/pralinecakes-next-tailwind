@@ -47,7 +47,12 @@ export const ProductForm: FC<Props> = ({
   };
 
   return (
-    <div className={cn('flex flex-col bg-white rounded-xl overflow-hidden md:flex-row', className)}>
+    <div
+      className={cn(
+        'flex flex-col bg-white rounded-xl overflow-hidden md:flex-row',
+        className
+      )}
+    >
       <div className='flex flex-1 items-center justify-center relative w-full'>
         <img
           src={product.imageUrl}
@@ -58,20 +63,16 @@ export const ProductForm: FC<Props> = ({
 
       <div className='flex flex-col justify-between w-full bg-[#f7f6f5] p-3 md:max-w-[400px] md:p-7'>
         <div>
-          <Title
-            text={product.name}
-            size='md'
-            className='font-extrabold mb-1'
-          />
-          <p>{product.description}</p>
-          <p className='flex w-full justify-end'>
-            цена:&nbsp;<b>{product.price}</b>&nbsp;р
+          <Title text={product.name} size='md' className='font-bold mb-1' />
+          <p className='line-clamp-5 md:line-clamp-none'>{product.description}</p>
+          <p className='pt-4'>
+            <b>{product.price}</b>&nbsp;р
           </p>
         </div>
 
         <Button
           loading={loading}
-          className='h-[55px] px-4 text-base rounded-[18px] w-full mt-10 md:px-10'
+          className='h-[55px] px-4 text-base rounded-[18px] w-full mt-4 md:px-10'
           onClick={() => onSubmit?.()}
         >
           Добавить в корзину

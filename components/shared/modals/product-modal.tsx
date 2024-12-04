@@ -23,7 +23,7 @@ export const ProductModal: FC<Props> = ({ product, className }) => {
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
-        className={cn('w-full max-w-[1060px] min-h-[560px]', className)}
+        className={cn('w-full max-w-[1060px] max-h-full', className)}
       >
         {/** Скрываем в консоли ошибки по поводу Титла и Дескрипшн */}
         <DialogTitle className='hidden' />

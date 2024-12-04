@@ -1,6 +1,4 @@
-import { Container, ProductList
-  // , Title, TopBar
- } from '@/components/shared';
+import { Container, ProductList } from '@/components/shared';
 import { findProducts } from '@/lib/find-products';
 
 export default async function Home() {
@@ -8,10 +6,6 @@ export default async function Home() {
 
   return (
     <>
-      {/* <Container className='mt-5'> */}
-        {/* <Title text='Торты' size='xl' className='font-bold' /> */}
-      {/* </Container> */}
-      {/* <TopBar /> */}
       <Container className='mb-5'>
         <ul>
           {categories.map(
