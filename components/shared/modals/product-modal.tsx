@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils';
 import { Product } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { ProductForm } from '..';
-// import { ProductWithRelations } from '@/@types/prisma';
 
 interface Props {
   product: Product;
@@ -24,10 +23,7 @@ export const ProductModal: FC<Props> = ({ product, className }) => {
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
-        className={cn(
-          'overflow-hidden p-0 w-full max-w-[1060px] min-h-[560px] bg-white',
-          className
-        )}
+        className={cn('w-full max-w-[1060px] min-h-[560px]', className)}
       >
         {/** Скрываем в консоли ошибки по поводу Титла и Дескрипшн */}
         <DialogTitle className='hidden' />

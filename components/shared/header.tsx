@@ -4,7 +4,14 @@ import { Suspense, useEffect, useState, type FC } from 'react';
 import { AlignJustify, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { CartButton, Container, Logo, ProfileButton, SearchBar } from '.';
+import {
+  CartButton,
+  Container,
+  Logo,
+  ProfileButton,
+  SearchBar,
+  TopBar,
+} from '.';
 import { AuthModal } from './modals/auth-modal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -43,10 +50,14 @@ export const Header: FC<Props> = ({
 
   return (
     <header
-      className={cn('bg-[#c1876b]', { 'bg-[#F4F1EE]': hasCheckout }, className)}
+      className={cn(
+        'sticky top-0 z-20 bg-[#c1876b] pb-2',
+        { 'bg-[#F4F1EE]': hasCheckout },
+        className
+      )}
     >
       <Container
-        className={cn('flex items-center justify-between py-1 md:py-3', {
+        className={cn('flex items-center justify-between py-4 ', {
           'border-b border-gray-300': hasCheckout,
         })}
       >
@@ -91,6 +102,8 @@ export const Header: FC<Props> = ({
           )}
         </div>
       </Container>
+
+      <TopBar />
     </header>
   );
 };

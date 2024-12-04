@@ -12,7 +12,7 @@ interface Props {
 
 export const Logo: FC<Props> = ({ hasCheckout, className }) => {
   return (
-    <Link href='/' className={cn('flex gap-3 items-center', className)}>
+    <Link href='/' className={cn('flex gap-2 items-center', className)}>
       <Image
         src={LogoImage}
         alt='Logo'
@@ -22,7 +22,7 @@ export const Logo: FC<Props> = ({ hasCheckout, className }) => {
         className='object-cover'
       />
       <div
-        className={cn('hidden sm:flex flex-col text-white text-center', {
+        className={cn('hidden xs:flex flex-col text-white text-center', {
           'text-gray-800': hasCheckout,
         })}
       >

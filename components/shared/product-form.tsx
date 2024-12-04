@@ -47,7 +47,7 @@ export const ProductForm: FC<Props> = ({
   };
 
   return (
-    <div className={cn('flex flex-col md:flex-row', className)}>
+    <div className={cn('flex flex-col bg-white rounded-xl overflow-hidden md:flex-row', className)}>
       <div className='flex flex-1 items-center justify-center relative w-full'>
         <img
           src={product.imageUrl}

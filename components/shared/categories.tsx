@@ -15,20 +15,18 @@ export const Categories: FC<Props> = ({ className }) => {
 
   return (
     <ScrollArea>
-      <ul className='flex items-center gap-3 p-2'>
+      <ul className='flex items-center gap-3'>
         {categories.map((category) => (
           <li
             key={category.id}
             className={cn(
-              'flex items-center font-bold bg-gray-50 rounded-md px-5 py-2',
+              'text-white border-b-2 border-[#c1876b]',
               categoryActiveId === category.id &&
-                'bg-primary  shadow-gray-200 text-white',
+                'border-b-2 border-white',
               className
             )}
           >
-            <a href={`/#${category.name}`}>
-              {category.name}
-            </a>
+            <a href={`/#${category.name}`}>{category.name}</a>
           </li>
         ))}
       </ul>
