@@ -4,7 +4,7 @@ import { Categories, Container } from '.';
 
 export const TopBar: FC = () => {
   return (
-    <Container className='flex items-center'>
+    <Container className='flex items-center px-2'>
       <Categories />
     </Container>
   );

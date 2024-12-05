@@ -25,10 +25,11 @@ export const ProductList: FC<Props> = ({ title, products, categoryId }) => {
   const setCategoryId = useCategoryId((state) => state.setActiveId);
 
   const intersectionRef = useRef(null);
+
   const intersection = useIntersection(intersectionRef, {
     root: null,
     rootMargin: '0px',
-    threshold: 1,
+    threshold: 0.5,
   });
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export const ProductList: FC<Props> = ({ title, products, categoryId }) => {
         text={title}
         className='text-[#b88065] font-bold text-[20px] md:text-[26px] md:px-6 mt-[100px] md:mt-[120px]'
       />
-      <ul className='grid grid-cols-1 gap-2 xs:grid-cols-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6'>
+      <ul className='grid grid-cols-1 gap-x-1 gap-y-2 xs:grid-cols-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6'>
         {products.map((product) => (
           // <ProductCardSkeleton key={product.id} />
           <ProductCard key={product.id} product={product} />

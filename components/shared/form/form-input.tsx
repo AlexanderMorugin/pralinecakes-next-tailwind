@@ -36,13 +36,13 @@ export const FormInput: FC<Props> = ({
   return (
     <div className={className}>
       {label && (
-        <p className='font-medium mb-2'>
+        <p className='text-[14px]'>
           {label} {required && <RequiredSymbol />}
         </p>
       )}
 
       <div className='relative'>
-        <Input className='h-12 text-md' {...register(name)} {...props} />
+        <Input className='h-10 text-md' {...register(name)} {...props} />
 
         {value && <ClearButton onClick={handleClearInput} />}
       </div>

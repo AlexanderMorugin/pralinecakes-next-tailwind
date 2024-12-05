@@ -8,14 +8,15 @@ import { TFormRegisterValues, formRegisterSchema } from './schemas';
 import { FormInput } from '../../../form';
 import { Button } from '@/components/ui';
 import { registerUser } from '@/app/api/actions';
+import { Title } from '@/components/shared';
 
 interface Props {
   onClose?: VoidFunction;
-  // onClickLogin?: VoidFunction;
+
 }
 
 export const RegisterForm: FC<Props> = ({ onClose
-  // , onClickLogin
+
  }) => {
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),
@@ -51,9 +52,16 @@ export const RegisterForm: FC<Props> = ({ onClose
   return (
     <FormProvider {...form}>
       <form
-        className='flex flex-col gap-5'
+        className='flex flex-col gap-2'
         onSubmit={form.handleSubmit(onSubmit)}
       >
+                <div className='flex flex-col'>
+          <Title text='Регистрация' size='md' className='font-bold' />
+          <p className='text-gray-400 text-[14px]'>
+            Заполните поля, чтобы зарегистрировать аккаунт.
+          </p>
+        </div>
+        
         <FormInput name='email' label='E-Mail' required />
         <FormInput name='fullName' label='Полное имя' required />
         <FormInput name='password' label='Пароль' type='password' required />

@@ -28,7 +28,7 @@ export const ProductCard: FC<TProduct> = ({ product }) => {
   };
 
   return (
-    <div className='relative flex flex-col border border-solid border-orange-600/30 pb-2 rounded-lg overflow-hidden transition duration-300 group hover:shadow-lg hover:shadow-gray-400'>
+    <li className='relative flex flex-col border border-solid border-orange-600/30 pb-2 rounded-lg overflow-hidden transition duration-300 group hover:shadow-lg hover:shadow-gray-400'>
       <Link href={`/product/${product.id}`}>
         <img
           src={product.imageUrl}
@@ -56,6 +56,6 @@ export const ProductCard: FC<TProduct> = ({ product }) => {
           Добавить
         </span>
       </Button>
-    </div>
+    </li>
   );
 };

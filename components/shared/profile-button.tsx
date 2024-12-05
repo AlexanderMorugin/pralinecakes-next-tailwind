@@ -1,17 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 import { type FC } from 'react';
 import { Button } from '../ui';
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface Props {
+  session: any;
+  hasCheckout?: boolean;
   handleClickSignIn?: () => void;
 }
 
-export const ProfileButton: FC<Props> = ({ handleClickSignIn }) => {
-  const { data: session } = useSession();
+export const ProfileButton: FC<Props> = ({
+  session,
+  hasCheckout,
+  handleClickSignIn,
+}) => {
   const firstName = session?.user.name.split(' ')[0];
 
   return (
@@ -31,9 +38,17 @@ export const ProfileButton: FC<Props> = ({ handleClickSignIn }) => {
           >
             <UserRound
               size={16}
-              className='flex items-center gap-1 text-[#cd9575] transition duration-300 group-hover:opacity-0'
+              className={cn(
+                'flex items-center gap-1 text-[#cd9575] transition duration-300 group-hover:opacity-0',
+                { 'text-gray-800': hasCheckout }
+              )}
             />
-            <span className='flex items-center gap-1 text-[#cd9575] tracking-wide transition duration-300 group-hover:text-white group-hover:-translate-x-2'>
+            <span
+              className={cn(
+                'flex items-center gap-1 text-[#cd9575] tracking-wide transition duration-300 group-hover:text-white group-hover:-translate-x-2',
+                { 'text-gray-800': hasCheckout }
+              )}
+            >
               Войти
             </span>
           </Button>

@@ -38,7 +38,7 @@ export const ProfileForm: FC<Props> = ({ data }) => {
         fullName: data.fullName,
         password: data.password,
       });
-      toast.success('Данные успешно оновлены', { icon: '✅' });
+      toast.success('Данные обновлены', { icon: '✅' });
     } catch (error) {
       console.log('Error [PROFILE_FORM] ', error);
       return toast.error('Ошибка при обновлении данных', { icon: '❌' });
@@ -53,17 +53,21 @@ export const ProfileForm: FC<Props> = ({ data }) => {
 
   return (
 
-      <Container className='flex flex-col items-center w-full my-10 px-4'>
-        <Title
-          text='Редактировать профиль'
-          size='md'
-          className='font-bold'
-        />
+      <Container className='flex flex-col items-center w-full my-2 px-4'>
+        {/* <Title text='Редактировать профиль' size='md' className='font-bold' /> */}
         <FormProvider {...form}>
           <form
-            className='flex flex-col gap-5 mt-10 w-full sm:w-96'
+          // className='flex flex-col gap-2'
+            className='flex flex-col gap-2 w-full md:mt-10 sm:w-96'
             onSubmit={form.handleSubmit(onSubmit)}
           >
+                    <div className='flex flex-col'>
+          <Title text='Редактировать профиль' size='md' className='font-bold' />
+          <p className='text-gray-400 text-[14px]'>
+            Вы можете изменить некоторые или все поля.
+          </p>
+        </div>
+
             <FormInput name='email' label='Email' required />
             <FormInput name='fullName' label='Полное имя' required />
             <FormInput
@@ -82,7 +86,7 @@ export const ProfileForm: FC<Props> = ({ data }) => {
             <Button
               type='submit'
               disabled={form.formState.isSubmitting}
-              className='text-base mt-10'
+              className='text-base mt-5'
             >
               Сохранить
             </Button>

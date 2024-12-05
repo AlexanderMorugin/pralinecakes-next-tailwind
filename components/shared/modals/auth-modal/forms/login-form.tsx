@@ -7,8 +7,6 @@ import { FormInput } from '@/components/shared/form';
 import { Button } from '@/components/ui';
 import toast from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
-import image from '@/assets/images/logo-120.png';
-import Image from 'next/image';
 
 interface Props {
   onClose?: VoidFunction;
@@ -31,10 +29,10 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
       });
 
       if (!response?.ok) {
-        throw Error()
+        throw Error();
       }
 
-      toast.success('Вы успешно вошли в аккаунт', { icon: '✅' });
+      toast.success('Вы вошли в аккаунт', { icon: '✅' });
       onClose?.();
     } catch (error) {
       console.log('Error [LOGIN] ', error);
@@ -45,17 +43,14 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
   return (
     <FormProvider {...form}>
       <form
-        className='flex flex-col gap-5'
+        className='flex flex-col gap-2'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <div className='flex justify-between items-center'>
-          <div className='mr-2'>
-            <Title text='Вход в аккаунт' size='md' className='font-bold' />
-            <p className='text-gray-400'>
-              Введите свою почту, чтобы войти в аккаунт
-            </p>
-          </div>
-          <Image src={image} alt='image' width={60} height={60} />
+        <div className='flex flex-col'>
+          <Title text='Вход в аккаунт' size='md' className='font-bold' />
+          <p className='text-gray-400 text-[14px]'>
+            Введите свою почту и пароль, чтобы войти в аккаунт.
+          </p>
         </div>
 
         <FormInput name='email' label='Email' required />
@@ -63,10 +58,10 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
 
         <Button
           loading={form.formState.isSubmitting}
-          className='h-12 text-base'
+          className='text-base'
           type='submit'
         >
-         Войти
+          Войти
         </Button>
       </form>
     </FormProvider>

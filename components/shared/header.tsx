@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState, type FC } from 'react';
-import { AlignJustify, Search } from 'lucide-react';
+import { AlignJustify, ChevronLeft, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import {
@@ -15,6 +15,7 @@ import {
 import { AuthModal } from './modals/auth-modal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   hasSearch?: boolean;
@@ -32,6 +33,7 @@ export const Header: FC<Props> = ({
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
 
   useEffect(() => {
     let toastMessage = '';
@@ -52,24 +54,33 @@ export const Header: FC<Props> = ({
     <header
       className={cn(
         'sticky top-0 z-20 bg-[#4e1609] pb-1 md:pb-2',
-        { 'bg-[#F4F1EE]': hasCheckout },
+        { 'bg-[#c1876b]': hasCheckout },
         className
       )}
     >
       <Container
-        className={cn('flex items-center justify-between border-b border-[#cd9575] pt-4 pb-2 md:pb-4', {
-          'border-b border-gray-300': hasCheckout,
-        })}
+        className={cn(
+          'flex items-center justify-between border-b border-[#cd9575] px-4 pt-4 pb-2 md:pb-4 md:border-0',
+          {
+            'border-0': hasCheckout,
+          }
+        )}
       >
         {/** Левая часть */}
-        <AlignJustify
-          size={30}
-          className={cn('flex md:hidden text-white cursor-pointer', {
-            'text-gray-800': hasCheckout,
-          })}
-        />
-
-        <Logo hasCheckout={hasCheckout} />
+        {hasCheckout ? (
+          <>
+          <ChevronLeft className='text-white cursor-pointer' onClick={() => router.back()}/>
+          <div className='font-bold text-white'>{session?.user.name}</div></>
+          
+        ) : (
+          <>
+            <AlignJustify
+              size={30}
+              className='flex md:hidden text-white cursor-pointer'
+            />
+            <Logo />
+          </>
+        )}
 
         {/** Средняя часть */}
         {hasSearch && (
@@ -92,7 +103,11 @@ export const Header: FC<Props> = ({
               open={openAuthModal}
               onClose={() => setOpenAuthModal(false)}
             />
-            <ProfileButton handleClickSignIn={() => setOpenAuthModal(true)} />
+            <ProfileButton
+              session={session}
+              hasCheckout={hasCheckout}
+              handleClickSignIn={() => setOpenAuthModal(true)}
+            />
           </Suspense>
 
           {hasCart && (
@@ -103,7 +118,7 @@ export const Header: FC<Props> = ({
         </div>
       </Container>
 
-      <TopBar />
+      {!hasCheckout && <TopBar />}
     </header>
   );
 };
