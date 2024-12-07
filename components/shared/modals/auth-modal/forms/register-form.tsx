@@ -12,12 +12,9 @@ import { Title } from '@/components/shared';
 
 interface Props {
   onClose?: VoidFunction;
-
 }
 
-export const RegisterForm: FC<Props> = ({ onClose
-
- }) => {
+export const RegisterForm: FC<Props> = ({ onClose }) => {
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {
@@ -55,20 +52,20 @@ export const RegisterForm: FC<Props> = ({ onClose
         className='flex flex-col gap-2'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-                <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <Title text='Регистрация' size='md' className='font-bold' />
           <p className='text-gray-400 text-[14px]'>
             Заполните поля, чтобы зарегистрировать аккаунт.
           </p>
         </div>
-        
-        <FormInput name='email' label='E-Mail' required />
-        <FormInput name='fullName' label='Полное имя' required />
-        <FormInput name='password' label='Пароль' type='password' required />
+
+        <FormInput type='email' name='email' label='E-Mail' required />
+        <FormInput type='text' name='fullName' label='Полное имя' required />
+        <FormInput type='password' name='password' label='Пароль' required />
         <FormInput
+          type='password'
           name='confirmPassword'
           label='Подтвердите пароль'
-          type='password'
           required
         />
 

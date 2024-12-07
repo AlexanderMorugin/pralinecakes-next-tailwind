@@ -5,7 +5,7 @@ const passwordShema = z
   .min(3, { message: 'Пароль не должен быть менее 3 символов' });
 
 export const formLoginShema = z.object({
-  email: z.string().email({ message: 'Введите корректную почту' }),
+  email: z.string().toLowerCase().email({ message: 'Введите корректную почту' }),
   password: passwordShema,
 });
 

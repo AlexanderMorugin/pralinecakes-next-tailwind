@@ -16,6 +16,9 @@ import { AuthModal } from './modals/auth-modal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
+import { useUserStore } from '@/store/user';
+// import { DisplayCurrentUser } from '@/lib/display-current-user';
+// import { useUserStore } from '@/store/user';
 
 interface Props {
   hasSearch?: boolean;
@@ -35,6 +38,18 @@ export const Header: FC<Props> = ({
   const searchParams = useSearchParams();
   const { data: session } = useSession();
 
+  const getUser = useUserStore((state) => state.getUser);
+
+  useEffect(() => {
+    if (session) {
+      getUser();
+    }
+  }, [session, getUser]);
+
+  const user = useUserStore((state) => state.user);
+
+  // const user = DisplayCurrentUser().fullName;
+
   useEffect(() => {
     let toastMessage = '';
 
@@ -49,6 +64,8 @@ export const Header: FC<Props> = ({
       }, 1000);
     }
   }, [router, searchParams]);
+
+  console.log(user);
 
   return (
     <header
@@ -69,9 +86,16 @@ export const Header: FC<Props> = ({
         {/** Левая часть */}
         {hasCheckout ? (
           <>
-          <ChevronLeft className='text-white cursor-pointer' onClick={() => router.back()}/>
-          <div className='font-bold text-white'>{session?.user.name}</div></>
-          
+            <ChevronLeft
+              size={20}
+              className='text-white cursor-pointer'
+              onClick={() => router.back()}
+            />
+            {/* {session && <p className='font-bold text-white'>{user}</p>} */}
+            {session && (
+              <p className='font-bold text-white'>{user.fullName}</p>
+            )}
+          </>
         ) : (
           <>
             <AlignJustify
@@ -105,6 +129,7 @@ export const Header: FC<Props> = ({
             />
             <ProfileButton
               session={session}
+              user={user.fullName}
               hasCheckout={hasCheckout}
               handleClickSignIn={() => setOpenAuthModal(true)}
             />

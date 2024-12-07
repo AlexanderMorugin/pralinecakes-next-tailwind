@@ -53,8 +53,8 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
           </p>
         </div>
 
-        <FormInput name='email' label='Email' required />
-        <FormInput name='password' label='Пароль' type='password' required />
+        <FormInput type='email' name='email' label='Email' required />
+        <FormInput type='password' name='password' label='Пароль' required />
 
         <Button
           loading={form.formState.isSubmitting}

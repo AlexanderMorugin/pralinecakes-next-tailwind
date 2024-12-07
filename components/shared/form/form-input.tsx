@@ -36,7 +36,7 @@ export const FormInput: FC<Props> = ({
   return (
     <div className={className}>
       {label && (
-        <p className='text-[14px]'>
+        <p className='text-[14px] text-gray-500'>
           {label} {required && <RequiredSymbol />}
         </p>
       )}

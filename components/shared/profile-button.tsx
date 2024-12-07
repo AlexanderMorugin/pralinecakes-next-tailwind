@@ -10,16 +10,19 @@ import { cn } from '@/lib/utils';
 
 interface Props {
   session: any;
+  user: string
   hasCheckout?: boolean;
   handleClickSignIn?: () => void;
 }
 
 export const ProfileButton: FC<Props> = ({
   session,
+  user,
   hasCheckout,
   handleClickSignIn,
 }) => {
-  const firstName = session?.user.name.split(' ')[0];
+  const firstName = user.split(' ')[0];
+  // const firstName = session?.user.name.split(' ')[0];
 
   return (
     <>
@@ -63,6 +66,7 @@ export const ProfileButton: FC<Props> = ({
             variant='profile'
             className='hidden md:flex items-center gap-2 w-[130px]'
           >
+            {/* <span className='font-bold'>{user}</span> */}
             <span className='font-bold'>{firstName}</span>
           </Button>
         </Link>

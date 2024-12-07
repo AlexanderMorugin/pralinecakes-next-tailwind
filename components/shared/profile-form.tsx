@@ -15,12 +15,17 @@ import { Title } from './title';
 import { FormInput } from './form';
 import { Button } from '../ui';
 import { updateUserInfo } from '@/app/api/actions';
+import { useUserStore } from '@/store/user';
+import { ToastSuccess } from './toast-success';
 
 interface Props {
   data: User;
 }
 
 export const ProfileForm: FC<Props> = ({ data }) => {
+  // const user = useUserStore((state) => state.user);
+  const getUser = useUserStore((state) => state.getUser);
+
   const form = useForm({
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {
@@ -38,7 +43,10 @@ export const ProfileForm: FC<Props> = ({ data }) => {
         fullName: data.fullName,
         password: data.password,
       });
-      toast.success('Данные обновлены', { icon: '✅' });
+
+      await getUser();
+
+      ToastSuccess({ title: 'Данные обновлены' });
     } catch (error) {
       console.log('Error [PROFILE_FORM] ', error);
       return toast.error('Ошибка при обновлении данных', { icon: '❌' });
@@ -51,58 +59,60 @@ export const ProfileForm: FC<Props> = ({ data }) => {
     });
   };
 
+
+
   return (
+    <Container className='flex flex-col items-center w-full my-2 px-4'>
+      <FormProvider {...form}>
+        <form
+          className='flex flex-col gap-2 w-full md:mt-10 sm:w-96'
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <div className='flex flex-col'>
+            <Title
+              text='Редактировать профиль'
+              size='md'
+              className='font-bold'
+            />
+            <p className='text-gray-400 text-[14px]'>
+              Вы можете изменить некоторые или все поля.
+            </p>
+          </div>
 
-      <Container className='flex flex-col items-center w-full my-2 px-4'>
-        {/* <Title text='Редактировать профиль' size='md' className='font-bold' /> */}
-        <FormProvider {...form}>
-          <form
-          // className='flex flex-col gap-2'
-            className='flex flex-col gap-2 w-full md:mt-10 sm:w-96'
-            onSubmit={form.handleSubmit(onSubmit)}
+          <FormInput type='email' name='email' label='Email' required />
+          <FormInput type='text' name='fullName' label='Полное имя' required />
+          <FormInput
+            type='password'
+            name='password'
+            label='Новый пароль'
+            required
+          />
+          <FormInput
+            type='password'
+            name='confirmPassword'
+            label='Подтвердите пароль'
+            required
+          />
+
+          <Button
+            type='submit'
+            disabled={form.formState.isSubmitting}
+            className='text-base mt-5'
           >
-                    <div className='flex flex-col'>
-          <Title text='Редактировать профиль' size='md' className='font-bold' />
-          <p className='text-gray-400 text-[14px]'>
-            Вы можете изменить некоторые или все поля.
-          </p>
-        </div>
+            Сохранить
+          </Button>
 
-            <FormInput name='email' label='Email' required />
-            <FormInput name='fullName' label='Полное имя' required />
-            <FormInput
-              type='password'
-              name='password'
-              label='Новый пароль'
-              required
-            />
-            <FormInput
-              type='password'
-              name='confirmPassword'
-              label='Подтвердите пароль'
-              required
-            />
-
-            <Button
-              type='submit'
-              disabled={form.formState.isSubmitting}
-              className='text-base mt-5'
-            >
-              Сохранить
-            </Button>
-
-            <Button
-              type='button'
-              disabled={form.formState.isSubmitting}
-              variant='secondary'
-              className='text-base'
-              onClick={onClickSignOut}
-            >
-              Выйти
-            </Button>
-          </form>
-        </FormProvider>
-      </Container>
-
+          <Button
+            type='button'
+            disabled={form.formState.isSubmitting}
+            variant='secondary'
+            className='text-base'
+            onClick={onClickSignOut}
+          >
+            Выйти
+          </Button>
+        </form>
+      </FormProvider>
+    </Container>
   );
 };

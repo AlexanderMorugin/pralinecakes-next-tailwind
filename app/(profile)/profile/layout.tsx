@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Checkout Pralinecakes Next Tailwind',
 };
 
-export default function CheckoutLayout({
+export default async function CheckoutLayout({
   children,
 }: {
   children: React.ReactNode;
