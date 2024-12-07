@@ -17,8 +17,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useUserStore } from '@/store/user';
-// import { DisplayCurrentUser } from '@/lib/display-current-user';
-// import { useUserStore } from '@/store/user';
 
 interface Props {
   hasSearch?: boolean;
@@ -48,8 +46,6 @@ export const Header: FC<Props> = ({
 
   const user = useUserStore((state) => state.user);
 
-  // const user = DisplayCurrentUser().fullName;
-
   useEffect(() => {
     let toastMessage = '';
 
@@ -64,8 +60,6 @@ export const Header: FC<Props> = ({
       }, 1000);
     }
   }, [router, searchParams]);
-
-  console.log(user);
 
   return (
     <header
@@ -85,17 +79,17 @@ export const Header: FC<Props> = ({
       >
         {/** Левая часть */}
         {hasCheckout ? (
-          <>
+          <div className='flex items-center gap-5'>
             <ChevronLeft
               size={20}
               className='text-white cursor-pointer'
               onClick={() => router.back()}
             />
-            {/* {session && <p className='font-bold text-white'>{user}</p>} */}
+
             {session && (
-              <p className='font-bold text-white'>{user.fullName}</p>
+              <p className='font-bold text-white'>{`${user.firstName} ${user.lastName}`}</p>
             )}
-          </>
+          </div>
         ) : (
           <>
             <AlignJustify
@@ -127,12 +121,14 @@ export const Header: FC<Props> = ({
               open={openAuthModal}
               onClose={() => setOpenAuthModal(false)}
             />
-            <ProfileButton
-              session={session}
-              user={user.fullName}
-              hasCheckout={hasCheckout}
-              handleClickSignIn={() => setOpenAuthModal(true)}
-            />
+            {!hasCheckout && (
+              <ProfileButton
+                session={session}
+                user={user.firstName}
+                hasCheckout={hasCheckout}
+                handleClickSignIn={() => setOpenAuthModal(true)}
+              />
+            )}
           </Suspense>
 
           {hasCart && (

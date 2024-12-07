@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-// import { useSession } from 'next-auth/react';
 import { type FC } from 'react';
 import { Button } from '../ui';
 import { UserRound } from 'lucide-react';
@@ -10,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 interface Props {
   session: any;
-  user: string
+  user: string;
   hasCheckout?: boolean;
   handleClickSignIn?: () => void;
 }
@@ -21,9 +20,6 @@ export const ProfileButton: FC<Props> = ({
   hasCheckout,
   handleClickSignIn,
 }) => {
-  const firstName = user.split(' ')[0];
-  // const firstName = session?.user.name.split(' ')[0];
-
   return (
     <>
       {!session ? (
@@ -64,10 +60,9 @@ export const ProfileButton: FC<Props> = ({
 
           <Button
             variant='profile'
-            className='hidden md:flex items-center gap-2 w-[130px]'
+            className='hidden md:flex items-center w-[130px] overflow-hidden'
           >
-            {/* <span className='font-bold'>{user}</span> */}
-            <span className='font-bold'>{firstName}</span>
+            <span className='font-bold'>{user}</span>
           </Button>
         </Link>
       )}

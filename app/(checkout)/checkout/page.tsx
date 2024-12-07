@@ -52,11 +52,16 @@ export default function CheckoutPage() {
   useEffect(() => {
     async function fetchUserInfo() {
       const data = await Api.auth.getMe();
-      const [firstName, lastName] = data.fullName.split(' ');
+      // const [firstName, lastName] = data.fullName.split(' ');
+      const firstName = data.firstName;
+      const lastName = data.lastName;
+      const phone = data.phone;
 
       form.setValue('firstName', firstName);
       form.setValue('lastName', lastName);
+      form.setValue('phone', phone);
       form.setValue('email', data.email);
+
     }
 
     if (session) {

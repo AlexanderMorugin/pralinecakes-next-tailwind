@@ -35,10 +35,15 @@ export const CartButton: FC<Props> = ({ className }) => {
         >
           {cartItems.length > 0 && (
             <>
-              <span className='font-bold transition duration-500 group-hover:text-white'>
+              <span
+                className={cn(
+                  'font-bold transition duration-500 group-hover:text-white',
+                  { 'text-white': cartItems.length > 0 }
+                )}
+              >
                 {totalAmount} р
               </span>
-              <span className='h-full w-[1px] bg-black/30 mx-3 transition duration-500 group-hover:bg-white' />
+              <span className='h-full w-[1px] bg-white mx-3 transition duration-500 group-hover:bg-white' />
             </>
           )}
 
@@ -51,12 +56,20 @@ export const CartButton: FC<Props> = ({ className }) => {
                 strokeWidth={2}
                 className={cn(
                   'text-[#cd9575] transition duration-500 group-hover:-translate-x-5 group-hover:text-white',
-                  { 'group-hover:-translate-x-0': cartItems.length > 0 }
+                  {
+                    'text-[#ff0000] group-hover:-translate-x-0':
+                      cartItems.length > 0,
+                  }
                 )}
               />
             )}
             {cartItems.length > 0 && (
-              <span className='font-bold text-black transition duration-500 group-hover:text-white'>
+              <span
+                className={cn(
+                  'font-bold text-black transition duration-500 group-hover:text-white',
+                  { 'text-white': cartItems.length > 0 }
+                )}
+              >
                 {cartItems.length}
               </span>
             )}

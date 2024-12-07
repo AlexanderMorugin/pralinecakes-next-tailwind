@@ -50,9 +50,11 @@ export async function createOrder(data: CheckoutFormValues) {
     const order = await prisma.order.create({
       data: {
         token: cartToken,
-        fullName: data.firstName + ' ' + data.lastName,
-        email: data.email,
+        // fullName: data.firstName + ' ' + data.lastName,
+        firstName: data.firstName,
+        lastName: data.lastName,
         phone: data.phone,
+        email: data.email,        
         address: data.address,
         comments: data.comment,
         totalAmount: userCart.totalAmount,
@@ -117,7 +119,9 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
         id: Number(currentUser.id),
       },
       data: {
-        fullName: body.fullName,
+        firstName: body.firstName,
+        lastName: body.lastName,
+        phone: body.phone,
         email: body.email,
         password: body.password
           ? hashSync(body.password as string, 10)
@@ -148,7 +152,9 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
     const createdUser = await prisma.user.create({
       data: {
-        fullName: body.fullName,
+        firstName: body.firstName,
+        lastName: body.lastName,
+        phone: body.phone,
         email: body.email,
         password: hashSync(body.password, 10),
       },

@@ -23,13 +23,14 @@ interface Props {
 }
 
 export const ProfileForm: FC<Props> = ({ data }) => {
-  // const user = useUserStore((state) => state.user);
   const getUser = useUserStore((state) => state.getUser);
 
   const form = useForm({
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {
-      fullName: data.fullName,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
       email: data.email,
       password: '',
       confirmPassword: '',
@@ -40,7 +41,9 @@ export const ProfileForm: FC<Props> = ({ data }) => {
     try {
       await updateUserInfo({
         email: data.email,
-        fullName: data.fullName,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
         password: data.password,
       });
 
@@ -58,8 +61,6 @@ export const ProfileForm: FC<Props> = ({ data }) => {
       callbackUrl: '/',
     });
   };
-
-
 
   return (
     <Container className='flex flex-col items-center w-full my-2 px-4'>
@@ -79,8 +80,10 @@ export const ProfileForm: FC<Props> = ({ data }) => {
             </p>
           </div>
 
+          <FormInput type='text' name='firstName' label='Имя' required />
+          <FormInput type='text' name='lastName' label='Фамилия' required />
+          <FormInput type='text' name='phone' label='Телефон' required />
           <FormInput type='email' name='email' label='Email' required />
-          <FormInput type='text' name='fullName' label='Полное имя' required />
           <FormInput
             type='password'
             name='password'
@@ -97,19 +100,19 @@ export const ProfileForm: FC<Props> = ({ data }) => {
           <Button
             type='submit'
             disabled={form.formState.isSubmitting}
-            className='text-base mt-5'
+            className='text-[16px] mt-5'
           >
-            Сохранить
+            Сохранить изменения
           </Button>
 
           <Button
             type='button'
             disabled={form.formState.isSubmitting}
             variant='secondary'
-            className='text-base'
+            className='text-[14px]'
             onClick={onClickSignOut}
           >
-            Выйти
+            Выйти из аккаунта
           </Button>
         </form>
       </FormProvider>

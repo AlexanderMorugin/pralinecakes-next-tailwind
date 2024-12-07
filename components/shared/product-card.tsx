@@ -6,6 +6,7 @@ import { TProduct } from './product-list';
 import { Button } from '../ui/button';
 import toast from 'react-hot-toast';
 import { useCartStore } from '@/store';
+import { ToastSuccess } from './toast-success';
 
 export const ProductCard: FC<TProduct> = ({ product }) => {
   const { addCartItem, loading } = useCartStore((state) => state);
@@ -16,9 +17,7 @@ export const ProductCard: FC<TProduct> = ({ product }) => {
         productId: product.id,
       });
 
-      toast.success(product.name + ' успешно добавлен в корзину', {
-        icon: '✅',
-      });
+      ToastSuccess({ title: product.name + ' добавлен в корзину' });
     } catch (error) {
       console.log('не удаллось добавить в корзину', error);
       toast.error(product.name + ' не удаллось добавить в корзину', {

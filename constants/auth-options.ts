@@ -4,7 +4,9 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 // import GoogleProvider from 'next-auth/providers/google';
 
 import { prisma } from '@/prisma/prisma-client';
-import { compare, hashSync } from 'bcrypt';
+import { compare, 
+  hashSync 
+} from 'bcrypt';
 import { UserRole } from '@prisma/client';
 
 export const authOptions: AuthOptions = {
@@ -60,7 +62,9 @@ export const authOptions: AuthOptions = {
         return {
           id: findUser.id,
           email: findUser.email,
-          name: findUser.fullName,
+          firstName: findUser.firstName,
+          lastName: findUser.lastName,
+          phone: findUser.phone,
           role: findUser.role,
         };
       },
@@ -110,7 +114,10 @@ export const authOptions: AuthOptions = {
         await prisma.user.create({
           data: {
             email: user.email,
-            fullName: user.name || 'User #' + user.id,
+            firstName: user.name || 'User #' + user.id,
+            // firstName: user.firstName,
+            lastName: user.name || 'User #' + user.id,
+            phone: user.name || 'User #' + user.id,
             password: hashSync(user.id.toString(), 10),
             verified: new Date(),
             provider: account?.provider,
@@ -139,7 +146,10 @@ export const authOptions: AuthOptions = {
       if (findUser) {
         token.id = String(findUser.id);
         token.email = findUser.email;
-        token.fullName = findUser.fullName;
+        // token.fullName = findUser.fullName;
+        token.firstName = findUser.firstName;
+        token.lastName = findUser.lastName;
+        token.phone = findUser.phone;
         token.role = findUser.role;
       }
 

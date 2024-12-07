@@ -19,7 +19,9 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {
       email: '',
-      fullName: '',
+      firstName: '',
+      lastName: '',
+      phone: '',
       password: '',
       confirmPassword: '',
     },
@@ -28,8 +30,10 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
   const onSubmit = async (data: TFormRegisterValues) => {
     try {
       await registerUser({
-        email: data.email,
-        fullName: data.fullName,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        email: data.email,        
         password: data.password,
       });
 
@@ -58,9 +62,10 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
             Заполните поля, чтобы зарегистрировать аккаунт.
           </p>
         </div>
-
+        <FormInput type='text' name='firstName' label='Имя' required />
+        <FormInput type='text' name='lastName' label='Фамилия' required />
+        <FormInput type='text' name='phone' label='Телефон' required />
         <FormInput type='email' name='email' label='E-Mail' required />
-        <FormInput type='text' name='fullName' label='Полное имя' required />
         <FormInput type='password' name='password' label='Пароль' required />
         <FormInput
           type='password'

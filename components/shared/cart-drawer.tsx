@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren, type FC } from 'react';
+import { PropsWithChildren, useEffect, type FC } from 'react';
 import {
   Sheet,
   SheetClose,
@@ -20,8 +20,17 @@ import Image from 'next/image';
 import { useCartStore } from '@/store';
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
-  const { totalAmount, cartItems, updateCartItemQuantity, removeCartItem } =
-    useCartStore((state) => state);
+  const {
+    totalAmount,
+    cartItems,
+    getCartItems,
+    updateCartItemQuantity,
+    removeCartItem,
+  } = useCartStore((state) => state);
+
+  useEffect(() => {
+    getCartItems();
+  }, [getCartItems]);
 
   const handleClickCountButton = (
     id: number,

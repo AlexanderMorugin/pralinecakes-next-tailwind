@@ -18,7 +18,9 @@ export async function GET() {
         id: Number(user.id),
       },
       select: {
-        fullName: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
         email: true,
         password: false,
       },

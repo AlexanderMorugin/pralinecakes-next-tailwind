@@ -31,7 +31,7 @@ export const AuthForm: FC<Props> = ({ handleClose, className }) => {
         <RegisterForm onClose={handleClose} />
       )}
       {type === 'login' && (
-        <Button variant='outline' onClick={onSwitchType} type='button'>
+        <Button variant='outline' onClick={onSwitchType} type='button' className='text-[14px]'>
           Регистрация
         </Button>
       )}

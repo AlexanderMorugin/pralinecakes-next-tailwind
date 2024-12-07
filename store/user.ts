@@ -1,9 +1,11 @@
-
 import { Api } from '@/services/api-client';
 import { create } from 'zustand';
 
 type TUser = {
-  fullName: string;
+  // fullName: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
   email: string;
 };
 export interface UserState {
@@ -18,7 +20,9 @@ export const useUserStore = create<UserState>((set) => ({
   loading: false,
   error: false,
   user: {
-    fullName: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
     email: '',
   },
 
@@ -26,8 +30,15 @@ export const useUserStore = create<UserState>((set) => ({
     try {
       set({ loading: true, error: false });
       const data = (await Api.auth.getMe()) as TUser;
-      set({ user: { fullName: data.fullName, email: data.email } });
-
+      // set({ user: { fullName: data.fullName, email: data.email } });
+      set({
+        user: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          email: data.email,
+        },
+      });
     } catch (error) {
       console.error(error);
     } finally {
