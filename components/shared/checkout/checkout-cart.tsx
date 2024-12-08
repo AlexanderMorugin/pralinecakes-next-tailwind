@@ -14,8 +14,8 @@ export const CheckoutCart: FC<Props> = ({
   totalAmount,
 }) => {
   return (
-    <WhiteBlock title='1. Корзина' contentClassName='flex flex-col gap-5'>
-      <ul className='flex flex-col gap-5'>
+    <WhiteBlock title='Корзина' contentClassName='flex flex-col gap-5'>
+      <ul className='flex flex-col gap-2'>
         {loading || !totalAmount
           ? [...Array(4)].map((_, i) => <CheckoutCartItemSkeleton key={i} />)
           : cartItems.map((item) => (

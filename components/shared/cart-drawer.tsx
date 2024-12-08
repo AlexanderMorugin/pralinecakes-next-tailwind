@@ -78,7 +78,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
               ))}
             </ul>
 
-            <SheetFooter className='-mx-6 bg-white px-8 py-4'>
+            <SheetFooter className='-mx-6 bg-[#f4f1ee] px-8 py-4'>
               <div className='w-full'>
                 <div className='flex mb-4'>
                   <span className='flex flex-1 text-lg text-neutral-500'>
@@ -89,12 +89,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                 </div>
 
                 <Link href='/checkout'>
-                  <Button
-                    // loading={redirect}
-                    // onClick={() => setRedirect(true)}
-                    type='submit'
-                    className='w-full h-12 text-base'
-                  >
+                  <Button type='submit' className='w-full h-12 text-base'>
                     Оформить заказ
                     <ArrowRight className='w-5 ml-2' />
                   </Button>

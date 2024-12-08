@@ -9,6 +9,7 @@ import { FormInput } from '../../../form';
 import { Button } from '@/components/ui';
 import { registerUser } from '@/app/api/actions';
 import { Title } from '@/components/shared';
+import { ToastSuccess } from '@/components/shared/toast-success';
 
 interface Props {
   onClose?: VoidFunction;
@@ -33,13 +34,11 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
         firstName: data.firstName,
         lastName: data.lastName,
         phone: data.phone,
-        email: data.email,        
+        email: data.email,
         password: data.password,
       });
 
-      toast.error('Регистрация успешна 📝. Подтвердите свою почту', {
-        icon: '✅',
-      });
+      ToastSuccess({ title: 'Регистрация успешна. Подтвердите свою почту' });
 
       onClose?.();
     } catch (error) {

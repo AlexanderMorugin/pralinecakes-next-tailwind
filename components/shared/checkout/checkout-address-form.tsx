@@ -2,17 +2,14 @@
 
 import { type FC } from 'react';
 import { FormInput, FormTextarea, WhiteBlock } from '..';
-// import { useFormContext } from 'react-hook-form';
 
 interface Props {
   className?: string;
 }
 
-export const CheckoutAddressForm: FC<Props> = ({className}) => {
-  // const { control } = useFormContext();
-
+export const CheckoutAddressForm: FC<Props> = ({ className }) => {
   return (
-    <WhiteBlock title='3. Адрес доставки' className={className}>
+    <WhiteBlock title='Адрес доставки' className={className}>
       <div className='flex flex-col gap-5'>
         <FormInput
           name='address'

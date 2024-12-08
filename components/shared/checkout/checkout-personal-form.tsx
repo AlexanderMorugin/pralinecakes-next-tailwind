@@ -7,16 +7,12 @@ interface Props {
 
 export const CheckoutPersonalForm: FC<Props> = ({ className }) => {
   return (
-    <WhiteBlock title='2. Персональные данные' className={className}>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-        <FormInput name='firstName' className='text-base' placeholder='Имя' />
-        <FormInput
-          name='lastName'
-          className='text-base'
-          placeholder='Фамилия'
-        />
-        <FormInput name='email' className='text-base' placeholder='E-Mail' />
-        <FormInput name='phone' className='text-base' placeholder='Телефон' />
+    <WhiteBlock title='Персональные данные' className={className}>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5'>
+        <FormInput type='text' name='firstName' label='Имя' />
+        <FormInput type='text' name='lastName' label='Фамилия' />
+        <FormInput type='text' name='phone' label='Телефон' />
+        <FormInput type='email' name='email' label='E-Mail' />
       </div>
     </WhiteBlock>
   );

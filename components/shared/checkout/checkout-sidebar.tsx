@@ -18,7 +18,7 @@ export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading }) => {
     <div className='flex-1 mb-5 md:w-2/5'>
       <WhiteBlock className='md:p-6 sticky top-4'>
         <div className='flex flex-col gap-1'>
-          <span className='text-[18px] font-bold'>Итого:</span>
+          <span className='text-[18px] font-bold'>Итого</span>
           {loading || !totalAmount ? (
             <Skeleton className='w-48 h-11 rounded-[6px]' />
           ) : (

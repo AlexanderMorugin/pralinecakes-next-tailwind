@@ -8,6 +8,7 @@ import { Button } from '../ui';
 import { useCartStore } from '@/store';
 import toast from 'react-hot-toast';
 import { ArrowRight } from 'lucide-react';
+import { ToastSuccess } from './toast-success';
 
 interface Props {
   product: Product;
@@ -34,9 +35,8 @@ export const ProductForm: FC<Props> = ({
         productId: product.id,
       });
 
-      toast.success(product.name + ' успешно добавлен в корзину', {
-        icon: '✅',
-      });
+      ToastSuccess({ title: product.name + ' добавлен в корзину' });
+
       _onSubmit?.();
     } catch (error) {
       console.log('', error);
@@ -64,7 +64,9 @@ export const ProductForm: FC<Props> = ({
       <div className='flex flex-col justify-between w-full bg-[#f7f6f5] p-3 md:max-w-[400px] md:p-7'>
         <div>
           <Title text={product.name} size='md' className='font-bold mb-1' />
-          <p className='line-clamp-5 md:line-clamp-none'>{product.description}</p>
+          <p className='line-clamp-5 md:line-clamp-none'>
+            {product.description}
+          </p>
           <p className='pt-4'>
             <b>{product.price}</b>&nbsp;р
           </p>

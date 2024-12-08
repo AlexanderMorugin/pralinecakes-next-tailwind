@@ -1,5 +1,4 @@
 import { type FC } from 'react';
-import { Equal } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CartItemProps } from '../cart-item-details/cart-item-details.types';
 import { CartItem } from '..';
@@ -7,7 +6,7 @@ import { CartItem } from '..';
 interface Props extends CartItemProps {
   onClickRemove?: () => void;
   handleClickCountButton?: (type: 'plus' | 'minus') => void;
-  isCheckoutSendCart?: boolean
+  isCheckoutSendCart?: boolean;
   className?: string;
 }
 
@@ -23,8 +22,8 @@ export const CheckoutCartItem: FC<Props> = ({
   return (
     <li
       className={cn(
-        'flex flex-col border-b border-gray-100 pb-3 sm:flex-row',
-        {'flex-row pb-1': isCheckoutSendCart},
+        'flex border-b border-gray-100 pb-3',
+        { 'flex-row pb-1': isCheckoutSendCart },
         className
       )}
     >
@@ -33,9 +32,8 @@ export const CheckoutCartItem: FC<Props> = ({
         <CartItem.Info name={name} details={description} />
       </div>
 
-      <div className='flex items-center justify-end gap-2 ml-3'>
-        <span className='text-[14px] text-gray-800'>{quantity} шт</span>
-        {price && <Equal size={14} className='text-gray-400' />}
+      <div className='flex items-center justify-end gap-2 pl-3'>
+        <span className='text-[14px] text-gray-800'>{quantity}шт</span>
         <CartItem.Price value={price} />
       </div>
     </li>

@@ -21,6 +21,7 @@ import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { Api } from '@/services/api-client';
 import { useCartStore } from '@/store';
+import { ToastSuccess } from '@/components/shared/toast-success';
 
 export default function CheckoutPage() {
   const { totalAmount, cartItems, loading } = useCartStore((state) => state);
@@ -52,7 +53,6 @@ export default function CheckoutPage() {
   useEffect(() => {
     async function fetchUserInfo() {
       const data = await Api.auth.getMe();
-      // const [firstName, lastName] = data.fullName.split(' ');
       const firstName = data.firstName;
       const lastName = data.lastName;
       const phone = data.phone;
@@ -61,7 +61,6 @@ export default function CheckoutPage() {
       form.setValue('lastName', lastName);
       form.setValue('phone', phone);
       form.setValue('email', data.email);
-
     }
 
     if (session) {
@@ -77,9 +76,7 @@ export default function CheckoutPage() {
 
       const url = await createOrder(data);
 
-      toast.success('Заказ успешно оформлен', {
-        icon: '✅',
-      });
+      ToastSuccess({ title: 'Заказ оформлен' });
 
       if (url) {
         location.href = url;
@@ -101,7 +98,7 @@ export default function CheckoutPage() {
 
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className='flex flex-col md:flex-row gap-5'>
+            <div className='flex flex-col px-1 md:flex-row gap-5'>
               {/** Левая сторона */}
               <div className='flex flex-col gap-5 w-full md:w-3/5 mb-5'>
                 <CheckoutCart

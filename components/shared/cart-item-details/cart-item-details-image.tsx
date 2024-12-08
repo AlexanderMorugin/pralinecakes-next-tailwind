@@ -8,6 +8,6 @@ interface Props {
 
 export const CartItemDetailsImage: FC<Props> = ({ src, className }) => {
   return (
-    src && <img className={cn('w-[60px] h-[60px]', className)} src={src} />
+    src && <img className={cn('w-[60px] h-[60px] object-cover rounded-full', className)} src={src} />
   );
 };

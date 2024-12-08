@@ -11,7 +11,8 @@ export const CheckoutSendCart: FC = () => {
   const { totalPrice } = useTotalPrice(totalAmount);
   return (
     <>
-      <span>Заказ</span>
+      <span className='text-center'>Заказ</span>
+      <hr className='mb-3' />
       <ul className='flex flex-col gap-3'>
         {cartItems.map((item) => (
           <CheckoutCartItem
@@ -22,7 +23,7 @@ export const CheckoutSendCart: FC = () => {
           />
         ))}
       </ul>
-      <div className='flex justify-between py-4'>
+      <div className='flex justify-between py-8'>
         <span>Сумма к оплате:</span>
         <span className='font-bold'>{totalPrice} р</span>
       </div>

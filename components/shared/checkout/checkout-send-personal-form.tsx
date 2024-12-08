@@ -1,6 +1,5 @@
 import { type FC } from 'react';
 import { CheckoutFormValues } from './checkout-form-schema';
-import { Title } from '../title';
 
 interface Props {
   data: CheckoutFormValues;
@@ -9,24 +8,18 @@ interface Props {
 export const CheckoutSendPersonalForm: FC<Props> = ({ data }) => {
   const fullName = data.firstName + ' ' + data.lastName;
   return (
-    <div className='grid grid-cols-[max-content_1fr] gap-x-4'>
-      <span>Покупатель:</span>
-      <Title size='sm' text={fullName} className='font-bold' />
+    <div className='grid grid-cols-[max-content_1fr] gap-x-4 text-[14px]'>
+      <span className='text-[12px]'>Покупатель:</span>
+      <span>{fullName}</span>
 
-      <span>Телефон:</span>
-      <span>
-        <b>{data.phone}</b>
-      </span>
+      <span className='text-[12px]'>Телефон:</span>
+      <span>{data.phone}</span>
 
-      <span>Адрес доставки:</span>
-      <span>
-        <b>{data.address}</b>
-      </span>
+      <span className='text-[12px]'>Адрес доставки:</span>
+      <span>{data.address}</span>
 
-      <span>Комментарии:</span>
-      <span>
-        <b>{data.comment}</b>
-      </span>
+      <span className='text-[12px]'>Комментарии:</span>
+      <span>{data.comment}</span>
     </div>
   );
 };

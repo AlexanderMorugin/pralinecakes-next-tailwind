@@ -23,17 +23,10 @@ export const CheckoutModal: FC<Props> = ({ showModal, data, className }) => {
 
   return (
     <Dialog open={Boolean(showModal)} onOpenChange={() => router.back()}>
-      <DialogContent
-        className={cn(
-          'p-5 w-full max-h-full overflow-auto bg-white',
-          className
-        )}
-      >
+      <DialogContent className={cn('w-full', className)}>
+        {/** Скрываем в консоли ошибки по поводу Титла и Дескрипшн */}
         <DialogTitle className='hidden' />
-        <DialogDescription className='flex flex-col text-base text-black'>
-          <span className='text-lg font-bold'>Благодарим за заказ!</span>
-          <span>Наш менеджер свяжется с вами по указанному телефону.</span>
-        </DialogDescription>
+        <DialogDescription className='hidden' />
 
         <СheckoutSendForm data={data} />
       </DialogContent>

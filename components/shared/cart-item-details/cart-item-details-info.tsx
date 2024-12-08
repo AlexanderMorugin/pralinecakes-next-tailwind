@@ -10,10 +10,10 @@ interface Props {
 export const CartItemDetailsInfo: FC<Props> = ({ name, details, className }) => {
   return (
     <div
-      className={cn('flex flex-col justify-between', className)}
+      className={cn('flex flex-col', className)}
     >
-      <h2 className='text-base font-bold flex-1 leading-6 md:text-lg'>{name}</h2>
-      {details && <p className='line-clamp-2 text-xs text-gray-400 w-[90%]'>{details}</p>}
+      <h2 className='text-[14px] font-bold md:text-[16px]'>{name}</h2>
+      {details && <p className='line-clamp-1 text-[12px] text-gray-400 w-[90%]'>{details}</p>}
     </div>
   );
 };

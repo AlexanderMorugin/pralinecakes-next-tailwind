@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils';
 import { type FC } from 'react';
-// import * as CartItem from './cart-item-details';
 import { CartItemProps } from './cart-item-details/cart-item-details.types';
 import { Trash2Icon } from 'lucide-react';
 import { CartItem, CountButton } from '.';
@@ -25,7 +24,7 @@ export const CartDrawerItem: FC<Props> = ({
   return (
     <li
       className={cn(
-        'flex bg-white p-5 gap-2 mb-2 sm:gap-6',
+        'flex bg-white p-2 gap-2 mb-1 sm:gap-6',
         { 'opacity-50 pointer-events-none': disabled },
         className
       )}
@@ -34,7 +33,7 @@ export const CartDrawerItem: FC<Props> = ({
 
       <div className='flex-1'>
         <CartItem.Info name={name} details={description} />
-        <hr className='my-3' />
+        <hr className='my-1' />
 
         <div className='flex items-center justify-between'>
           <CountButton onClick={handleClickCountButton} value={quantity} />
