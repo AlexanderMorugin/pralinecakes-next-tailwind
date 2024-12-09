@@ -22,6 +22,7 @@ interface Props {
   hasSearch?: boolean;
   hasCart?: boolean;
   hasCheckout?: boolean;
+  hasDashboard?: boolean;
   className?: string;
 }
 
@@ -29,6 +30,7 @@ export const Header: FC<Props> = ({
   hasSearch = true,
   hasCart = true,
   hasCheckout = false,
+  hasDashboard = false,
   className,
 }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -66,6 +68,8 @@ export const Header: FC<Props> = ({
       className={cn(
         'sticky top-0 z-20 bg-[#4e1609] pb-1 md:pb-2',
         { 'bg-[#c1876b]': hasCheckout },
+
+        { 'bg-[#8486ec]': hasDashboard },
         className
       )}
     >
@@ -73,12 +77,12 @@ export const Header: FC<Props> = ({
         className={cn(
           'flex items-center justify-between border-b border-[#cd9575] px-4 pt-4 pb-2 md:pb-4 md:border-0',
           {
-            'border-0': hasCheckout,
+            'border-0': hasCheckout || hasDashboard,
           }
         )}
       >
         {/** Левая часть */}
-        {hasCheckout ? (
+        {hasCheckout || hasDashboard ? (
           <div className='flex items-center gap-5'>
             <ChevronLeft
               size={20}
@@ -88,6 +92,10 @@ export const Header: FC<Props> = ({
 
             {session && (
               <p className='font-bold text-white'>{`${user.firstName} ${user.lastName}`}</p>
+            )}
+
+            {hasDashboard && (
+              <p className='font-bold text-white'>Панель управления</p>
             )}
           </div>
         ) : (
@@ -121,7 +129,7 @@ export const Header: FC<Props> = ({
               open={openAuthModal}
               onClose={() => setOpenAuthModal(false)}
             />
-            {!hasCheckout && (
+            {!hasCheckout && !hasDashboard && (
               <ProfileButton
                 session={session}
                 user={user.firstName}
@@ -139,7 +147,7 @@ export const Header: FC<Props> = ({
         </div>
       </Container>
 
-      {!hasCheckout && <TopBar />}
+      {!hasCheckout && !hasDashboard && <TopBar />}
     </header>
   );
 };
