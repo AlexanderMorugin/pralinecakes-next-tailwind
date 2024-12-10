@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode, type FC } from 'react';
+import { type FC } from 'react';
 
 import { OrderCard } from './order-card';
+import { OrderContact } from './order-contact';
+import { OrderContent } from './order-content';
 
 export interface OrderProps {
   token: string;
@@ -10,12 +12,12 @@ export interface OrderProps {
   email: string;
   address: string;
   phone: string;
-  items: any
-  createdAt: ReactNode | string | Date;
+  items: any;
+  createdAt: Date;
   totalAmount: number;
   comments: string | null;
   status: string;
-  map?: any
+  map?: any;
 }
 
 export const OrdersForm: FC<OrderProps> = ({
@@ -31,38 +33,17 @@ export const OrdersForm: FC<OrderProps> = ({
   comments,
   status,
 }) => {
-  console.log(createdAt);
+  const d = new Date(createdAt);
+  const date = d.toLocaleString().slice(0, 17);
 
   return (
     token && (
-      <OrderCard title={firstName + ' ' + lastName} 
-      // endAdornment={createdAt}
-      >
-        <div>Телефон: {phone}</div>
-        <div>E-mail: {email}</div>
-        <div>Адрес доставки: {address}</div>
-        <div>Токен пользователя: {token}</div>
+      <OrderCard title={firstName + ' ' + lastName} date={date}>
+        <OrderContact phone={phone} email={email} address={address} />
+        <OrderContent items={items} comments={comments} />
 
-        <div className='py-4'>
-          <div className='font-bold'>Детали заказа:</div>
-          {items?.map((item: any) => (
-            <div key={item.id} className='flex items-center gap-2'>
-              <img
-                src={item.product.imageUrl}
-                className='w-[52px] h-[52px] rounded-full object-cover'
-                alt={item.product.name}
-              />
+        <span>Сумма: {totalAmount} руб</span>
 
-              <div>{item.product.name}</div>
-              <div className='flex'>
-                <span>{item.quantity}шт *&nbsp;</span>
-                <b>{item.product.price}</b> руб
-              </div>
-            </div>
-          ))}
-        </div>
-        <div>Сумма: {totalAmount} руб</div>
-        <div>Комментарии: {comments}</div>
         <div>Статус заказа: {status}</div>
       </OrderCard>
     )

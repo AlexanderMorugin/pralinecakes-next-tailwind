@@ -1,31 +1,34 @@
-import { PropsWithChildren, ReactNode, type FC } from 'react';
+import { PropsWithChildren, type FC } from 'react';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
 
 interface Props {
-  title?: string;
-  endAdornment?: ReactNode;
+  title: string;
+  date: string;
   className?: string;
-  contentClassName?: string;
 }
 
 export const OrderCard: FC<PropsWithChildren<Props>> = ({
   title,
-  endAdornment,
+  date,
   className,
-  contentClassName,
   children,
 }) => {
   return (
-    <div className={cn('bg-white rounded-3xl', className)}>
+    <div
+      className={cn(
+        'bg-white rounded-3xl overflow-hidden border border-[#8486ec]',
+        className
+      )}
+    >
       {title && (
-        <div className='flex items-center justify-between p-5 px-7 border-b border-gray-100'>
+        <div className='flex items-center justify-between p-2 px-5 bg-[#cecef3]'>
           <Title text={title} size='sm' className='font-bold' />
-          {endAdornment}
+          <span className='text-[12px]'>{date}</span>
         </div>
       )}
 
-      <div className={cn('px-5 py-4', contentClassName)}>{children}</div>
+      <div className='flex flex-col gap-3 py-2 px-2 md:py-4 md:px-5'>{children}</div>
     </div>
   );
 };

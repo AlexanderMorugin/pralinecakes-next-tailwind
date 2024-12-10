@@ -17,7 +17,7 @@ export default function DashboardPage() {
 
   // console.log('DashboardPage: ', order);
 
-  console.log(order);
+  // console.log(order);
   return (
     <Container className='py-5 md:py-10'>
       <Title

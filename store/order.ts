@@ -20,10 +20,7 @@ export const useOrderStore = create<OrderState>((set) => ({
     try {
       set({ loading: true, error: false });
       const data: Order = await Api.order.getOrderService();
-
       set(getOrderDetails(data));
-
-      // console.log('useOrderStore: ', data);
     } catch (error) {
       console.error(error);
     } finally {
