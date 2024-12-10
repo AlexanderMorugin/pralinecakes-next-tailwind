@@ -1,9 +1,8 @@
-import { Order } from '@prisma/client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { OrderProps } from '@/components/shared/orders-form';
 
-export const getOrderDetails = (data: Order) => {
-
-
-  const order = data.map((item) => ({
+export const getOrderDetails = (data: OrderProps) => {
+  const order = data.map((item: any) => ({
     id: item.id,
     createdAt: String(item.createdAt),
     userId: item.userId,
@@ -22,5 +21,5 @@ export const getOrderDetails = (data: Order) => {
 
   // console.log(order)
 
-  return {order};
+  return { order };
 };

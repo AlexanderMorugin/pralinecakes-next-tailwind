@@ -1,8 +1,24 @@
-import { Prisma } from '@prisma/client';
-import Image from 'next/image';
-import { WhiteBlock } from './white-block';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode, type FC } from 'react';
 
-export const OrdersForm = ({
+import { OrderCard } from './order-card';
+
+export interface OrderProps {
+  token: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  phone: string;
+  items: any
+  createdAt: ReactNode | string | Date;
+  totalAmount: number;
+  comments: string | null;
+  status: string;
+  map?: any
+}
+
+export const OrdersForm: FC<OrderProps> = ({
   token,
   firstName,
   lastName,
@@ -19,7 +35,9 @@ export const OrdersForm = ({
 
   return (
     token && (
-      <WhiteBlock title={firstName + ' ' + lastName} endAdornment={createdAt}>
+      <OrderCard title={firstName + ' ' + lastName} 
+      // endAdornment={createdAt}
+      >
         <div>Телефон: {phone}</div>
         <div>E-mail: {email}</div>
         <div>Адрес доставки: {address}</div>
@@ -27,7 +45,7 @@ export const OrdersForm = ({
 
         <div className='py-4'>
           <div className='font-bold'>Детали заказа:</div>
-          {items?.map((item) => (
+          {items?.map((item: any) => (
             <div key={item.id} className='flex items-center gap-2'>
               <img
                 src={item.product.imageUrl}
@@ -46,7 +64,7 @@ export const OrdersForm = ({
         <div>Сумма: {totalAmount} руб</div>
         <div>Комментарии: {comments}</div>
         <div>Статус заказа: {status}</div>
-      </WhiteBlock>
+      </OrderCard>
     )
   );
 };
