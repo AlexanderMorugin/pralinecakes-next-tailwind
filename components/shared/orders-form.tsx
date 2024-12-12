@@ -6,6 +6,7 @@ import { OrderContact } from './order-contact';
 import { OrderContent } from './order-content';
 
 export interface OrderProps {
+  id: number;
   token: string;
   firstName: string;
   lastName: string;
@@ -21,6 +22,7 @@ export interface OrderProps {
 }
 
 export const OrdersForm: FC<OrderProps> = ({
+  id,
   token,
   firstName,
   lastName,
@@ -36,15 +38,34 @@ export const OrdersForm: FC<OrderProps> = ({
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
 
+  const statusTitle = (status: string) => {
+    if (status === 'PENDING') {
+      status = 'Новый';
+      return status;
+    }
+
+    if (status === 'SUCCES') {
+      status = 'Выполнен';
+      return status;
+    }
+  };
+
   return (
     token && (
-      <OrderCard title={firstName + ' ' + lastName} date={date}>
-        <OrderContact phone={phone} email={email} address={address} />
+      <OrderCard
+        id={id}
+        title={firstName}
+        date={date}
+        statusTitle={statusTitle(status)}
+        totalAmount={totalAmount}
+      >
+        <OrderContact
+          name={firstName + ' ' + lastName}
+          phone={phone}
+          email={email}
+          address={address}
+        />
         <OrderContent items={items} comments={comments} />
-
-        <span>Сумма: {totalAmount} руб</span>
-
-        <div>Статус заказа: {status}</div>
       </OrderCard>
     )
   );

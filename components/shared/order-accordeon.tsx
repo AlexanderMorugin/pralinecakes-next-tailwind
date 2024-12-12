@@ -19,7 +19,7 @@ export const OrderAccordeon: FC<Props> = ({ title, children, className }) => {
   return (
     <div
       className={cn(
-        'flex flex-col h-[38px] rounded-xl overflow-hidden border border-[#cecef3] cursor-pointer',
+        'flex flex-col h-[40px] rounded-xl overflow-hidden border border-[#cecef3] cursor-pointer',
         { 'h-auto': active }
       )}
     >

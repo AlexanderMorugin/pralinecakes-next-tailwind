@@ -10,22 +10,28 @@ interface Props {
 export const OrderContent: FC<Props> = ({ items, comments }) => {
   return (
     <>
-      <OrderAccordeon title='Детали заказа' className='py-2 px-2 md:px-3'>
+      <OrderAccordeon title='Детали заказа' className='py-2'>
         <ul className='flex flex-col gap-4'>
           {items?.map((item: any) => (
             <li
               key={item.id}
-              className='grid grid-cols-[60px_1fr_100px_100px] gap-2'
+              className='flex items-center justify-between gap-1 text-[14px] odd:bg-white even:bg-slate-50  md:text-[16px]'
             >
-              <img
-                src={item.product.imageUrl}
-                className='w-[52px] h-[52px] rounded-full object-cover'
-                alt={item.product.name}
-              />
+              <div className='flex items-center gap-1 overflow-hidden py-1 pl-2 sm:gap-2 md:gap-3 md:pl-3'>
+                <img
+                  src={item.product.imageUrl}
+                  className='w-[32px] h-[32px] rounded-full object-cover md:w-[52px] md:h-[52px]'
+                  alt={item.product.name}
+                />
 
-              <span className='flex items-center'>{item.product.name}</span>
-              <span className='flex items-center'>{item.quantity}шт</span>
-              <span className='flex items-center'>{item.product.price} руб</span>
+                <span className='line-clamp-1'>
+                  {item.product.name}
+                </span>
+              </div>
+
+              <div className='pr-2 md:pr-3'>
+                <b>{item.quantity}</b>
+              </div>
             </li>
           ))}
         </ul>

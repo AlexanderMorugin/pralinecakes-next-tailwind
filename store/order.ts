@@ -9,6 +9,7 @@ export interface OrderState {
   order: Order[];
 
   getOrders: () => Promise<void>;
+  updateOrderStatus: (id: number, status: string) => Promise<void>;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
@@ -23,6 +24,19 @@ export const useOrderStore = create<OrderState>((set) => ({
       set(getOrderDetails(data));
     } catch (error) {
       console.error(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  updateOrderStatus: async (id: number, status: string) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.order.updateOrderStatusService(id, status);
+      set(getOrderDetails(data));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
     } finally {
       set({ loading: false });
     }

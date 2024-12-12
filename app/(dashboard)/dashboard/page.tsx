@@ -29,6 +29,7 @@ export default function DashboardPage() {
           order.map((item) => (
             <OrdersForm
               key={item.id}
+              id={item.id}
               token={item.token}
               firstName={item.firstName}
               lastName={item.lastName}
