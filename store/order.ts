@@ -1,20 +1,23 @@
 import { getOrderDetails } from '@/lib/get-order-details';
 import { Api } from '@/services/api-client';
-import { Order } from '@prisma/client';
+import { Order, OrderStatus } from '@prisma/client';
 import { create } from 'zustand';
 
 export interface OrderState {
   loading: boolean;
   error: boolean;
+  status: OrderStatus;
   order: Order[];
 
   getOrders: () => Promise<void>;
-  updateOrderStatus: (id: number, status: string) => Promise<void>;
+
+  updateOrderStatus: (id: number, status: OrderStatus) => Promise<void>;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
   loading: false,
   error: false,
+  status: OrderStatus.PENDING,
   order: [],
 
   getOrders: async () => {
@@ -29,13 +32,16 @@ export const useOrderStore = create<OrderState>((set) => ({
     }
   },
 
-  updateOrderStatus: async (id: number, status: string) => {
+  updateOrderStatus: async (id: number, status: OrderStatus) => {
     try {
       set({ loading: true, error: false });
-      const data = await Api.order.updateOrderStatusService(id, status);
-      set(getOrderDetails(data));
+      await Api.order.updateOrderStatusService(id, status);
+      // const data = await Api.order.updateOrderStatusService(id, status);
+      // set(getOrderDetails(data));
+
+      // console.log("Стор работает", id, status)
     } catch (error) {
-      console.error(error);
+      console.error('[ORDER_STORE_PATCH] ServerError ', error);
       set({ error: true });
     } finally {
       set({ loading: false });

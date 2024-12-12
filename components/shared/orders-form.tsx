@@ -4,6 +4,9 @@ import { type FC } from 'react';
 import { OrderCard } from './order-card';
 import { OrderContact } from './order-contact';
 import { OrderContent } from './order-content';
+import { Button } from '../ui';
+import { OrderStatus } from '@prisma/client';
+import { useOrderStore } from '@/store/order';
 
 export interface OrderProps {
   id: number;
@@ -17,7 +20,7 @@ export interface OrderProps {
   createdAt: Date;
   totalAmount: number;
   comments: string | null;
-  status: string;
+  status: OrderStatus;
   map?: any;
 }
 
@@ -35,8 +38,17 @@ export const OrdersForm: FC<OrderProps> = ({
   comments,
   status,
 }) => {
+  const { updateOrderStatus } = useOrderStore((state) => state);
+  // const status = useOrderStore((state) => state.status);
+  // console.log(status);
+
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
+
+  const handleChangeStatus = (id: number) => {
+    updateOrderStatus(id, OrderStatus.SUCCES);
+    status = 'SUCCES';
+  };
 
   const statusTitle = (status: string) => {
     if (status === 'PENDING') {
@@ -66,6 +78,22 @@ export const OrdersForm: FC<OrderProps> = ({
           address={address}
         />
         <OrderContent items={items} comments={comments} />
+
+        <Button
+          variant='status'
+          size='status'
+          onClick={() =>
+            handleChangeStatus(
+              id
+              //  status
+            )
+          }
+          // handleClickCountButton={(type) =>
+          //   handleClickCountButton(item.id, item.quantity, type)
+          // }
+        >
+          Выполнить
+        </Button>
       </OrderCard>
     )
   );

@@ -24,9 +24,7 @@ export const OrderContent: FC<Props> = ({ items, comments }) => {
                   alt={item.product.name}
                 />
 
-                <span className='line-clamp-1'>
-                  {item.product.name}
-                </span>
+                <span className='line-clamp-1'>{item.product.name}</span>
               </div>
 
               <div className='pr-2 md:pr-3'>

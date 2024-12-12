@@ -14,10 +14,11 @@ export default function DashboardPage() {
   }, [getOrders]);
 
   const order = useOrderStore((state) => state.order);
+  // const status = useOrderStore((state) => state.status);
 
   // console.log('DashboardPage: ', order);
 
-  // console.log(order);
+  // console.log(status);
   return (
     <Container className='py-5 md:py-10'>
       <Title

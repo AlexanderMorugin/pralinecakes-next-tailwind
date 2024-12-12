@@ -1,15 +1,15 @@
-import { Order } from '@prisma/client';
+import { Order, OrderStatus } from '@prisma/client';
 import { axiosInstance } from './axios-instance';
 
 
 export const getOrderService = async (): Promise<Order> => {
-  return (await axiosInstance.get('/orders')).data;
+  return (await axiosInstance.get('/order')).data;
 };
 
 export const updateOrderStatusService = async (
   id: number,
-  status: string
+  status: OrderStatus
 ): Promise<Order> => {
-  return (await axiosInstance.patch('/orders/' + id, { status }))
+  return (await axiosInstance.patch('/order/' + id, { status }))
     .data;
 };

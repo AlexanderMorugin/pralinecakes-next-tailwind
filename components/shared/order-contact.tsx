@@ -9,8 +9,6 @@ interface Props {
 }
 
 export const OrderContact: FC<Props> = ({ name, phone, email, address }) => {
-
-
   return (
     <OrderAccordeon
       title='Контакты'

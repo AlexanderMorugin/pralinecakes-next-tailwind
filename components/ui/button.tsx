@@ -22,7 +22,7 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        status: 'w-fit bg-[#ff0000] rounded-xl text-[14px] text-white font-bold transition duration-300 hover:bg-gray-500',
+        status: 'w-fit bg-gray-500 rounded-[10px] text-[14px] text-white transition duration-300 hover:bg-primary',
       },
       size: {
         default: 'h-10 px-4 py-2',

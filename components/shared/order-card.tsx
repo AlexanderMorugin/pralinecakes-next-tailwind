@@ -1,6 +1,8 @@
 import { PropsWithChildren, type FC } from 'react';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
+// import { Button } from '../ui';
+// import { OrderStatus } from '@prisma/client';
 
 interface Props {
   id: number;
@@ -20,6 +22,16 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   className,
   children,
 }) => {
+
+
+  // const handleChangeStatus = (
+  //   id: number,
+  //   status: OrderStatus,
+  // ) => {
+  //   status = OrderStatus.SUCCES;
+  //   updateOrderStatus(id, status);
+  // };
+
   return (
     <div
       className={cn(
@@ -46,14 +58,26 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
       <div className='flex items-center justify-between bg-[#fae1c0]'>
         <div className='flex items-center gap-2'>
           <div
-            className={cn('text-white p-2 px-3 sm:px-5 rounded-r-[8px]',
-              {'bg-[#ff0000]': statusTitle === 'Новый'},
-              {'bg-green-600': statusTitle === 'Выполнен'},
+            className={cn(
+              'text-white p-2 px-3 sm:px-5 rounded-r-[8px]',
+              { 'bg-[#ff0000]': statusTitle === 'Новый' },
+              { 'bg-green-600': statusTitle === 'Выполнен' }
             )}
           >
             <span className='font-bold'>{statusTitle}</span>
           </div>
         </div>
+
+        {/* {statusTitle === 'Новый' && (
+          // <Button variant='status' size='status' 
+          // onClick={handleChangeStatus}
+          // handleClickCountButton={(type) =>
+          //   handleClickCountButton(item.id, item.quantity, type)
+          // }
+          // >
+          //   Выполнить
+          // </Button>
+        )} */}
 
         <span className='text-[14px] p-2 px-3 sm:px-5'>
           <b>{totalAmount}</b>&nbsp;руб
@@ -62,3 +86,8 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
     </div>
   );
 };
+
+// function updateOrderStatus(id: number, newStatus: string) {
+//   throw new Error('Function not implemented.');
+// }
+
