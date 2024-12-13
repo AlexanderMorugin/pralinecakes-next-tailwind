@@ -3,11 +3,16 @@
 import { Container, Title } from '@/components/shared';
 import { OrdersForm } from '@/components/shared/orders-form';
 import { useOrderStore } from '@/store/order';
+// import { OrderStatus } from '@prisma/client';
 
 import { useEffect } from 'react';
 
 export default function DashboardPage() {
-  const getOrders = useOrderStore((state) => state.getOrders);
+  const { getOrders } = useOrderStore((state) => state);
+
+  // const handleChangeStatus = (id: number, status: OrderStatus) => {
+  //   updateOrderStatus(id, status);
+  // };
 
   useEffect(() => {
     getOrders();
@@ -42,6 +47,7 @@ export default function DashboardPage() {
               totalAmount={item.totalAmount}
               comments={item.comments}
               status={item.status}
+              // handleChangeStatus={handleChangeStatus}
             />
           ))}
       </ul>

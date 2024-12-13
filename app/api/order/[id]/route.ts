@@ -1,7 +1,6 @@
-// import { updateOrderStatus } from '@/lib/update-order-status';
-import { updateOrderStatus } from '@/lib/update-order-status';
+import { updateCurrentOrderStatus } from '@/lib/update-current-order-status';
 import { prisma } from '@/prisma/prisma-client';
-// import { OrderStatus } from '@prisma/client';
+import { OrderStatus } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(
@@ -10,7 +9,8 @@ export async function PATCH(
 ) {
   try {
     const id = Number(params.id);
-    const data = await req.json();
+    const data = (await req.json()) as { status: OrderStatus };
+
 
     const orderItem = await prisma.order.findFirst({
       where: {
@@ -33,7 +33,8 @@ export async function PATCH(
       },
     });
 
-    const updateOrder = await updateOrderStatus(id);
+    // const updateOrder = await updateCurrentOrderStatus(id);
+    const updateOrder = await updateCurrentOrderStatus(id);
     return NextResponse.json(updateOrder);
   } catch (error) {
     console.log('[ORDER_PATCH] ServerError ', error);

@@ -22,6 +22,7 @@ export interface OrderProps {
   comments: string | null;
   status: OrderStatus;
   map?: any;
+  // handleChangeStatus: () => void
 }
 
 export const OrdersForm: FC<OrderProps> = ({
@@ -37,30 +38,24 @@ export const OrdersForm: FC<OrderProps> = ({
   totalAmount,
   comments,
   status,
+  // handleChangeStatus
 }) => {
-  const { updateOrderStatus } = useOrderStore((state) => state);
+  const { updateOrderStatus, getOrders } = useOrderStore((state) => state);
   // const status = useOrderStore((state) => state.status);
   // console.log(status);
 
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
 
-  const handleChangeStatus = (id: number) => {
-    updateOrderStatus(id, OrderStatus.SUCCES);
-    status = 'SUCCES';
+  const handleChangeStatus = async (id: number, status: OrderStatus) => {
+    await updateOrderStatus(id, status);
+
+    getOrders();
   };
 
-  const statusTitle = (status: string) => {
-    if (status === 'PENDING') {
-      status = 'Новый';
-      return status;
-    }
-
-    if (status === 'SUCCES') {
-      status = 'Выполнен';
-      return status;
-    }
-  };
+  // useEffect(() => {
+  //   getOrders();
+  // }, [getOrders]);
 
   return (
     token && (
@@ -68,7 +63,7 @@ export const OrdersForm: FC<OrderProps> = ({
         id={id}
         title={firstName}
         date={date}
-        statusTitle={statusTitle(status)}
+        status={status}
         totalAmount={totalAmount}
       >
         <OrderContact
@@ -82,15 +77,7 @@ export const OrdersForm: FC<OrderProps> = ({
         <Button
           variant='status'
           size='status'
-          onClick={() =>
-            handleChangeStatus(
-              id
-              //  status
-            )
-          }
-          // handleClickCountButton={(type) =>
-          //   handleClickCountButton(item.id, item.quantity, type)
-          // }
+          onClick={() => handleChangeStatus(id, status)}
         >
           Выполнить
         </Button>

@@ -1,6 +1,7 @@
 import { PropsWithChildren, type FC } from 'react';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
+import { OrderStatus } from '@prisma/client';
 // import { Button } from '../ui';
 // import { OrderStatus } from '@prisma/client';
 
@@ -8,7 +9,7 @@ interface Props {
   id: number;
   title: string;
   date: string;
-  statusTitle?: string;
+  status: OrderStatus;
   totalAmount: number;
   className?: string;
 }
@@ -17,13 +18,11 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   id,
   title,
   date,
-  statusTitle,
+  status,
   totalAmount,
   className,
   children,
 }) => {
-
-
   // const handleChangeStatus = (
   //   id: number,
   //   status: OrderStatus,
@@ -60,11 +59,16 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
           <div
             className={cn(
               'text-white p-2 px-3 sm:px-5 rounded-r-[8px]',
-              { 'bg-[#ff0000]': statusTitle === 'Новый' },
-              { 'bg-green-600': statusTitle === 'Выполнен' }
+              { 'bg-[#ff0000]': status === OrderStatus.PENDING },
+              { 'bg-green-600': status === OrderStatus.SUCCES }
             )}
           >
-            <span className='font-bold'>{statusTitle}</span>
+            {status === OrderStatus.PENDING && (
+              <span className='font-bold'>Новый</span>
+            )}
+            {status === OrderStatus.SUCCES && (
+              <span className='font-bold'>Выполнен</span>
+            )}
           </div>
         </div>
 
@@ -90,4 +94,3 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
 // function updateOrderStatus(id: number, newStatus: string) {
 //   throw new Error('Function not implemented.');
 // }
-
