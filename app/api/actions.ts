@@ -89,12 +89,12 @@ export async function createOrder(data: CheckoutFormValues) {
       PayOrderTemplate({
         orderId: order.id,
         totalAmount: order.totalAmount,
-        paymentUrl: 'https://pralinecakes.ru/',
+        paymentUrl: 'https://pralinecakes-next-tailwind.vercel.app/',
         // items: userCart.cartItems,
       })
     );
 
-    return 'https://pralinecakes.ru/';
+    return 'https://pralinecakes-next-tailwind.vercel.app/';
   } catch (error) {
     console.log('[CreateOrder] Server error ', error);
   }

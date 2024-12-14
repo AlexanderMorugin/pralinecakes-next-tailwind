@@ -1,18 +1,13 @@
 'use client';
 
 import { Suspense, useEffect, useState, type FC } from 'react';
-import {
-  AlignJustify,
-  ChevronLeft,
-  House,
-  LayoutDashboard,
-  Search,
-} from 'lucide-react';
+import { AlignJustify, ChevronLeft, House, Search } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import {
   CartButton,
   Container,
+  DashboardButton,
   Logo,
   ProfileButton,
   SearchBar,
@@ -132,9 +127,7 @@ export const Header: FC<Props> = ({
           )}
 
           {!hasCheckout && !hasDashboard ? (
-            <Link href='/dashboard'>
-              <LayoutDashboard size={26} className='text-white' />
-            </Link>
+            <DashboardButton />
           ) : (
             <Link href='/'>
               <House size={26} className='text-white' />
