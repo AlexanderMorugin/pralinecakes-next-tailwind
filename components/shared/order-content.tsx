@@ -3,7 +3,7 @@ import { type FC } from 'react';
 import { OrderAccordeon } from './order-accordeon';
 
 interface Props {
-  items: any;
+  items?: any;
   comments: string | null;
 }
 

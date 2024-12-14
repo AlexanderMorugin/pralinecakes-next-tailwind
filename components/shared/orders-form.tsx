@@ -7,7 +7,7 @@ import {
 
 import { OrderCard } from './order-card';
 import { OrderContact } from './order-contact';
-import { OrderContent } from './order-content';
+// import { OrderContent } from './order-content';
 import { Button } from '../ui';
 import { OrderStatus } from '@prisma/client';
 // import { useOrderStore } from '@/store/order';
@@ -36,19 +36,13 @@ export const OrdersForm: FC<OrderProps> = ({
   email,
   address,
   phone,
-  items,
+  // items,
   createdAt,
   totalAmount,
-  comments,
+  // comments,
   status,
 }) => {
-  // const { updateOrderStatus, 
-  //   // getOrders, 
-  //   // order
 
-  //  } = useOrderStore(
-  //   (state) => state
-  // );
 
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
@@ -80,7 +74,7 @@ export const OrdersForm: FC<OrderProps> = ({
           email={email}
           address={address}
         />
-        <OrderContent items={items} comments={comments} />
+        {/* <OrderContent items={items} comments={comments} /> */}
 
         <Button
           variant='status'
