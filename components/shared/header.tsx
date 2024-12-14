@@ -1,7 +1,13 @@
 'use client';
 
 import { Suspense, useEffect, useState, type FC } from 'react';
-import { AlignJustify, ChevronLeft, Search } from 'lucide-react';
+import {
+  AlignJustify,
+  ChevronLeft,
+  House,
+  LayoutDashboard,
+  Search,
+} from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import {
@@ -17,6 +23,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useUserStore } from '@/store/user';
+import Link from 'next/link';
 
 interface Props {
   hasSearch?: boolean;
@@ -122,6 +129,16 @@ export const Header: FC<Props> = ({
               size={26}
               className='flex md:hidden text-white cursor-pointer'
             />
+          )}
+
+          {!hasCheckout && !hasDashboard ? (
+            <Link href='/dashboard'>
+              <LayoutDashboard size={26} className='text-white' />
+            </Link>
+          ) : (
+            <Link href='/'>
+              <House size={26} className='text-white' />
+            </Link>
           )}
 
           <Suspense>

@@ -14,7 +14,7 @@ export default function DashboardLayout({
   return (
     <>
       <Suspense>
-        <Header hasSearch={false} hasCart={false} hasCheckout={false} hasDashboard={true} />
+        <Header hasSearch={false} hasCart={false} hasDashboard={true} />
       </Suspense>
       <main className='flex-grow bg-[#F4F1EE]'>{children}</main>
       <Footer />
