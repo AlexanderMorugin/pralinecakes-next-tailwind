@@ -6,9 +6,9 @@ import {
 } from 'react';
 
 import { OrderCard } from './order-card';
-import { OrderContact } from './order-contact';
+// import { OrderContact } from './order-contact';
 // import { OrderContent } from './order-content';
-import { Button } from '../ui';
+// import { Button } from '../ui';
 import { OrderStatus } from '@prisma/client';
 // import { useOrderStore } from '@/store/order';
 
@@ -32,10 +32,10 @@ export const OrdersForm: FC<OrderProps> = ({
   id,
   token,
   firstName,
-  lastName,
-  email,
-  address,
-  phone,
+  // lastName,
+  // email,
+  // address,
+  // phone,
   // items,
   createdAt,
   totalAmount,
@@ -68,21 +68,21 @@ export const OrdersForm: FC<OrderProps> = ({
         status={status}
         totalAmount={totalAmount}
       >
-        <OrderContact
+        {/* <OrderContact
           name={firstName + ' ' + lastName}
           phone={phone}
           email={email}
           address={address}
-        />
+        /> */}
         {/* <OrderContent items={items} comments={comments} /> */}
 
-        <Button
+        {/* <Button
           variant='status'
           size='status'
           // onClick={() => handleChangeStatus(id, status)}
         >
           Выполнить
-        </Button>
+        </Button> */}
       </OrderCard>
     )
   );

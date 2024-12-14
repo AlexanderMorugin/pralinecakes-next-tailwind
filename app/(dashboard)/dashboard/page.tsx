@@ -11,7 +11,13 @@ import { prisma } from '@/prisma/prisma-client';
 // import { useEffect } from 'react';
 
 export default async function DashboardPage() {
-  const orders = await prisma.order.findMany();
+  const orders = await prisma.order.findMany({
+    orderBy: {
+      id: 'desc',
+    },
+  });
+
+  console.log(orders)
 
 return <DashboardContent orders={orders}/>
   // const getOrders = useOrderStore((state) => state.getOrders);
