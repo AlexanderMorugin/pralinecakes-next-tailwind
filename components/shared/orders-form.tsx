@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { type FC } from 'react';
+import {
+  // useEffect,
+  // useEffect,
+  type FC,
+} from 'react';
 
 import { OrderCard } from './order-card';
 import { OrderContact } from './order-contact';
 import { OrderContent } from './order-content';
 import { Button } from '../ui';
 import { OrderStatus } from '@prisma/client';
-import { useOrderStore } from '@/store/order';
+// import { useOrderStore } from '@/store/order';
 
 export interface OrderProps {
   id: number;
@@ -22,7 +26,6 @@ export interface OrderProps {
   comments: string | null;
   status: OrderStatus;
   map?: any;
-  // handleChangeStatus: () => void
 }
 
 export const OrdersForm: FC<OrderProps> = ({
@@ -38,24 +41,29 @@ export const OrdersForm: FC<OrderProps> = ({
   totalAmount,
   comments,
   status,
-  // handleChangeStatus
 }) => {
-  const { updateOrderStatus, getOrders } = useOrderStore((state) => state);
-  // const status = useOrderStore((state) => state.status);
-  // console.log(status);
+  // const { updateOrderStatus, 
+  //   // getOrders, 
+  //   // order
+
+  //  } = useOrderStore(
+  //   (state) => state
+  // );
 
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
 
-  const handleChangeStatus = async (id: number, status: OrderStatus) => {
-    await updateOrderStatus(id, status);
+  // const handleChangeStatus = async (id: number, status: OrderStatus) => {
+  //   await updateOrderStatus(id, status);
+    
+  // };
 
-    getOrders();
-  };
-
+  // getOrders();
   // useEffect(() => {
   //   getOrders();
-  // }, [getOrders]);
+
+  //   // console.log('OrdersForm - useEffect сработал ', order)
+  // }, []);
 
   return (
     token && (
@@ -77,7 +85,7 @@ export const OrdersForm: FC<OrderProps> = ({
         <Button
           variant='status'
           size='status'
-          onClick={() => handleChangeStatus(id, status)}
+          // onClick={() => handleChangeStatus(id, status)}
         >
           Выполнить
         </Button>

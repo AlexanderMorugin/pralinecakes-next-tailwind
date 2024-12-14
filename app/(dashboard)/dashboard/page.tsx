@@ -2,28 +2,31 @@
 
 import { Container, Title } from '@/components/shared';
 import { OrdersForm } from '@/components/shared/orders-form';
+
 import { useOrderStore } from '@/store/order';
-// import { OrderStatus } from '@prisma/client';
 
 import { useEffect } from 'react';
 
 export default function DashboardPage() {
-  const { getOrders } = useOrderStore((state) => state);
+  const getOrders = useOrderStore((state) => state.getOrders);
 
-  // const handleChangeStatus = (id: number, status: OrderStatus) => {
-  //   updateOrderStatus(id, status);
-  // };
+  // const orderStatus = order.map((item) => item.status);
 
   useEffect(() => {
     getOrders();
   }, [getOrders]);
 
   const order = useOrderStore((state) => state.order);
-  // const status = useOrderStore((state) => state.status);
+  // useEffect(() => {
+  //   if (status) {
+  //     getOrders();
+  //     console.log('useEffect второй ', status);
+  //   }
+  // }, [status]);
 
-  // console.log('DashboardPage: ', order);
+  // console.log('orderStatus - ', orderStatus);
+  // console.log('status - ', status);
 
-  // console.log(status);
   return (
     <Container className='py-5 md:py-10'>
       <Title

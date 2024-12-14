@@ -11,7 +11,6 @@ export async function PATCH(
     const id = Number(params.id);
     const data = (await req.json()) as { status: OrderStatus };
 
-
     const orderItem = await prisma.order.findFirst({
       where: {
         id,
@@ -33,7 +32,6 @@ export async function PATCH(
       },
     });
 
-    // const updateOrder = await updateCurrentOrderStatus(id);
     const updateOrder = await updateCurrentOrderStatus(id);
     return NextResponse.json(updateOrder);
   } catch (error) {

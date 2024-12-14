@@ -23,14 +23,6 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   className,
   children,
 }) => {
-  // const handleChangeStatus = (
-  //   id: number,
-  //   status: OrderStatus,
-  // ) => {
-  //   status = OrderStatus.SUCCES;
-  //   updateOrderStatus(id, status);
-  // };
-
   return (
     <div
       className={cn(
@@ -72,17 +64,6 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
           </div>
         </div>
 
-        {/* {statusTitle === 'Новый' && (
-          // <Button variant='status' size='status' 
-          // onClick={handleChangeStatus}
-          // handleClickCountButton={(type) =>
-          //   handleClickCountButton(item.id, item.quantity, type)
-          // }
-          // >
-          //   Выполнить
-          // </Button>
-        )} */}
-
         <span className='text-[14px] p-2 px-3 sm:px-5'>
           <b>{totalAmount}</b>&nbsp;руб
         </span>
@@ -90,7 +71,3 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
     </div>
   );
 };
-
-// function updateOrderStatus(id: number, newStatus: string) {
-//   throw new Error('Function not implemented.');
-// }
