@@ -1,7 +1,7 @@
 'use server';
 
 import {
-  PayOrderTemplate,
+  // PayOrderTemplate,
   VerificationUserTemplate,
 } from '@/components/shared';
 import { CheckoutFormValues } from '@/components/shared/checkout/checkout-form-schema';
@@ -47,14 +47,15 @@ export async function createOrder(data: CheckoutFormValues) {
     }
 
     /** Создаем заказ */
-    const order = await prisma.order.create({
+    // const order = await prisma.order.create({ // этот код при использовании сенд имейл
+    await prisma.order.create({
       data: {
         token: cartToken,
         // fullName: data.firstName + ' ' + data.lastName,
         firstName: data.firstName,
         lastName: data.lastName,
         phone: data.phone,
-        email: data.email,        
+        email: data.email,
         address: data.address,
         comments: data.comment,
         totalAmount: userCart.totalAmount,
@@ -83,16 +84,16 @@ export async function createOrder(data: CheckoutFormValues) {
     // TODO: Сделать создание ссылки оплаты
 
     /** Отправляем письмо на почту клиенту */
-    await sendEmail(
-      data.email,
-      'Кондитерская "Пралине" - Подтверждение оплаты заказа #' + order.id,
-      PayOrderTemplate({
-        orderId: order.id,
-        totalAmount: order.totalAmount,
-        paymentUrl: 'https://pralinecakes-next-tailwind.vercel.app/',
-        // items: userCart.cartItems,
-      })
-    );
+    // await sendEmail(
+    //   data.email,
+    //   'Кондитерская "Пралине" - Подтверждение оплаты заказа #' + order.id,
+    //   PayOrderTemplate({
+    //     orderId: order.id,
+    //     totalAmount: order.totalAmount,
+    //     paymentUrl: 'https://pralinecakes-next-tailwind.vercel.app/',
+    //     // items: userCart.cartItems,
+    //   })
+    // );
 
     return 'https://pralinecakes-next-tailwind.vercel.app/';
   } catch (error) {

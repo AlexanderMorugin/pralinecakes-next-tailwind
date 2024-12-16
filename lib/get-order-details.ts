@@ -19,9 +19,9 @@ export const getOrderDetails = (data: OrderProps) => {
       items: JSON.parse(item.items),
       comments: item.comments,
     }))
-    .sort(
-      (a: any, b: any) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
-    );
+    // .sort(
+    //   (a: any, b: any) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+    // );
 
   return { order };
 };

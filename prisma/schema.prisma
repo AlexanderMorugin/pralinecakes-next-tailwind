@@ -24,7 +24,7 @@ model User {
   providerId String?
 
   cart             Cart?
-  orders           Order[]
+  // orders           Order[]
   verificationCode VerificationCode?
 
   createdAt DateTime @default(now())
@@ -93,12 +93,12 @@ model CartItem {
 model Order {
   id Int @id @default(autoincrement())
 
-  user        User?       @relation(fields: [userId], references: [id])
-  userId      Int?
+  // user        User?       @relation(fields: [userId], references: [id])
+  // userId      Int?
   token       String
   totalAmount Int
   status      OrderStatus @default(PENDING)
-  paymentId   String?
+  // paymentId   String?
   items       Json
 
   // кому предназначается заказ
@@ -126,27 +126,27 @@ model VerificationCode {
 }
 
 // модель группы историй
-model Story {
-  id Int @id @default(autoincrement())
+// model Story {
+//   id Int @id @default(autoincrement())
 
-  previewImageUrl String
-  items           StoryItem[]
+//   previewImageUrl String
+//   items           StoryItem[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
 
 // модель одной истории входящей в группу историй
-model StoryItem {
-  id Int @id @default(autoincrement())
+// model StoryItem {
+//   id Int @id @default(autoincrement())
 
-  story     Story  @relation(fields: [storyId], references: [id])
-  storyId   Int
-  sourceUrl String
+//   story     Story  @relation(fields: [storyId], references: [id])
+//   storyId   Int
+//   sourceUrl String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
 
 enum OrderStatus {
   PENDING

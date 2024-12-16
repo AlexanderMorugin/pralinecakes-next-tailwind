@@ -11,7 +11,7 @@ export interface OrderState {
 
   getOrders: () => Promise<void>;
 
-  // updateOrderStatus: (id: number, status: OrderStatus) => Promise<void>;
+  updateOrderStatus: (id: number, status: OrderStatus) => Promise<void>;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
@@ -32,19 +32,20 @@ export const useOrderStore = create<OrderState>((set) => ({
     }
   },
 
-  // updateOrderStatus: async (id: number, status: OrderStatus) => {
-  //   try {
-  //     set({ loading: true, error: false });
-  //     const data: Order = await Api.order.updateOrderStatusService(id, status);
-  //     set({
-  //       status: data.status,
-  //     });
-  //     // console.log('Стор работает', data);
-  //   } catch (error) {
-  //     console.error('[ORDER_STORE_PATCH] ServerError ', error);
-  //     set({ error: true });
-  //   } finally {
-  //     set({ loading: false });
-  //   }
-  // },
+  updateOrderStatus: async (id: number, status: OrderStatus) => {
+    try {
+      set({ loading: true, error: false });
+      const data: Order = await Api.order.updateOrderStatusService(id, status);
+      // set(getOrderDetails(data));
+      set({
+        status: data.status,
+      });
+      // console.log('Стор работает', data);
+    } catch (error) {
+      console.error('[ORDER_STORE_PATCH] ServerError ', error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

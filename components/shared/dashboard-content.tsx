@@ -1,15 +1,24 @@
 'use client';
 
-import { Order } from '@prisma/client';
-import { type FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { Container, Title } from '.';
 import { OrdersForm } from './orders-form';
+import { useOrderStore } from '@/store/order';
+// import { OrderStatus } from '@prisma/client';
 
-interface Props {
-  orders: Order[];
-}
+export const DashboardContent: FC = () => {
+  const { order, getOrders, updateOrderStatus } = useOrderStore(
+    (state) => state
+  );
 
-export const DashboardContent: FC<Props> = ({ orders }) => {
+  // const handleChangeStatus = (id: number, status: OrderStatus) => {
+  //   updateOrderStatus(id, status);
+  // };
+
+  useEffect(() => {
+    getOrders();
+  }, [updateOrderStatus, getOrders]);
+
   return (
     <Container className='py-5 md:py-10'>
       <Title
@@ -17,8 +26,8 @@ export const DashboardContent: FC<Props> = ({ orders }) => {
         className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
       />
       <ul className='flex flex-col gap-4 px-2'>
-        {orders &&
-          orders.map((item) => (
+        {order &&
+          order.map((item) => (
             <OrdersForm
               key={item.id}
               id={item.id}
@@ -33,7 +42,7 @@ export const DashboardContent: FC<Props> = ({ orders }) => {
               totalAmount={item.totalAmount}
               comments={item.comments}
               status={item.status}
-              // handleChangeStatus={handleChangeStatus}
+              // handleChangeStatus={() => handleChangeStatus(item.id, item.status)}
             />
           ))}
       </ul>
