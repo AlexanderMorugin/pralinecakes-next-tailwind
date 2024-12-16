@@ -1,19 +1,14 @@
 'use client';
 
 import { useEffect, type FC } from 'react';
-import { Container, Title } from '.';
-import { OrdersForm } from './orders-form';
 import { useOrderStore } from '@/store/order';
-// import { OrderStatus } from '@prisma/client';
+import { Container, Title } from '..';
+import { OrdersForm } from '../order/orders-form';
 
 export const DashboardContent: FC = () => {
   const { order, getOrders, updateOrderStatus } = useOrderStore(
     (state) => state
   );
-
-  // const handleChangeStatus = (id: number, status: OrderStatus) => {
-  //   updateOrderStatus(id, status);
-  // };
 
   useEffect(() => {
     getOrders();
@@ -42,7 +37,6 @@ export const DashboardContent: FC = () => {
               totalAmount={item.totalAmount}
               comments={item.comments}
               status={item.status}
-              // handleChangeStatus={() => handleChangeStatus(item.id, item.status)}
             />
           ))}
       </ul>

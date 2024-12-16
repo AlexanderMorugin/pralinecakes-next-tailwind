@@ -1,9 +1,9 @@
 import { PropsWithChildren, type FC } from 'react';
-import { Title } from './title';
+
 import { cn } from '@/lib/utils';
 import { OrderStatus } from '@prisma/client';
-// import { Button } from '../ui';
-// import { OrderStatus } from '@prisma/client';
+import { Title } from '..';
+import { Button } from '@/components/ui';
 
 interface Props {
   id: number;
@@ -11,6 +11,7 @@ interface Props {
   date: string;
   status: OrderStatus;
   totalAmount: number;
+  handleChangeStatus: (id: number, status: OrderStatus) => void;
   className?: string;
 }
 
@@ -20,6 +21,7 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   date,
   status,
   totalAmount,
+  handleChangeStatus,
   className,
   children,
 }) => {
@@ -50,7 +52,7 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
         <div className='flex items-center gap-2'>
           <div
             className={cn(
-              'text-white p-2 px-3 sm:px-5 rounded-r-[8px]',
+              'text-white p-2 px-5 border-t border-r border-[#8486ec] rounded-tr-3xl',
               { 'bg-[#ff0000]': status === OrderStatus.PENDING },
               { 'bg-green-600': status === OrderStatus.SUCCES }
             )}
@@ -63,6 +65,16 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
             )}
           </div>
         </div>
+
+        {status === OrderStatus.PENDING && (
+          <Button
+            variant='status'
+            size='status'
+            onClick={() => handleChangeStatus(id, status)}
+          >
+            Выполнить
+          </Button>
+        )}
 
         <span className='text-[14px] p-2 px-3 sm:px-5'>
           <b>{totalAmount}</b>&nbsp;руб

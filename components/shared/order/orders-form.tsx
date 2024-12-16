@@ -1,19 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  // useEffect,
-  // useEffect,
-  // useEffect,
-  type FC,
-} from 'react';
+import { type FC } from 'react';
 
 import { OrderCard } from './order-card';
-// import { OrderContact } from './order-contact';
-// import { OrderContent } from './order-content';
-import { Button } from '../ui';
 import { OrderStatus } from '@prisma/client';
 import { useOrderStore } from '@/store/order';
-// import { useOrderStore } from '@/store/order';
-// import { useOrderStore } from '@/store/order';
+import { OrderContact } from './order-contact';
+import { OrderContent } from './order-content';
 
 export interface OrderProps {
   id: number;
@@ -28,8 +20,6 @@ export interface OrderProps {
   totalAmount: number;
   comments: string | null;
   status: OrderStatus;
-  // handleChangeStatus: (id: number, status: OrderStatus) => void
-  // handleChangeStatus: any
   map?: any;
 }
 
@@ -37,16 +27,15 @@ export const OrdersForm: FC<OrderProps> = ({
   id,
   token,
   firstName,
-  // lastName,
-  // email,
-  // address,
-  // phone,
-  // items,
+  lastName,
+  email,
+  address,
+  phone,
+  items,
   createdAt,
   totalAmount,
-  // comments,
+  comments,
   status,
-  // handleChangeStatus
 }) => {
   const { getOrders, updateOrderStatus } = useOrderStore((state) => state);
 
@@ -55,12 +44,8 @@ export const OrdersForm: FC<OrderProps> = ({
 
   const handleChangeStatus = async (id: number, status: OrderStatus) => {
     await updateOrderStatus(id, status);
-    getOrders()
+    getOrders();
   };
-
-  // useEffect(() => {
-  //   getOrders();
-  // }, [updateOrderStatus, getOrders]);
 
   return (
     token && (
@@ -70,23 +55,15 @@ export const OrdersForm: FC<OrderProps> = ({
         date={date}
         status={status}
         totalAmount={totalAmount}
+        handleChangeStatus={handleChangeStatus}
       >
-        {/* <OrderContact
+        <OrderContact
           name={firstName + ' ' + lastName}
           phone={phone}
           email={email}
           address={address}
-        /> */}
-        {/* <OrderContent items={items} comments={comments} /> */}
-
-        <Button
-          variant='status'
-          size='status'
-          // onClick={() => handleChangeStatus(id, status)}
-          onClick={() => handleChangeStatus(id, status)}
-        >
-          Выполнить
-        </Button>
+        />
+        <OrderContent items={items} comments={comments} />
       </OrderCard>
     )
   );

@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils';
 import {
   CartButton,
   Container,
-  DashboardButton,
   Logo,
   ProfileButton,
   SearchBar,
@@ -19,6 +18,7 @@ import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useUserStore } from '@/store/user';
 import Link from 'next/link';
+import { DashboardButton } from './dashboard/dashboard-button';
 
 interface Props {
   hasSearch?: boolean;

@@ -36,11 +36,9 @@ export const useOrderStore = create<OrderState>((set) => ({
     try {
       set({ loading: true, error: false });
       const data: Order = await Api.order.updateOrderStatusService(id, status);
-      // set(getOrderDetails(data));
       set({
         status: data.status,
       });
-      // console.log('Стор работает', data);
     } catch (error) {
       console.error('[ORDER_STORE_PATCH] ServerError ', error);
       set({ error: true });
