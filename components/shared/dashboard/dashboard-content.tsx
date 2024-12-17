@@ -10,19 +10,28 @@ export const DashboardContent: FC = () => {
     (state) => state
   );
 
-  // проверяет сервер через каждые 2 мин
   useEffect(() => {
+    // загружает данные с сервера сразу при входе на страницу или обновлении статуса
+    getOrders();
+
+    // проверяет сервер через каждую 1 мин
     const timer = setInterval(() => {
       getOrders();
-    }, 200000);
-    
+    }, 10000);
+
     // очистка интервала
     return () => clearInterval(timer);
   }, [updateOrderStatus, getOrders]);
 
+  // проверяет сервер через каждые 2 мин
   // useEffect(() => {
-  //   getOrders();
-  // }, [updateOrderStatus, getOrders]);
+  //   const timer = setInterval(() => {
+  //     getOrders();
+  //   }, 200000);
+
+  //   // очистка интервала
+  //   return () => clearInterval(timer);
+  // }, [getOrders]);
 
   return (
     <Container className='py-5 md:py-10'>
