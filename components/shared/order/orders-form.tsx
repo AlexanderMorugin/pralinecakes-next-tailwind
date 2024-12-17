@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type FC } from 'react';
-
 import { OrderCard } from './order-card';
 import { OrderStatus } from '@prisma/client';
-import { useOrderStore } from '@/store/order';
 import { OrderContact } from './order-contact';
 import { OrderContent } from './order-content';
 
@@ -37,15 +35,8 @@ export const OrdersForm: FC<OrderProps> = ({
   comments,
   status,
 }) => {
-  const { getOrders, updateOrderStatus } = useOrderStore((state) => state);
-
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
-
-  const handleChangeStatus = async (id: number, status: OrderStatus) => {
-    await updateOrderStatus(id, status);
-    getOrders();
-  };
 
   return (
     token && (
@@ -54,8 +45,8 @@ export const OrdersForm: FC<OrderProps> = ({
         title={firstName}
         date={date}
         status={status}
+        // token={token}
         totalAmount={totalAmount}
-        handleChangeStatus={handleChangeStatus}
       >
         <OrderContact
           name={firstName + ' ' + lastName}

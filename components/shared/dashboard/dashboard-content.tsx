@@ -10,9 +10,19 @@ export const DashboardContent: FC = () => {
     (state) => state
   );
 
+  // проверяет сервер через каждые 2 мин
   useEffect(() => {
-    getOrders();
+    const timer = setInterval(() => {
+      getOrders();
+    }, 200000);
+    
+    // очистка интервала
+    return () => clearInterval(timer);
   }, [updateOrderStatus, getOrders]);
+
+  // useEffect(() => {
+  //   getOrders();
+  // }, [updateOrderStatus, getOrders]);
 
   return (
     <Container className='py-5 md:py-10'>
