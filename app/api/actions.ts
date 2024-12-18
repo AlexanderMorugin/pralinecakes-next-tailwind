@@ -1,12 +1,11 @@
 'use server';
 
-import {
-  // PayOrderTemplate,
-  VerificationUserTemplate,
-} from '@/components/shared';
+// import // PayOrderTemplate,
+// // VerificationUserTemplate,
+// '@/components/shared';
 import { CheckoutFormValues } from '@/components/shared/checkout/checkout-form-schema';
 import { getUserSession } from '@/lib/get-user-session';
-import { sendEmail } from '@/lib/send-email';
+// import { sendEmail } from '@/lib/send-email';
 import { prisma } from '@/prisma/prisma-client';
 import { OrderStatus, Prisma } from '@prisma/client';
 import { hashSync } from 'bcrypt';
@@ -144,39 +143,43 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     });
 
     if (user) {
-      if (!user.verified) {
-        throw new Error('Почта не подтверждена');
-      }
+      // if (!user.verified) {
+      //   throw new Error('Почта не подтверждена');
+      // }
 
       throw new Error('Пользователь уже существует');
     }
 
-    const createdUser = await prisma.user.create({
+    // const createdUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         firstName: body.firstName,
         lastName: body.lastName,
         phone: body.phone,
         email: body.email,
         password: hashSync(body.password, 10),
+        // password: body.password,
       },
     });
 
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    // const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    await prisma.verificationCode.create({
-      data: {
-        code,
-        userId: createdUser.id,
-      },
-    });
+    // await prisma.verificationCode.create({
+    //   data: {
+    //     code,
+    //     userId: createdUser.id,
+    //   },
+    // });
 
-    await sendEmail(
-      createdUser.email,
-      'Кондитерская "Пралине" - 📝 Подтверждение регистрации',
-      VerificationUserTemplate({
-        code,
-      })
-    );
+    /** Отправляем письмо на почту клиенту */
+    // await sendEmail(
+    //   createdUser.email,
+    //   'Кондитерская "Пралине" - 📝 Подтверждение регистрации',
+    // VerificationUserTemplate({
+    //     code,
+    //   })
+    // );
+    return 'https://pralinecakes-next-tailwind.vercel.app/';
   } catch (err) {
     console.log('Error [CREATE_USER]', err);
     throw err;

@@ -7,7 +7,6 @@ import { OrderContent } from './order-content';
 
 export interface OrderProps {
   id: number;
-  token: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -23,7 +22,6 @@ export interface OrderProps {
 
 export const OrdersForm: FC<OrderProps> = ({
   id,
-  token,
   firstName,
   lastName,
   email,
@@ -39,23 +37,22 @@ export const OrdersForm: FC<OrderProps> = ({
   const date = d.toLocaleString().slice(0, 17);
 
   return (
-    token && (
-      <OrderCard
-        id={id}
-        title={firstName}
-        date={date}
-        status={status}
-        // token={token}
-        totalAmount={totalAmount}
-      >
-        <OrderContact
-          name={firstName + ' ' + lastName}
-          phone={phone}
-          email={email}
-          address={address}
-        />
-        <OrderContent items={items} comments={comments} />
-      </OrderCard>
-    )
+    <OrderCard
+      id={id}
+      firstName={firstName}
+      lastName={lastName}
+      date={date}
+      status={status}
+      email={email}
+      totalAmount={totalAmount}
+    >
+      <OrderContact
+        name={firstName + ' ' + lastName}
+        phone={phone}
+        email={email}
+        address={address}
+      />
+      <OrderContent items={items} comments={comments} />
+    </OrderCard>
   );
 };

@@ -6,24 +6,26 @@ import { OrderStatus } from '@prisma/client';
 import { Title } from '..';
 import { Button } from '@/components/ui';
 import { OrderChangeStatusModal } from './order-change-status-modal';
-import { ArrowRight } from 'lucide-react';
+import { CurrentUserOrders } from './current-user-orders';
 
 interface Props {
   id: number;
-  title: string;
+  firstName: string;
+  lastName: string;
   date: string;
   status: OrderStatus;
-  // token: string;
+  email: string;
   totalAmount: number;
   className?: string;
 }
 
 export const OrderCard: FC<PropsWithChildren<Props>> = ({
   id,
-  title,
+  firstName,
+  lastName,
   date,
   status,
-  // token,
+  email,
   totalAmount,
   className,
   children,
@@ -60,19 +62,16 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
         <div className='flex items-center justify-between p-2 px-3 bg-[#cecef3] sm:px-5'>
           <div className='flex items-center gap-2'>
             <span className='text-[12px]'>#{id}</span>
-            <Title text={title} size='sm' className='font-bold' />
+            <Title text={firstName} size='sm' className='font-bold' />
           </div>
 
           {/** Кнопка всех заказов пользователя */}
-          <div className='flex items-center gap-2 border border-white rounded-full py-2 px-2 text-teal-800 group cursor-pointer transition duration-300 sm:rounded-sm sm:py-1 sm:px-4 hover:bg-white'>
-            <span className='hidden sm:block transition duration-300 group-hover:text-red-600'>
-              все заказы
-            </span>
-            <ArrowRight
-              size={16}
-              className='transition duration-300 group-hover:text-red-600'
-            />
-          </div>
+          <CurrentUserOrders 
+          firstName={firstName}
+          lastName={lastName}
+          userEmail={email}
+          />
+
 
           {/** Дата и время заказа */}
           <span className='text-[12px]'>{date}</span>

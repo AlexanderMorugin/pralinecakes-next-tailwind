@@ -19,19 +19,9 @@ export const DashboardContent: FC = () => {
       getOrders();
     }, 10000);
 
-    // очистка интервала
+    // // очистка интервала
     return () => clearInterval(timer);
   }, [updateOrderStatus, getOrders]);
-
-  // проверяет сервер через каждые 2 мин
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     getOrders();
-  //   }, 200000);
-
-  //   // очистка интервала
-  //   return () => clearInterval(timer);
-  // }, [getOrders]);
 
   return (
     <Container className='py-5 md:py-10'>
@@ -45,7 +35,7 @@ export const DashboardContent: FC = () => {
             <OrdersForm
               key={item.id}
               id={item.id}
-              token={item.token}
+              // token={item.token}
               firstName={item.firstName}
               lastName={item.lastName}
               email={item.email}

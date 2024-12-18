@@ -38,7 +38,7 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
         password: data.password,
       });
 
-      ToastSuccess({ title: 'Регистрация успешна. Подтвердите свою почту' });
+      ToastSuccess({ title: 'Регистрация успешна!' });
 
       onClose?.();
     } catch (error) {
