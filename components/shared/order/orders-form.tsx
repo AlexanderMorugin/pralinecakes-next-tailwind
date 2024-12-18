@@ -44,6 +44,7 @@ export const OrdersForm: FC<OrderProps> = ({
       date={date}
       status={status}
       email={email}
+      phone={phone}
       totalAmount={totalAmount}
     >
       <OrderContact

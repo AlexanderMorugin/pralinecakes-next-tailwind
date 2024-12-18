@@ -15,12 +15,12 @@ export const DashboardContent: FC = () => {
     getOrders();
 
     // проверяет сервер через каждую 1 мин
-    const timer = setInterval(() => {
-      getOrders();
-    }, 10000);
+    // const timer = setInterval(() => {
+    //   getOrders();
+    // }, 10000);
 
     // // очистка интервала
-    return () => clearInterval(timer);
+    // return () => clearInterval(timer);
   }, [updateOrderStatus, getOrders]);
 
   return (

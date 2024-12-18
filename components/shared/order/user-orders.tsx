@@ -11,28 +11,30 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-// import { useOrderStore } from '@/store/order';
+import { useOrderStore } from '@/store/order';
 // import { prisma } from '@/prisma/prisma-client';
 import { ArrowRight } from 'lucide-react';
 import { FC } from 'react';
+import { Title } from '../title';
+import { CurrentOrder } from './current-order';
 
 interface Props {
   firstName: string;
   lastName: string;
   userEmail: string;
+  userPhone: string;
 }
 
-export const CurrentUserOrders: FC<Props> = ({
+export const UserOrders: FC<Props> = ({
   firstName,
   lastName,
   userEmail,
+  userPhone,
 }) => {
-  // const { order } = useOrderStore((state) => state);
-  // const filterOrders = order.filter(item => item.email === userEmail);
-
-  // // console.log(order);
-  // // console.log(filterOrders);
-  // console.log(userEmail);
+  const { order } = useOrderStore((state) => state);
+  const filterOrder = order
+    .filter((item) => item.email === userEmail)
+    .map((item) => item);
 
   return (
     <Sheet>
@@ -51,13 +53,27 @@ export const CurrentUserOrders: FC<Props> = ({
       <SheetContent className='flex flex-col justify-between gap-0 pb-0 bg-[#f4f1ee]'>
         <SheetHeader>
           <SheetTitle>{firstName + ' ' + lastName}</SheetTitle>
-          <SheetDescription>Все заказы</SheetDescription>
+          {/** Скрываем ошибку в консоли по поводу Дескрипшн */}
+          <SheetDescription className='hidden' />
         </SheetHeader>
         <div className='flex-1'>
-          <span>{userEmail}</span>
-          {/* <span>{firstName + lastName}</span> */}
+          <div className='flex flex-col'>
+            <span>телефон: {userPhone}</span>
+            <span>почта: {userEmail}</span>
+          </div>
+          <div className='flex flex-col gap-3 h-full bg-white -mx-6 mt-2 pt-6 px-1'>
+            <Title text='Все заказы пользователя' className='px-5' />
+            <ul className='flex flex-col gap-3'>
+              {filterOrder.map((item) => (
+                <CurrentOrder key={item.id} item={item}/>
+
+
+              ))}
+            </ul>
+          </div>
         </div>
-        <SheetFooter>
+
+        <SheetFooter className='-mx-6 bg-[#f4f1ee] px-8 py-4'>
           <SheetClose asChild>
             <Button type='submit'>Закрыть</Button>
           </SheetClose>

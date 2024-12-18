@@ -6,7 +6,7 @@ import { OrderStatus } from '@prisma/client';
 import { Title } from '..';
 import { Button } from '@/components/ui';
 import { OrderChangeStatusModal } from './order-change-status-modal';
-import { CurrentUserOrders } from './current-user-orders';
+import { UserOrders } from './user-orders';
 
 interface Props {
   id: number;
@@ -15,6 +15,7 @@ interface Props {
   date: string;
   status: OrderStatus;
   email: string;
+  phone: string;
   totalAmount: number;
   className?: string;
 }
@@ -26,6 +27,7 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   date,
   status,
   email,
+  phone,
   totalAmount,
   className,
   children,
@@ -66,12 +68,13 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
           </div>
 
           {/** Кнопка всех заказов пользователя */}
-          <CurrentUserOrders 
-          firstName={firstName}
-          lastName={lastName}
-          userEmail={email}
+          {/* <Link href='/dashboard/current-order'>все заказы</Link> */}
+          <UserOrders
+            firstName={firstName}
+            lastName={lastName}
+            userEmail={email}
+            userPhone={phone}
           />
-
 
           {/** Дата и время заказа */}
           <span className='text-[12px]'>{date}</span>
