@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Order, OrderStatus } from '@prisma/client';
-import { type FC } from 'react';
+import { useState, type FC } from 'react';
+import { CurrentOrderModal } from './current-order-modal';
 
 interface Props {
   item: Order;
@@ -10,15 +11,33 @@ export const CurrentOrder: FC<Props> = ({ item }) => {
   const d = new Date(item.createdAt);
   const date = d.toLocaleString().slice(0, 17);
 
+  const [showCurrentOrderModal, setShowCurrentOrderModal] = useState(false);
+
+  const onClose = () => {
+    setShowCurrentOrderModal(false);
+  };
+  const handleShowCurrentOrderModal = () => {
+    setShowCurrentOrderModal(true);
+  };
+
   return (
     <>
+      {/** Модальное окно с кнопками подтверждения */}
+      {showCurrentOrderModal && (
+        <CurrentOrderModal
+          showCurrentOrderModal={showCurrentOrderModal}
+          onClose={onClose}
+          item={item}
+        />
+      )}
+
       <li
         key={item.id}
-        className='grid grid-cols-3 gap-2 bg-[#f4f1ee] rounded-md py-1 px-2'
+        onClick={handleShowCurrentOrderModal}
+        className='grid grid-cols-3 gap-2 bg-[#f4f1ee] rounded-md py-1 px-2 cursor-pointer'
       >
         <div>
           <span className='text-[12px]'>#{item.id}</span>
-
           <div
             className={cn(
               { 'text-[#ff0000]': item.status === OrderStatus.PENDING },

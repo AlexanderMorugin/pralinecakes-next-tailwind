@@ -1,5 +1,3 @@
-// 'use client';
-
 import { Button } from '@/components/ui';
 import {
   Sheet,
@@ -12,7 +10,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useOrderStore } from '@/store/order';
-// import { prisma } from '@/prisma/prisma-client';
 import { ArrowRight } from 'lucide-react';
 import { FC } from 'react';
 import { Title } from '../title';
@@ -25,7 +22,7 @@ interface Props {
   userPhone: string;
 }
 
-export const UserOrders: FC<Props> = ({
+export const CurrentUserOrders: FC<Props> = ({
   firstName,
   lastName,
   userEmail,
@@ -35,6 +32,13 @@ export const UserOrders: FC<Props> = ({
   const filterOrder = order
     .filter((item) => item.email === userEmail)
     .map((item) => item);
+
+  const initialValue = 0;
+
+  const totalAmountCurrentUserOrders = filterOrder.reduce(
+    (acc, currentItem) => acc + currentItem.totalAmount,
+    initialValue
+  );
 
   return (
     <Sheet>
@@ -65,15 +69,17 @@ export const UserOrders: FC<Props> = ({
             <Title text='Все заказы пользователя' className='px-5' />
             <ul className='flex flex-col gap-3'>
               {filterOrder.map((item) => (
-                <CurrentOrder key={item.id} item={item}/>
-
-
+                <CurrentOrder key={item.id} item={item} />
               ))}
             </ul>
           </div>
         </div>
 
-        <SheetFooter className='-mx-6 bg-[#f4f1ee] px-8 py-4'>
+        <SheetFooter className='flex flex-col -mx-6 bg-[#f4f1ee] px-4 py-4 sm:flex-col'>
+          <div className='flex justify-between pb-3'>
+            <span>Всего на сумму:</span>
+            <span>{totalAmountCurrentUserOrders} руб</span>
+          </div>
           <SheetClose asChild>
             <Button type='submit'>Закрыть</Button>
           </SheetClose>
