@@ -13,12 +13,18 @@ import {
   TopBar,
 } from '.';
 import { AuthModal } from './modals/auth-modal';
-import { useRouter, useSearchParams } from 'next/navigation';
-import toast from 'react-hot-toast';
-import { useSession } from 'next-auth/react';
+import {
+  useRouter,
+  // useSearchParams
+} from 'next/navigation';
+// import toast from 'react-hot-toast';
+import { signOut, useSession } from 'next-auth/react';
 import { useUserStore } from '@/store/user';
 import Link from 'next/link';
 import { DashboardButton } from './dashboard/dashboard-button';
+import { AdminModal } from './modals/admin-modal/admin-modal';
+import { Button } from '../ui';
+// import { UserRole } from '@prisma/client';
 
 interface Props {
   hasSearch?: boolean;
@@ -36,11 +42,13 @@ export const Header: FC<Props> = ({
   className,
 }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
+  const [openAdminModal, setOpenAdminModal] = useState(false);
+
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const { data: session } = useSession();
 
-  const getUser = useUserStore((state) => state.getUser);
+  const { user, getUser } = useUserStore((state) => state);
 
   useEffect(() => {
     if (session) {
@@ -48,22 +56,32 @@ export const Header: FC<Props> = ({
     }
   }, [session, getUser]);
 
-  const user = useUserStore((state) => state.user);
+  // useEffect(() => {
+  //   if (session?.user.role === UserRole.ADMIN) {
+  //     location.href = '/dashboard';
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    let toastMessage = '';
+  // useEffect(() => {
+  //   let toastMessage = '';
 
-    if (searchParams.has('verified')) {
-      toastMessage = 'Почта успешно подтверждена';
-    }
+  //   if (searchParams.has('verified')) {
+  //     toastMessage = 'Почта успешно подтверждена';
+  //   }
 
-    if (toastMessage) {
-      setTimeout(() => {
-        router.replace('/');
-        toast.success(toastMessage, { duration: 3000 });
-      }, 1000);
-    }
-  }, [router, searchParams]);
+  //   if (toastMessage) {
+  //     setTimeout(() => {
+  //       router.replace('/');
+  //       toast.success(toastMessage, { duration: 3000 });
+  //     }, 1000);
+  //   }
+  // }, [router, searchParams]);
+
+  const onClickSignOut = () => {
+    signOut({
+      callbackUrl: '/',
+    });
+  };
 
   return (
     <header
@@ -86,11 +104,13 @@ export const Header: FC<Props> = ({
         {/** Левая часть */}
         {hasCheckout || hasDashboard ? (
           <div className='flex items-center gap-5'>
-            <ChevronLeft
-              size={20}
-              className='text-white cursor-pointer'
-              onClick={() => router.back()}
-            />
+            {hasCheckout && (
+              <ChevronLeft
+                size={20}
+                className='text-white cursor-pointer'
+                onClick={() => router.back()}
+              />
+            )}
 
             {session && (
               <p className='font-bold text-white'>{`${user.firstName} ${user.lastName}`}</p>
@@ -126,18 +146,37 @@ export const Header: FC<Props> = ({
             />
           )}
 
-          {!hasCheckout && !hasDashboard ? (
-            <DashboardButton />
-          ) : (
-            <Link href='/'>
-              <House size={26} className='text-white' />
-            </Link>
-          )}
+          {/** Кнопка сотрудника */}
+          <Suspense>
+            <AdminModal
+              open={openAdminModal}
+              onClose={() => setOpenAdminModal(false)}
+              session={session}
+            />
 
+            {!hasCheckout && !hasDashboard ? (
+              <DashboardButton
+                handleClickSignIn={() => setOpenAdminModal(true)}
+              />
+            ) : hasDashboard ? (
+              <Button onClick={onClickSignOut}>Выйти</Button>
+            ) : (
+              <Link href='/'>
+                <House
+                  size={26}
+                  className='text-white'
+                  // onClick={onClickSignOut}
+                />
+              </Link>
+            )}
+          </Suspense>
+
+          {/** Кнопка профиля */}
           <Suspense>
             <AuthModal
               open={openAuthModal}
               onClose={() => setOpenAuthModal(false)}
+              session={session}
             />
             {!hasCheckout && !hasDashboard && (
               <ProfileButton
@@ -149,6 +188,7 @@ export const Header: FC<Props> = ({
             )}
           </Suspense>
 
+          {/** Кнопка корзины */}
           {hasCart && (
             <Suspense>
               <CartButton />

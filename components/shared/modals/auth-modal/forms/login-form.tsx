@@ -6,14 +6,20 @@ import { Title } from '@/components/shared/title';
 import { FormInput } from '@/components/shared/form';
 import { Button } from '@/components/ui';
 import toast from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
-import { ToastSuccess } from '@/components/shared/toast-success';
+import { signIn, signOut } from 'next-auth/react';
+// import { ToastSuccess } from '@/components/shared/toast-success';
 
 interface Props {
-  onClose?: VoidFunction;
+  userSession?: boolean;
+  adminSession?: boolean;
+  // onClose?: VoidFunction;
 }
 
-export const LoginForm: FC<Props> = ({ onClose }) => {
+export const LoginForm: FC<Props> = ({
+  userSession,
+  adminSession,
+  // onClose,
+}) => {
   const form = useForm<TFormLoginValues>({
     resolver: zodResolver(formLoginShema),
     defaultValues: {
@@ -33,13 +39,23 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
         throw Error();
       }
 
-      ToastSuccess({ title: 'Вы вошли в аккаунт' });
-      onClose?.();
+      // ToastSuccess({ title: 'Вы вошли в аккаунт' });
+      // onClose?.();
     } catch (error) {
       console.log('Error [LOGIN] ', error);
       toast.error('Не удалось войти в аккаунт', { icon: '❌' });
     }
   };
+
+  if (userSession) {
+    location.href = '/profile';
+  }
+
+  if (adminSession) {
+    signOut({
+      callbackUrl: '/',
+    });
+  }
 
   return (
     <FormProvider {...form}>
@@ -49,9 +65,17 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
       >
         <div className='flex flex-col'>
           <Title text='Вход в аккаунт' size='md' className='font-bold' />
-          <p className='text-gray-400 text-[14px]'>
-            Введите свою почту и пароль, чтобы войти в аккаунт.
-          </p>
+          <div className='flex flex-col text-[14px]'>
+            <span className='pb-2'>
+              Укажите данные тестового пользователя или зарегистрируйте нового
+            </span>
+            <span>
+              Почта: <b>user@mail.ru</b>
+            </span>
+            <span>
+              Пароль: <b>123</b>
+            </span>
+          </div>
         </div>
 
         <FormInput type='email' name='email' label='Email' required />

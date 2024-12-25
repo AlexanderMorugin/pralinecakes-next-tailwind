@@ -6,6 +6,7 @@ import { Button } from '../ui';
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { UserRole } from '@prisma/client';
 
 interface Props {
   session: any;
@@ -22,7 +23,7 @@ export const ProfileButton: FC<Props> = ({
 }) => {
   return (
     <>
-      {!session ? (
+      {!session || session.user.role === UserRole.ADMIN ? (
         <>
           <UserRound
             size={26}

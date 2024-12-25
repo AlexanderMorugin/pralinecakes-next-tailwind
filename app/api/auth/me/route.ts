@@ -22,6 +22,7 @@ export async function GET() {
         lastName: true,
         phone: true,
         email: true,
+        role: true,
         password: false,
       },
     });

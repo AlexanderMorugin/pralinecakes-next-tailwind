@@ -7,6 +7,7 @@ export const getMe = async () => {
   // if (!data) {
   //   return null;
   // }
+// console.log(data)
 
   return data;
   // return (await axiosInstance.get<User>('/auth/me')).data;

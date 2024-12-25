@@ -1,4 +1,5 @@
 import { Api } from '@/services/api-client';
+import { UserRole } from '@prisma/client';
 import { create } from 'zustand';
 
 type TUser = {
@@ -6,6 +7,7 @@ type TUser = {
   lastName: string;
   phone: string;
   email: string;
+  role: UserRole;
 };
 
 export interface UserState {
@@ -24,18 +26,23 @@ export const useUserStore = create<UserState>((set) => ({
     lastName: '',
     phone: '',
     email: '',
+    role: UserRole.USER,
   },
 
   getUser: async () => {
     try {
       set({ loading: true, error: false });
       const data = (await Api.auth.getMe()) as TUser;
+
+      // console.log(data)
+
       set({
         user: {
           firstName: data.firstName,
           lastName: data.lastName,
           phone: data.phone,
           email: data.email,
+          role: data.role,
         },
       });
     } catch (error) {

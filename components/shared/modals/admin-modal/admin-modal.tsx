@@ -7,9 +7,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-
 import { type FC } from 'react';
-import { AuthForm } from './forms';
+import { AdminForm } from './admin-form';
 import { UserRole } from '@prisma/client';
 
 interface Props {
@@ -18,13 +17,14 @@ interface Props {
   session: any;
 }
 
-export const AuthModal: FC<Props> = ({ open, session, onClose }) => {
-  const userSession = session?.user.role === UserRole.USER;
-  const adminSession = session?.user.role === UserRole.ADMIN;
-
+export const AdminModal: FC<Props> = ({ open, onClose, session }) => {
   const handleClose = () => {
     onClose();
   };
+
+  const adminSession = session?.user.role === UserRole.ADMIN;
+  const userSession = session?.user.role === UserRole.USER;
+  // console.log('session  ----', adminSession);
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -33,7 +33,11 @@ export const AuthModal: FC<Props> = ({ open, session, onClose }) => {
         <DialogTitle className='hidden' />
         <DialogDescription className='hidden' />
 
-        <AuthForm handleClose={handleClose} userSession={userSession} adminSession={adminSession}/>
+        <AdminForm
+          // handleClose={handleClose}
+          adminSession={adminSession}
+          userSession={userSession}
+        />
       </DialogContent>
     </Dialog>
   );

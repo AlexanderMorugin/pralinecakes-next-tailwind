@@ -30,6 +30,7 @@ export const DashboardContent: FC = () => {
         text='Панель кондитерской'
         className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
       />
+
       {loading ? (
         <DashboardLoading />
       ) : (
@@ -39,7 +40,6 @@ export const DashboardContent: FC = () => {
               <OrdersForm
                 key={item.id}
                 id={item.id}
-                // token={item.token}
                 firstName={item.firstName}
                 lastName={item.lastName}
                 email={item.email}

@@ -9,9 +9,11 @@ import { Button } from '@/components/ui';
 interface Props {
   handleClose: () => void;
   className?: string;
+  userSession?: boolean;
+  adminSession?: boolean;
 }
 
-export const AuthForm: FC<Props> = ({ handleClose, className }) => {
+export const AuthForm: FC<Props> = ({ handleClose, userSession, adminSession, className }) => {
   const [type, setType] = useState<'login' | 'register'>('login');
 
   const onSwitchType = () => {
@@ -26,7 +28,9 @@ export const AuthForm: FC<Props> = ({ handleClose, className }) => {
       )}
     >
       {type === 'login' ? (
-        <LoginForm onClose={handleClose} />
+        <LoginForm 
+        // onClose={handleClose}
+         userSession={userSession} adminSession={adminSession}/>
       ) : (
         <RegisterForm onClose={handleClose} />
       )}
