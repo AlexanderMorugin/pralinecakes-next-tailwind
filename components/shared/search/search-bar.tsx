@@ -9,10 +9,11 @@ import { useRef, useState, type FC } from 'react';
 import { useClickAway, useDebounce } from 'react-use';
 
 interface Props {
+  isMobile?: boolean;
   className?: string;
 }
 
-export const SearchBar: FC<Props> = ({ className }) => {
+export const SearchBar: FC<Props> = ({ isMobile = false, className }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [focused, setFocused] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
@@ -42,7 +43,9 @@ export const SearchBar: FC<Props> = ({ className }) => {
     <>
       {/** Затемнение экрана */}
       {focused && (
-        <div className='fixed top-0 right-0 bottom-0 left-0 bg-black/80 z-30' />
+        <div className={cn('fixed top-0 right-0 bottom-0 left-0 bg-black/80 z-30',
+          {'bg-black/0': isMobile}
+        )} />
       )}
 
       {/** Поисковый блок */}
@@ -50,6 +53,10 @@ export const SearchBar: FC<Props> = ({ className }) => {
         ref={ref}
         className={cn(
           'flex-1 mx-10 rounded-2xl justify-between h-11 relative z-30',
+          {
+            'flex-1 -mx-2 rounded-2xl justify-between h-11 relative z-30':
+              isMobile,
+          },
           className
         )}
       >
@@ -57,7 +64,10 @@ export const SearchBar: FC<Props> = ({ className }) => {
         <input
           type='text'
           placeholder='Найти торт...'
-          className='rounded-2xl outline-none w-full bg-gray-100 pl-11'
+          className={cn('rounded-2xl outline-none w-full bg-gray-100 pl-11', {
+            'rounded-2xl outline-none w-full bg-gray-100 h-11 pl-11':
+              isMobile,
+          })}
           onFocus={() => setFocused(true)}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}

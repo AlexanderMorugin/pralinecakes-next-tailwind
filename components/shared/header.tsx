@@ -1,30 +1,19 @@
 'use client';
 
 import { Suspense, useEffect, useState, type FC } from 'react';
-import { AlignJustify, ChevronLeft, House, Search } from 'lucide-react';
-
+import { AlignJustify, ChevronLeft, House } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import {
-  CartButton,
-  Container,
-  Logo,
-  ProfileButton,
-  SearchBar,
-  TopBar,
-} from '.';
+import { CartButton, Container, Logo, ProfileButton, TopBar } from '.';
 import { AuthModal } from './modals/auth-modal';
-import {
-  useRouter,
-  // useSearchParams
-} from 'next/navigation';
-// import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { useUserStore } from '@/store/user';
 import Link from 'next/link';
 import { DashboardButton } from './dashboard/dashboard-button';
 import { AdminModal } from './modals/admin-modal/admin-modal';
 import { Button } from '../ui';
-// import { UserRole } from '@prisma/client';
+import { SearchBar } from './search/search-bar';
+import { SearchMobile } from './search/search-mobile';
 
 interface Props {
   hasSearch?: boolean;
@@ -43,9 +32,7 @@ export const Header: FC<Props> = ({
 }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [openAdminModal, setOpenAdminModal] = useState(false);
-
   const router = useRouter();
-  // const searchParams = useSearchParams();
   const { data: session } = useSession();
 
   const { user, getUser } = useUserStore((state) => state);
@@ -55,27 +42,6 @@ export const Header: FC<Props> = ({
       getUser();
     }
   }, [session, getUser]);
-
-  // useEffect(() => {
-  //   if (session?.user.role === UserRole.ADMIN) {
-  //     location.href = '/dashboard';
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   let toastMessage = '';
-
-  //   if (searchParams.has('verified')) {
-  //     toastMessage = 'Почта успешно подтверждена';
-  //   }
-
-  //   if (toastMessage) {
-  //     setTimeout(() => {
-  //       router.replace('/');
-  //       toast.success(toastMessage, { duration: 3000 });
-  //     }, 1000);
-  //   }
-  // }, [router, searchParams]);
 
   const onClickSignOut = () => {
     signOut({
@@ -130,7 +96,7 @@ export const Header: FC<Props> = ({
           </>
         )}
 
-        {/** Средняя часть */}
+        {/** Средняя часть - инпут поиска десктоп*/}
         {hasSearch && (
           <Suspense>
             <SearchBar className='hidden md:flex' />
@@ -138,13 +104,9 @@ export const Header: FC<Props> = ({
         )}
 
         {/** Правая часть */}
+        {/** Кнопка поиска в мобильной версии */}
         <div className='flex items-center gap-3'>
-          {hasSearch && (
-            <Search
-              size={26}
-              className='flex md:hidden text-white cursor-pointer'
-            />
-          )}
+          {hasSearch && <SearchMobile />}
 
           {/** Кнопка сотрудника */}
           <Suspense>
@@ -162,11 +124,7 @@ export const Header: FC<Props> = ({
               <Button onClick={onClickSignOut}>Выйти</Button>
             ) : (
               <Link href='/'>
-                <House
-                  size={26}
-                  className='text-white'
-                  // onClick={onClickSignOut}
-                />
+                <House size={26} className='text-white' />
               </Link>
             )}
           </Suspense>

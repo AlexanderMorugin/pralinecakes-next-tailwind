@@ -9,7 +9,6 @@ export { Categories } from './categories';
 export { TopBar } from './top-bar';
 export { ProductCard } from './product-card';
 export { ProductList } from './product-list';
-export { SearchBar } from './search-bar';
 export { ProductForm } from './product-form';
 export { CartDrawer } from './cart-drawer';
 export { CartDrawerItem } from './cart-drawer-item';
