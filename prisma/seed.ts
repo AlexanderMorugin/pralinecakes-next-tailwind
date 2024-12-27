@@ -13,7 +13,7 @@ async function up() {
         phone: '+79261564879',
         email: 'user@mail.ru',
         password: hashSync('123', 10),
-        verified: new Date(),
+        // verified: new Date(),
         role: 'USER',
       },
       {
@@ -23,7 +23,7 @@ async function up() {
         phone: '+79261564879',
         email: 'admin@mail.ru',
         password: hashSync('123', 10),
-        verified: new Date(),
+        // verified: new Date(),
         role: 'ADMIN',
       },
     ],
@@ -37,28 +37,28 @@ async function up() {
     data: products,
   });
 
-  await prisma.cart.createMany({
-    data: [
-      { userId: 1, totalAmount: 0, token: '111' },
-      { userId: 2, totalAmount: 0, token: '222' },
-    ],
-  });
+  // await prisma.cart.createMany({
+  //   data: [
+  //     { userId: 1, totalAmount: 0, token: '111' },
+  //     { userId: 2, totalAmount: 0, token: '222' },
+  //   ],
+  // });
 
-  await prisma.cartItem.create({
-    data: {
-      productId: 4,
-      cartId: 1,
-      quantity: 3,
-    },
-  });
+  // await prisma.cartItem.create({
+  //   data: {
+  //     productId: 4,
+  //     cartId: 1,
+  //     quantity: 3,
+  //   },
+  // });
 
-  await prisma.cartItem.create({
-    data: {
-      productId: 5,
-      cartId: 1,
-      quantity: 4,
-    },
-  });
+  // await prisma.cartItem.create({
+  //   data: {
+  //     productId: 5,
+  //     cartId: 1,
+  //     quantity: 4,
+  //   },
+  // });
 }
 
 //   await prisma.story.createMany({

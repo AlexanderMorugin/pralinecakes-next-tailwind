@@ -18,6 +18,7 @@ export async function GET() {
         id: Number(user.id),
       },
       select: {
+        id: true,
         firstName: true,
         lastName: true,
         phone: true,

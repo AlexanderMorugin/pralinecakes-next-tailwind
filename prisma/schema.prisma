@@ -93,13 +93,14 @@ model CartItem {
 model Order {
   id Int @id @default(autoincrement())
 
-  token       String
+  // token       String
   totalAmount Int
   status      OrderStatus @default(PENDING)
 
   items Json
 
   // кому предназначается заказ
+  userId    Int?
   firstName String
   lastName  String
   address   String

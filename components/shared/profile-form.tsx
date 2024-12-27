@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const ProfileForm: FC<Props> = ({ data }) => {
-  const getUser = useUserStore((state) => state.getUser);
+  const { getUser } = useUserStore((state) => state);
 
   const form = useForm({
     resolver: zodResolver(formRegisterSchema),

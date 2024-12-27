@@ -7,6 +7,7 @@ import { OrderContent } from './order-content';
 
 export interface OrderProps {
   id: number;
+  userId: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -22,6 +23,7 @@ export interface OrderProps {
 
 export const OrdersForm: FC<OrderProps> = ({
   id,
+  userId,
   firstName,
   lastName,
   email,
@@ -36,9 +38,14 @@ export const OrdersForm: FC<OrderProps> = ({
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
 
+
+  // console.log(userId)
+
+
   return (
     <OrderCard
       id={id}
+      userId={userId}
       firstName={firstName}
       lastName={lastName}
       date={date}

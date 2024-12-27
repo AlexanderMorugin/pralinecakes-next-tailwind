@@ -10,6 +10,7 @@ import { CurrentUserOrders } from './current-user-orders';
 
 interface Props {
   id: number;
+  userId: number;
   firstName: string;
   lastName: string;
   date: string;
@@ -22,6 +23,7 @@ interface Props {
 
 export const OrderCard: FC<PropsWithChildren<Props>> = ({
   id,
+  userId,
   firstName,
   lastName,
   date,
@@ -33,6 +35,11 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   children,
 }) => {
   const [showChangeStatus, setShowChangeStatus] = useState(false);
+
+  // console.log(userId)
+
+
+
 
   const onClose = () => {
     setShowChangeStatus(false);
@@ -70,6 +77,7 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
           {/** Кнопка всех заказов пользователя */}
           {/* <Link href='/dashboard/current-order'>все заказы</Link> */}
           <CurrentUserOrders
+            userId={userId}
             firstName={firstName}
             lastName={lastName}
             userEmail={email}

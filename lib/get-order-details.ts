@@ -6,9 +6,10 @@ export const getOrderDetails = (data: OrderProps) => {
   const order = data.map((item: any) => ({
     id: item.id,
     createdAt: item.createdAt,
-    token: item.token,
+    // token: item.token,
     totalAmount: item.totalAmount,
     status: item.status,
+    userId: item.userId,
     firstName: item.firstName,
     lastName: item.lastName,
     email: item.email,
@@ -17,9 +18,7 @@ export const getOrderDetails = (data: OrderProps) => {
     items: JSON.parse(item.items),
     comments: item.comments,
   }));
-  // .sort(
-  //   (a: any, b: any) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
-  // );
+
 
   return { order };
 };

@@ -6,6 +6,7 @@ import { create } from 'zustand';
 export interface CartState {
   loading: boolean;
   error: boolean;
+  // userId: number;
   totalAmount: number;
   quantity: number;
   cartItems: CartStateItem[];
@@ -22,6 +23,7 @@ export interface CartState {
 export const useCartStore = create<CartState>((set) => ({
   loading: false,
   error: false,
+  // userId: 0,
   totalAmount: 0,
   quantity: 0,
   cartItems: [],
@@ -30,6 +32,7 @@ export const useCartStore = create<CartState>((set) => ({
     try {
       set({ loading: true, error: false });
       const data = await Api.cart.getCartService();
+      // console.log(data)
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
@@ -55,6 +58,7 @@ export const useCartStore = create<CartState>((set) => ({
     try {
       set({ loading: true, error: false });
       const data = await Api.cart.addCartItemService(value);
+      // console.log(data)
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);

@@ -11,6 +11,10 @@ export const DashboardContent: FC = () => {
     (state) => state
   );
 
+
+  // console.log(order)
+
+
   useEffect(() => {
     // загружает данные с сервера сразу при входе на страницу или обновлении статуса
     getOrders();
@@ -27,7 +31,7 @@ export const DashboardContent: FC = () => {
   return (
     <Container className='py-5 md:py-10'>
       <Title
-        text='Панель кондитерской'
+        text='История заказов'
         className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
       />
 
@@ -40,6 +44,7 @@ export const DashboardContent: FC = () => {
               <OrdersForm
                 key={item.id}
                 id={item.id}
+                userId={item.userId}
                 firstName={item.firstName}
                 lastName={item.lastName}
                 email={item.email}

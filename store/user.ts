@@ -3,6 +3,7 @@ import { UserRole } from '@prisma/client';
 import { create } from 'zustand';
 
 type TUser = {
+  id: number;
   firstName: string;
   lastName: string;
   phone: string;
@@ -22,6 +23,7 @@ export const useUserStore = create<UserState>((set) => ({
   loading: false,
   error: false,
   user: {
+    id: 0,
     firstName: '',
     lastName: '',
     phone: '',
@@ -34,10 +36,9 @@ export const useUserStore = create<UserState>((set) => ({
       set({ loading: true, error: false });
       const data = (await Api.auth.getMe()) as TUser;
 
-      // console.log(data)
-
       set({
         user: {
+          id: data.id,
           firstName: data.firstName,
           lastName: data.lastName,
           phone: data.phone,

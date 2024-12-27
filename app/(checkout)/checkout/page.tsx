@@ -29,6 +29,7 @@ export default function CheckoutPage() {
   const { data: session } = useSession();
 
   const [personalInfo, setPersonalInfo] = useState<CheckoutFormValues>({
+    userId: 0,
     email: '',
     firstName: '',
     lastName: '',
@@ -41,6 +42,7 @@ export default function CheckoutPage() {
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
+      userId: 0,
       email: '',
       firstName: '',
       lastName: '',
@@ -53,10 +55,12 @@ export default function CheckoutPage() {
   useEffect(() => {
     async function fetchUserInfo() {
       const data = await Api.auth.getMe();
+      const userId = data.id;
       const firstName = data.firstName;
       const lastName = data.lastName;
       const phone = data.phone;
 
+      form.setValue('userId', userId);
       form.setValue('firstName', firstName);
       form.setValue('lastName', lastName);
       form.setValue('phone', phone);
@@ -73,6 +77,8 @@ export default function CheckoutPage() {
       setSubmiting(true);
       setShowModal(true);
       setPersonalInfo(data);
+
+
 
       const url = await createOrder(data);
 
