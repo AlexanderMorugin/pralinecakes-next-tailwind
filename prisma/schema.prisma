@@ -100,7 +100,7 @@ model Order {
   items Json
 
   // кому предназначается заказ
-  userId    Int?
+  userId    Int
   firstName String
   lastName  String
   address   String
