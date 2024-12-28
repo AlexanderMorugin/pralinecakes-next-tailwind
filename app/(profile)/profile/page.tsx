@@ -1,7 +1,16 @@
-import { ProfileForm } from '@/components/shared/profile-form';
+import {
+  Container,
+  ProfileCard,
+  ProfileLinkButton,
+  // ProfileForm,
+  ProfileSignoutButton,
+} from '@/components/shared';
 import { getUserSession } from '@/lib/get-user-session';
 import { prisma } from '@/prisma/prisma-client';
 import { redirect } from 'next/navigation';
+// import { getUserSession } from '@/lib/get-user-session';
+// import { prisma } from '@/prisma/prisma-client';
+// import { redirect } from 'next/navigation';
 
 export default async function ProfilePage() {
   const session = await getUserSession();
@@ -20,5 +29,14 @@ export default async function ProfilePage() {
     return redirect('/not-auth');
   }
 
-  return <ProfileForm data={user} />;
+  return (
+    <Container className='py-5 px-2 md:p-10'>
+      <div className='flex flex-col items-center gap-5 w-full'>
+        <ProfileCard data={user} />
+        <ProfileLinkButton route='/profile/orders' text='Мои заказы' />
+        <ProfileLinkButton route='/profile/edit' text='Редактировать профиль' />
+        <ProfileSignoutButton />
+      </div>
+    </Container>
+  );
 }

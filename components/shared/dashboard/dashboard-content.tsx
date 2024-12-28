@@ -4,16 +4,16 @@ import { useEffect, type FC } from 'react';
 import { useOrderStore } from '@/store/order';
 import { Container, Title } from '..';
 import { OrdersForm } from '../order/orders-form';
-import { DashboardLoading } from './dashboard-loading';
+// import { DashboardLoading } from './dashboard-loading';
 
 export const DashboardContent: FC = () => {
-  const { order, getOrders, updateOrderStatus, loading } = useOrderStore(
+  const { order, getOrders, updateOrderStatus, 
+    // loading
+   } = useOrderStore(
     (state) => state
   );
 
-
   // console.log(order)
-
 
   useEffect(() => {
     // загружает данные с сервера сразу при входе на страницу или обновлении статуса
@@ -35,9 +35,9 @@ export const DashboardContent: FC = () => {
         className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
       />
 
-      {loading ? (
+      {/* {loading ? (
         <DashboardLoading />
-      ) : (
+      ) : ( */}
         <ul className='flex flex-col gap-4 px-2'>
           {order &&
             order.map((item) => (
@@ -58,7 +58,7 @@ export const DashboardContent: FC = () => {
               />
             ))}
         </ul>
-      )}
+       {/* )}  */}
     </Container>
   );
 };

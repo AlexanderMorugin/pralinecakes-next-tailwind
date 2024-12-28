@@ -4,19 +4,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { User } from '@prisma/client';
 import { type FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { updateUserInfo } from '@/app/api/actions';
+import { useUserStore } from '@/store/user';
 import {
   formRegisterSchema,
   TFormRegisterValues,
-} from './modals/auth-modal/forms/schemas';
-import toast from 'react-hot-toast';
-import { signOut } from 'next-auth/react';
-import { Container } from './container';
-import { Title } from './title';
-import { FormInput } from './form';
-import { Button } from '../ui';
-import { updateUserInfo } from '@/app/api/actions';
-import { useUserStore } from '@/store/user';
-import { ToastSuccess } from './toast-success';
+} from '../modals/auth-modal/forms/schemas';
+import { ToastSuccess } from '../toast-success';
+import { Container, FormInput, Title } from '..';
+import { Button } from '@/components/ui';
 
 interface Props {
   data: User;
@@ -24,6 +21,8 @@ interface Props {
 
 export const ProfileForm: FC<Props> = ({ data }) => {
   const { getUser } = useUserStore((state) => state);
+
+  // console.log(data);
 
   const form = useForm({
     resolver: zodResolver(formRegisterSchema),
@@ -56,17 +55,20 @@ export const ProfileForm: FC<Props> = ({ data }) => {
     }
   };
 
-  const onClickSignOut = () => {
-    signOut({
-      callbackUrl: '/',
-    });
-  };
+  // const onClickSignOut = () => {
+  //   signOut({
+  //     callbackUrl: '/',
+  //   });
+  // };
 
   return (
-    <Container className='flex flex-col items-center w-full my-2 px-4'>
+    <Container 
+    // className='flex flex-col items-center w-full'
+    className='flex flex-col items-center gap-5 w-full py-5 px-2'
+    >
       <FormProvider {...form}>
         <form
-          className='flex flex-col gap-2 w-full md:mt-10 sm:w-96'
+          className='flex flex-col gap-2 w-full md:mt-10 sm:w-[400px]'
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className='flex flex-col'>
@@ -105,7 +107,7 @@ export const ProfileForm: FC<Props> = ({ data }) => {
             Сохранить изменения
           </Button>
 
-          <Button
+          {/* <Button
             type='button'
             disabled={form.formState.isSubmitting}
             variant='secondary'
@@ -113,7 +115,7 @@ export const ProfileForm: FC<Props> = ({ data }) => {
             onClick={onClickSignOut}
           >
             Выйти из аккаунта
-          </Button>
+          </Button> */}
         </form>
       </FormProvider>
     </Container>

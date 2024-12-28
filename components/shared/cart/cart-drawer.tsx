@@ -12,12 +12,14 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import Link from 'next/link';
-import { Button } from '../ui';
+import { Button } from '@/components/ui';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { CartDrawerItem, Title } from '.';
 import ImageLogo from '@/assets/images/logo-120.png';
 import Image from 'next/image';
 import { useCartStore } from '@/store';
+import { CartDrawerItem } from '.';
+import { Title } from '..';
+
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
   const {

@@ -78,8 +78,6 @@ export default function CheckoutPage() {
       setShowModal(true);
       setPersonalInfo(data);
 
-
-
       const url = await createOrder(data);
 
       ToastSuccess({ title: 'Заказ оформлен' });

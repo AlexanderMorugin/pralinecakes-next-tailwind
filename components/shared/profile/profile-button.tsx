@@ -2,11 +2,12 @@
 'use client';
 
 import { type FC } from 'react';
-import { Button } from '../ui';
+
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { UserRole } from '@prisma/client';
+import { Button } from '@/components/ui';
 
 interface Props {
   session: any;

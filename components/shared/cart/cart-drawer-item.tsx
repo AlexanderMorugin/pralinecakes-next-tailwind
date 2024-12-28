@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils';
 import { type FC } from 'react';
-import { CartItemProps } from './cart-item-details/cart-item-details.types';
+
 import { Trash2Icon } from 'lucide-react';
-import { CartItem, CountButton } from '.';
+import { CartItemProps } from './cart-item-details/cart-item-details.types';
+import { CartItem, CountButton } from '..';
 
 interface Props extends CartItemProps {
   handleClickCountButton?: (type: 'plus' | 'minus') => void;
