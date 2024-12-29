@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import { type FC } from 'react';
+import Link from 'next/link';
 import { Plus, ShoppingCart } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 import { TProduct } from './product-list';
 import { Button } from '../ui/button';
-import toast from 'react-hot-toast';
 import { useCartStore } from '@/store';
 import { ToastSuccess } from './toast-success';
 

@@ -1,10 +1,11 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { useState, type FC } from 'react';
 
-import { LoginForm, RegisterForm } from '.';
 import { Button } from '@/components/ui';
+import { cn } from '@/lib/utils';
+
+import { LoginForm, RegisterForm } from '.';
 
 interface Props {
   handleClose: () => void;
@@ -13,7 +14,12 @@ interface Props {
   adminSession?: boolean;
 }
 
-export const AuthForm: FC<Props> = ({ handleClose, userSession, adminSession, className }) => {
+export const AuthForm: FC<Props> = ({
+  handleClose,
+  userSession,
+  adminSession,
+  className,
+}) => {
   const [type, setType] = useState<'login' | 'register'>('login');
 
   const onSwitchType = () => {
@@ -28,9 +34,7 @@ export const AuthForm: FC<Props> = ({ handleClose, userSession, adminSession, cl
       )}
     >
       {type === 'login' ? (
-        <LoginForm 
-        // onClose={handleClose}
-         userSession={userSession} adminSession={adminSession}/>
+        <LoginForm userSession={userSession} adminSession={adminSession} />
       ) : (
         <RegisterForm onClose={handleClose} />
       )}

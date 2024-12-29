@@ -1,6 +1,7 @@
+import { create } from 'zustand';
+
 import { Api } from '@/services/api-client';
 import { UserRole } from '@prisma/client';
-import { create } from 'zustand';
 
 type TUser = {
   id: number;

@@ -1,5 +1,4 @@
 import { Container, ProductList } from '@/components/shared';
-
 import { findProducts } from '@/lib/find-products';
 
 export default async function Home() {

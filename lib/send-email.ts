@@ -14,7 +14,7 @@ export const sendEmail = async (
     subject,
     react: template,
   });
-  
+
   if (error) {
     throw error;
   }

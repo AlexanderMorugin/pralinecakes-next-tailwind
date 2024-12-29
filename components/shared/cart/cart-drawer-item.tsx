@@ -1,7 +1,8 @@
-import { cn } from '@/lib/utils';
 import { type FC } from 'react';
-
 import { Trash2Icon } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+
 import { CartItemProps } from './cart-item-details/cart-item-details.types';
 import { CartItem, CountButton } from '..';
 

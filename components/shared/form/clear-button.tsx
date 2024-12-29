@@ -1,5 +1,6 @@
-import { X } from 'lucide-react';
 import { type FC } from 'react';
+
+import { X } from 'lucide-react';
 
 interface Props {
   onClick?: VoidFunction;

@@ -1,12 +1,13 @@
 'use client';
 
+import { useRef, useState, type FC } from 'react';
+import { useClickAway, useDebounce } from 'react-use';
+import Link from 'next/link';
+import { Search } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 import { Api } from '@/services/api-client';
 import { Product } from '@prisma/client';
-import { Search } from 'lucide-react';
-import Link from 'next/link';
-import { useRef, useState, type FC } from 'react';
-import { useClickAway, useDebounce } from 'react-use';
 
 interface Props {
   isMobile?: boolean;
@@ -43,9 +44,12 @@ export const SearchBar: FC<Props> = ({ isMobile = false, className }) => {
     <>
       {/** Затемнение экрана */}
       {focused && (
-        <div className={cn('fixed top-0 right-0 bottom-0 left-0 bg-black/80 z-30',
-          {'bg-black/0': isMobile}
-        )} />
+        <div
+          className={cn(
+            'fixed top-0 right-0 bottom-0 left-0 bg-black/80 z-30',
+            { 'bg-black/0': isMobile }
+          )}
+        />
       )}
 
       {/** Поисковый блок */}
@@ -65,8 +69,7 @@ export const SearchBar: FC<Props> = ({ isMobile = false, className }) => {
           type='text'
           placeholder='Найти торт...'
           className={cn('rounded-2xl outline-none w-full bg-gray-100 pl-11', {
-            'rounded-2xl outline-none w-full bg-gray-100 h-11 pl-11':
-              isMobile,
+            'rounded-2xl outline-none w-full bg-gray-100 h-11 pl-11': isMobile,
           })}
           onFocus={() => setFocused(true)}
           value={searchQuery}

@@ -93,7 +93,6 @@ model CartItem {
 model Order {
   id Int @id @default(autoincrement())
 
-  // token       String
   totalAmount Int
   status      OrderStatus @default(PENDING)
 

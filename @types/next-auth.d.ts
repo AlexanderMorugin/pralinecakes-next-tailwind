@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-
 import { DefaultSession, DefaultUser } from 'next-auth';
 import { JWT, DefaultJWT } from 'next-auth/jwt';
 import type { UserRole } from '@prisma/client';
@@ -10,7 +9,6 @@ declare module 'next-auth' {
     user: {
       id: string;
       role: UserRole;
-      // name: string;
       firstName: string;
       lastName: string;
       image: string;

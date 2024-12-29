@@ -1,7 +1,11 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import {
   CheckoutAddressForm,
   CheckoutCart,
@@ -15,10 +19,7 @@ import {
   checkoutFormSchema,
   CheckoutFormValues,
 } from '@/components/shared/checkout/checkout-form-schema';
-import { useEffect, useState } from 'react';
 import { createOrder } from '@/app/api/actions';
-import toast from 'react-hot-toast';
-import { useSession } from 'next-auth/react';
 import { Api } from '@/services/api-client';
 import { useCartStore } from '@/store';
 import { ToastSuccess } from '@/components/shared/toast-success';

@@ -1,6 +1,7 @@
+import { NextRequest, NextResponse } from 'next/server';
+
 import { updateCartTotalAmount } from '@/lib/update-cart-total-amount';
 import { prisma } from '@/prisma/prisma-client';
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(
   req: NextRequest,
@@ -9,11 +10,10 @@ export async function PATCH(
   try {
     const id = Number(params.id);
     const data = (await req.json()) as { quantity: number };
-    // const token = await req.cookies.get('cartToken')?.value;
     const token = await req.cookies.get('next-auth.session-token')?.value;
 
     if (!token) {
-      return NextResponse.json({ message: 'Token Not Found'});
+      return NextResponse.json({ message: 'Token Not Found' });
     }
 
     const cartItem = await prisma.cartItem.findFirst({
@@ -55,7 +55,6 @@ export async function DELETE(
 ) {
   try {
     const id = Number(params.id);
-    // const token = req.cookies.get('cartToken')?.value;
     const token = req.cookies.get('next-auth.session-token')?.value;
 
     if (!token) {

@@ -1,13 +1,14 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { ChevronDown } from 'lucide-react';
 import { ReactNode, useState, type FC } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
 
 interface Props {
-  title: string
-  children: ReactNode
-  className?: string
+  title: string;
+  children: ReactNode;
+  className?: string;
 }
 
 export const OrderAccordeon: FC<Props> = ({ title, children, className }) => {
@@ -23,7 +24,7 @@ export const OrderAccordeon: FC<Props> = ({ title, children, className }) => {
         { 'h-auto': active }
       )}
     >
-            <div
+      <div
         onClick={toggleClick}
         className='flex items-center gap-3 bg-gray-100 py-2 px-2 transition-all duration-300 ease-in-out md:px-3 hover:bg-lime-50'
       >

@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+
 import { OrderAccordeon } from './order-accordeon';
 
 interface Props {

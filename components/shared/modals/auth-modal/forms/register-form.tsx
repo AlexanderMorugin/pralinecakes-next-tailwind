@@ -2,14 +2,16 @@
 
 import { type FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
-import { TFormRegisterValues, formRegisterSchema } from './schemas';
-import { FormInput } from '../../../form';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui';
 import { registerUser } from '@/app/api/actions';
 import { Title } from '@/components/shared';
 import { ToastSuccess } from '@/components/shared/toast-success';
+
+import { TFormRegisterValues, formRegisterSchema } from './schemas';
+import { FormInput } from '../../../form';
 
 interface Props {
   onClose?: VoidFunction;

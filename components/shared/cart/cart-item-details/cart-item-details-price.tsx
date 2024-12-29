@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils';
 import { type FC } from 'react';
+
+import { cn } from '@/lib/utils';
 
 interface Props {
   value?: number;
@@ -7,5 +8,7 @@ interface Props {
 }
 
 export const CartItemDetailsPrice: FC<Props> = ({ value, className }) => {
-  return value && <span className={cn('text-[14px]', className)}>{value} р</span>;
+  return (
+    value && <span className={cn('text-[14px]', className)}>{value} р</span>
+  );
 };

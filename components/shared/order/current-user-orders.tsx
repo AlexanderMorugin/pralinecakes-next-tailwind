@@ -1,3 +1,6 @@
+import { FC } from 'react';
+import { ArrowRight } from 'lucide-react';
+
 import { Button } from '@/components/ui';
 import {
   Sheet,
@@ -10,13 +13,12 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useOrderStore } from '@/store/order';
-import { ArrowRight } from 'lucide-react';
-import { FC } from 'react';
+
 import { Title } from '../title';
 import { CurrentOrder } from './current-order';
 
 interface Props {
-  userId: number
+  userId: number;
   firstName: string;
   lastName: string;
   userEmail: string;
@@ -32,13 +34,9 @@ export const CurrentUserOrders: FC<Props> = ({
 }) => {
   const { order } = useOrderStore((state) => state);
 
-  // const filterOrder = order
-  //   .filter((item) => item.email === userEmail)
-  //   .map((item) => item);
-
   const filterOrder = order
-  .filter((item) => item.userId === userId)
-  .map((item) => item);
+    .filter((item) => item.userId === userId)
+    .map((item) => item);
 
   const initialValue = 0;
 
@@ -69,7 +67,6 @@ export const CurrentUserOrders: FC<Props> = ({
         </SheetHeader>
         <div className='flex-1'>
           <div className='flex flex-col'>
-          {/* <span>ваш id: {userId}</span> */}
             <span>телефон: {userPhone}</span>
             <span>почта: {userEmail}</span>
           </div>

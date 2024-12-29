@@ -1,5 +1,6 @@
-import { Skeleton } from '@/components/ui/skeleton';
 import { type FC } from 'react';
+
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const CheckoutCartItemSkeleton: FC = () => {
   return (

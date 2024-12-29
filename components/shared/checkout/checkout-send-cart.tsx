@@ -2,9 +2,10 @@
 
 import { type FC } from 'react';
 
-import { CheckoutCartItem } from '..';
 import { useTotalPrice } from '@/hooks/use-total-price';
 import { useCartStore } from '@/store';
+
+import { CheckoutCartItem } from '..';
 
 export const CheckoutSendCart: FC = () => {
   const { totalAmount, cartItems } = useCartStore((state) => state);

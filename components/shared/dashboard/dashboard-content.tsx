@@ -1,19 +1,16 @@
 'use client';
 
 import { useEffect, type FC } from 'react';
+
 import { useOrderStore } from '@/store/order';
+
 import { Container, Title } from '..';
 import { OrdersForm } from '../order/orders-form';
-// import { DashboardLoading } from './dashboard-loading';
 
 export const DashboardContent: FC = () => {
-  const { order, getOrders, updateOrderStatus, 
-    // loading
-   } = useOrderStore(
+  const { order, getOrders, updateOrderStatus } = useOrderStore(
     (state) => state
   );
-
-  // console.log(order)
 
   useEffect(() => {
     // загружает данные с сервера сразу при входе на страницу или обновлении статуса
@@ -24,7 +21,7 @@ export const DashboardContent: FC = () => {
       getOrders();
     }, 100000);
 
-    // // очистка интервала
+    // очистка интервала
     return () => clearInterval(timer);
   }, [updateOrderStatus, getOrders]);
 
@@ -34,31 +31,26 @@ export const DashboardContent: FC = () => {
         text='История заказов'
         className='font-extrabold mb-4 text-[18px] text-center md:text-left md:mb-8 md:text-[26px]'
       />
-
-      {/* {loading ? (
-        <DashboardLoading />
-      ) : ( */}
-        <ul className='flex flex-col gap-4 px-2'>
-          {order &&
-            order.map((item) => (
-              <OrdersForm
-                key={item.id}
-                id={item.id}
-                userId={item.userId}
-                firstName={item.firstName}
-                lastName={item.lastName}
-                email={item.email}
-                address={item.address}
-                phone={item.phone}
-                items={item.items}
-                createdAt={item.createdAt}
-                totalAmount={item.totalAmount}
-                comments={item.comments}
-                status={item.status}
-              />
-            ))}
-        </ul>
-       {/* )}  */}
+      <ul className='flex flex-col gap-4 px-2'>
+        {order &&
+          order.map((item) => (
+            <OrdersForm
+              key={item.id}
+              id={item.id}
+              userId={item.userId}
+              firstName={item.firstName}
+              lastName={item.lastName}
+              email={item.email}
+              address={item.address}
+              phone={item.phone}
+              items={item.items}
+              createdAt={item.createdAt}
+              totalAmount={item.totalAmount}
+              comments={item.comments}
+              status={item.status}
+            />
+          ))}
+      </ul>
     </Container>
   );
 };

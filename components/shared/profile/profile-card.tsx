@@ -1,5 +1,6 @@
+import { type FC } from 'react';
+
 import { User } from '@prisma/client';
-import React, { FC } from 'react';
 
 interface Props {
   data: User;

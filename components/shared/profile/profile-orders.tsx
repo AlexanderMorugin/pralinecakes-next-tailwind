@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, type FC } from 'react';
+
 import { useOrderStore } from '@/store/order';
 import { User } from '@prisma/client';
-import { useEffect, type FC } from 'react';
+
 import { ProfileCurrentOrder } from '.';
 import { Title } from '../title';
 import { Container } from '..';
@@ -23,8 +25,6 @@ export const ProfileOrders: FC<Props> = ({ data }) => {
     .filter((item) => item.userId === data.id)
     .map((item) => item);
 
-  // console.log(filterOrder);
-
   const initialValue = 0;
 
   const totalAmountCurrentUserOrders = filterOrder.reduce(
@@ -38,10 +38,7 @@ export const ProfileOrders: FC<Props> = ({ data }) => {
       {loading ? (
         <DashboardLoading />
       ) : (
-        <ul
-          className='flex flex-col gap-3 w-full max-w-[400px]'
-          // className='flex flex-col gap-4 items-center'
-        >
+        <ul className='flex flex-col gap-3 w-full max-w-[400px]'>
           {filterOrder.map((item) => (
             <ProfileCurrentOrder key={item.id} item={item} />
           ))}

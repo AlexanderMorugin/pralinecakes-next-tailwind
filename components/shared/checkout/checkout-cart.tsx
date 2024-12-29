@@ -1,5 +1,7 @@
 import { type FC } from 'react';
+
 import { CartStateItem } from '@/lib/get-cart-details';
+
 import { CheckoutCartItem, CheckoutCartItemSkeleton, WhiteBlock } from '..';
 
 interface Props {

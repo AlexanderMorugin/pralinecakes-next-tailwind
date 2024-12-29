@@ -2,18 +2,20 @@
 
 import { Suspense, useEffect, useState, type FC } from 'react';
 import { ChevronLeft, House } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { CartButton, Container, Logo, ProfileButton, TopBar } from '.';
-import { AuthModal } from './modals/auth-modal';
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
-import { useUserStore } from '@/store/user';
 import Link from 'next/link';
+
+import { cn } from '@/lib/utils';
+import { useUserStore } from '@/store/user';
+
 import { DashboardButton } from './dashboard/dashboard-button';
 import { AdminModal } from './modals/admin-modal/admin-modal';
 import { Button } from '../ui';
 import { SearchBar } from './search/search-bar';
 import { SearchMobile } from './search/search-mobile';
+import { CartButton, Container, Logo, ProfileButton, TopBar } from '.';
+import { AuthModal } from './modals/auth-modal';
 
 interface Props {
   hasSearch?: boolean;
@@ -87,13 +89,7 @@ export const Header: FC<Props> = ({
             )}
           </div>
         ) : (
-          // <>
-          //   <AlignJustify
-          //     size={30}
-          //     className='flex md:hidden text-white cursor-pointer'
-          //   />
-            <Logo />
-          // </>
+          <Logo />
         )}
 
         {/** Средняя часть - инпут поиска десктоп*/}

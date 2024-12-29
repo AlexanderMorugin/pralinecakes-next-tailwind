@@ -1,3 +1,5 @@
+import { type FC } from 'react';
+
 import {
   Dialog,
   DialogContent,
@@ -6,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { Order } from '@prisma/client';
-import { type FC } from 'react';
+
 import { CurrentOrderContentModal } from './current-order-content-modal';
 
 interface Props {

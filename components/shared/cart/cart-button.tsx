@@ -1,11 +1,12 @@
 'use client';
 
-import { ArrowRight, LoaderCircle, ShoppingCart } from 'lucide-react';
 import { type FC } from 'react';
+import { ArrowRight, LoaderCircle, ShoppingCart } from 'lucide-react';
 
-import { CartDrawer } from '.';
 import { cn } from '@/lib/utils';
 import { useCartStore } from '@/store';
+
+import { CartDrawer } from '.';
 
 interface Props {
   className?: string;

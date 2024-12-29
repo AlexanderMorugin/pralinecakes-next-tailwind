@@ -1,3 +1,6 @@
+import { type FC } from 'react';
+import { Search } from 'lucide-react';
+
 import {
   Sheet,
   SheetClose,
@@ -8,9 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Search } from 'lucide-react';
-import { type FC } from 'react';
 import { Button } from '@/components/ui';
+
 import { SearchBar } from './search-bar';
 
 export const SearchMobile: FC = () => {

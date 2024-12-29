@@ -1,10 +1,12 @@
 import { type FC } from 'react';
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
-import { CheckoutItemDetails, WhiteBlock } from '..';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui';
 import { DELIVERY_PRICE } from '@/constants/constants';
 import { useTotalPrice } from '@/hooks/use-total-price';
+
+import { CheckoutItemDetails, WhiteBlock } from '..';
 
 interface Props {
   totalAmount: number;

@@ -1,10 +1,12 @@
 'use client';
 
 import { PropsWithChildren, useState, type FC } from 'react';
+
 import { cn } from '@/lib/utils';
 import { OrderStatus } from '@prisma/client';
-import { Title } from '..';
 import { Button } from '@/components/ui';
+
+import { Title } from '..';
 import { OrderChangeStatusModal } from './order-change-status-modal';
 import { CurrentUserOrders } from './current-user-orders';
 
@@ -35,11 +37,6 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
   children,
 }) => {
   const [showChangeStatus, setShowChangeStatus] = useState(false);
-
-  // console.log(userId)
-
-
-
 
   const onClose = () => {
     setShowChangeStatus(false);
@@ -75,7 +72,6 @@ export const OrderCard: FC<PropsWithChildren<Props>> = ({
           </div>
 
           {/** Кнопка всех заказов пользователя */}
-          {/* <Link href='/dashboard/current-order'>все заказы</Link> */}
           <CurrentUserOrders
             userId={userId}
             firstName={firstName}

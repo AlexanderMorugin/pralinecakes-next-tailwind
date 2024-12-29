@@ -1,5 +1,7 @@
 import { type FC } from 'react';
+
 import { cn } from '@/lib/utils';
+
 import { CartItemProps } from '../cart/cart-item-details/cart-item-details.types';
 import { CartItem } from '..';
 

@@ -1,19 +1,21 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { User } from '@prisma/client';
 import { type FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { User } from '@prisma/client';
 import { updateUserInfo } from '@/app/api/actions';
 import { useUserStore } from '@/store/user';
+import { Button } from '@/components/ui';
+
 import {
   formRegisterSchema,
   TFormRegisterValues,
 } from '../modals/auth-modal/forms/schemas';
 import { ToastSuccess } from '../toast-success';
 import { Container, FormInput, Title } from '..';
-import { Button } from '@/components/ui';
 
 interface Props {
   data: User;
@@ -21,8 +23,6 @@ interface Props {
 
 export const ProfileForm: FC<Props> = ({ data }) => {
   const { getUser } = useUserStore((state) => state);
-
-  // console.log(data);
 
   const form = useForm({
     resolver: zodResolver(formRegisterSchema),
@@ -55,17 +55,8 @@ export const ProfileForm: FC<Props> = ({ data }) => {
     }
   };
 
-  // const onClickSignOut = () => {
-  //   signOut({
-  //     callbackUrl: '/',
-  //   });
-  // };
-
   return (
-    <Container 
-    // className='flex flex-col items-center w-full'
-    className='flex flex-col items-center gap-5 w-full py-5 px-2'
-    >
+    <Container className='flex flex-col items-center gap-5 w-full py-5 px-2'>
       <FormProvider {...form}>
         <form
           className='flex flex-col gap-2 w-full md:mt-10 sm:w-[400px]'
@@ -106,16 +97,6 @@ export const ProfileForm: FC<Props> = ({ data }) => {
           >
             Сохранить изменения
           </Button>
-
-          {/* <Button
-            type='button'
-            disabled={form.formState.isSubmitting}
-            variant='secondary'
-            className='text-[14px]'
-            onClick={onClickSignOut}
-          >
-            Выйти из аккаунта
-          </Button> */}
         </form>
       </FormProvider>
     </Container>

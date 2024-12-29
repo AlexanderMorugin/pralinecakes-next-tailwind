@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { type FC } from 'react';
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-
-import { type FC } from 'react';
-import { AuthForm } from './forms';
 import { UserRole } from '@prisma/client';
+
+import { AuthForm } from './forms';
 
 interface Props {
   open: boolean;
@@ -33,7 +34,11 @@ export const AuthModal: FC<Props> = ({ open, session, onClose }) => {
         <DialogTitle className='hidden' />
         <DialogDescription className='hidden' />
 
-        <AuthForm handleClose={handleClose} userSession={userSession} adminSession={adminSession}/>
+        <AuthForm
+          handleClose={handleClose}
+          userSession={userSession}
+          adminSession={adminSession}
+        />
       </DialogContent>
     </Dialog>
   );

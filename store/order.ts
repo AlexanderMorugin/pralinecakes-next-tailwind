@@ -1,7 +1,8 @@
+import { create } from 'zustand';
+
 import { getOrderDetails } from '@/lib/get-order-details';
 import { Api } from '@/services/api-client';
 import { Order, OrderStatus } from '@prisma/client';
-import { create } from 'zustand';
 
 export interface OrderState {
   loading: boolean;

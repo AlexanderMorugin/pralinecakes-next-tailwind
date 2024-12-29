@@ -1,28 +1,11 @@
 import { AuthOptions } from 'next-auth';
-// import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
-// import GoogleProvider from 'next-auth/providers/google';
+import { compare, hashSync } from 'bcrypt';
 
 import { prisma } from '@/prisma/prisma-client';
-import { compare, hashSync } from 'bcrypt';
-// import { UserRole } from '@prisma/client';
 
 export const authOptions: AuthOptions = {
   providers: [
-    // TODO: GoogleProvider
-    // GitHubProvider({
-    //   clientId: process.env.GITHUB_ID || '',
-    //   clientSecret: process.env.GITHUB_SECRET || '',
-    //   profile(profile) {
-    //     return {
-    //       id: profile.id,
-    //       name: profile.name || profile.login,
-    //       email: profile.email,
-    //       image: profile.avatar_url,
-    //       role: 'USER' as UserRole,
-    //     };
-    //   },
-    // }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -53,10 +36,6 @@ export const authOptions: AuthOptions = {
         if (!isPasswordValid) {
           return null;
         }
-
-        // if (!findUser.verified) {
-        //   return null;
-        // }
 
         return {
           id: findUser.id,
@@ -114,7 +93,6 @@ export const authOptions: AuthOptions = {
           data: {
             email: user.email,
             firstName: user.name || 'User #' + user.id,
-            // firstName: user.firstName,
             lastName: user.name || 'User #' + user.id,
             phone: user.name || 'User #' + user.id,
             password: hashSync(user.id.toString(), 10),
@@ -145,7 +123,6 @@ export const authOptions: AuthOptions = {
       if (findUser) {
         token.id = String(findUser.id);
         token.email = findUser.email;
-        // token.fullName = findUser.fullName;
         token.firstName = findUser.firstName;
         token.lastName = findUser.lastName;
         token.phone = findUser.phone;

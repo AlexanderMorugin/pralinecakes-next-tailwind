@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { cn } from '@/lib/utils';
+
 import { type FC } from 'react';
+
+import { cn } from '@/lib/utils';
+import { OrderStatus } from '@prisma/client';
+
 import { Title } from '../title';
 import { CurrentUserContentModal } from './current-user-content-modal';
-import { OrderStatus } from '@prisma/client';
 
 interface Props {
   item: any;
@@ -11,7 +14,6 @@ interface Props {
 }
 
 export const CurrentOrderContentModal: FC<Props> = ({ item, className }) => {
-  // console.log(item);
   return (
     <div
       className={cn(

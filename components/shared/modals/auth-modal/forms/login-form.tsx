@@ -1,25 +1,21 @@
 import { type FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { formLoginShema, TFormLoginValues } from './schemas';
+import toast from 'react-hot-toast';
+import { signIn, signOut } from 'next-auth/react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Title } from '@/components/shared/title';
 import { FormInput } from '@/components/shared/form';
 import { Button } from '@/components/ui';
-import toast from 'react-hot-toast';
-import { signIn, signOut } from 'next-auth/react';
-// import { ToastSuccess } from '@/components/shared/toast-success';
+
+import { formLoginShema, TFormLoginValues } from './schemas';
 
 interface Props {
   userSession?: boolean;
   adminSession?: boolean;
-  // onClose?: VoidFunction;
 }
 
-export const LoginForm: FC<Props> = ({
-  userSession,
-  adminSession,
-  // onClose,
-}) => {
+export const LoginForm: FC<Props> = ({ userSession, adminSession }) => {
   const form = useForm<TFormLoginValues>({
     resolver: zodResolver(formLoginShema),
     defaultValues: {
@@ -38,10 +34,6 @@ export const LoginForm: FC<Props> = ({
       if (!response?.ok) {
         throw Error();
       }
-
-
-      // ToastSuccess({ title: 'Вы вошли в аккаунт' });
-      // onClose?.();
     } catch (error) {
       console.log('Error [LOGIN] ', error);
       toast.error('Не удалось войти в аккаунт', { icon: '❌' });

@@ -1,6 +1,7 @@
 import { Product } from '@prisma/client';
-import { axiosInstance } from './axios-instance';
 import { Routes } from '@/constants/routes';
+
+import { axiosInstance } from './axios-instance';
 
 export const searchProduct = async (query: string): Promise<Product[]> => {
   return (

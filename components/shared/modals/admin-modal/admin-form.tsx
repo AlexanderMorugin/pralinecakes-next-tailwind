@@ -1,27 +1,21 @@
-// import { type FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-// import { ToastSuccess } from '@/components/shared/toast-success';
 import { signIn, signOut } from 'next-auth/react';
 import toast from 'react-hot-toast';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput, Title } from '@/components/shared';
 import { Button } from '@/components/ui';
 import { cn } from '@/lib/utils';
+
 import { formLoginShema, TFormLoginValues } from '../auth-modal/forms/schemas';
 
 interface Props {
-  // handleClose?: VoidFunction;
   className?: string;
   adminSession?: boolean;
   userSession?: boolean;
 }
 
-export const AdminForm = ({
-  // handleClose,
-  adminSession,
-  userSession,
-  className,
-}: Props) => {
+export const AdminForm = ({ adminSession, userSession, className }: Props) => {
   const form = useForm<TFormLoginValues>({
     resolver: zodResolver(formLoginShema),
     defaultValues: {
@@ -40,9 +34,6 @@ export const AdminForm = ({
       if (!response?.ok) {
         throw Error();
       }
-
-      //   ToastSuccess({ title: 'Вы вошли как сотрудник' });
-      //   handleClose?.();
     } catch (error) {
       console.log('Error [LOGIN] ', error);
       toast.error('Вход не выполнен', { icon: '❌' });

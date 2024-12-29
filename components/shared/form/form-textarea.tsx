@@ -2,8 +2,10 @@
 
 import { InputHTMLAttributes, type FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { ClearButton, ErrorText, RequiredSymbol } from '..';
+
 import { Textarea } from '@/components/ui/textarea';
+
+import { ClearButton, ErrorText, RequiredSymbol } from '..';
 
 interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
   name: string;

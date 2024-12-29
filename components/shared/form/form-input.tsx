@@ -1,9 +1,11 @@
 'use client';
 
 import { InputHTMLAttributes, type FC } from 'react';
-import { ClearButton, ErrorText, RequiredSymbol } from '..';
 import { useFormContext } from 'react-hook-form';
+
 import { Input } from '@/components/ui/input';
+
+import { ClearButton, ErrorText, RequiredSymbol } from '..';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;

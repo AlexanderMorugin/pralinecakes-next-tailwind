@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui';
-import { LayoutDashboard } from 'lucide-react';
-// import Link from 'next/link';
 import { type FC } from 'react';
+import { LayoutDashboard } from 'lucide-react';
+
+import { Button } from '@/components/ui';
 
 interface Props {
   handleClickSignIn?: () => void;
@@ -10,7 +10,6 @@ interface Props {
 export const DashboardButton: FC<Props> = ({ handleClickSignIn }) => {
   return (
     <>
-      {/* <Link href='/dashboard'> */}
       <LayoutDashboard
         size={26}
         className='text-white md:hidden'
@@ -26,7 +25,6 @@ export const DashboardButton: FC<Props> = ({ handleClickSignIn }) => {
           Сотрудник
         </span>
       </Button>
-      {/* </Link> */}
     </>
   );
 };

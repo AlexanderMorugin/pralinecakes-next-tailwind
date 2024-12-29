@@ -1,13 +1,13 @@
-import { prisma } from '@/prisma/prisma-client';
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+
+import { prisma } from '@/prisma/prisma-client';
 import { findOrCreateCart } from '@/lib/find-or-create-cart';
 import { CreateCartItemDTOValues } from '@/services/dto/cart.dto';
 import { updateCartTotalAmount } from '@/lib/update-cart-total-amount';
 
 export async function GET(req: NextRequest) {
   try {
-    // const token = req.cookies.get('cartToken')?.value;
     const token = req.cookies.get('next-auth.session-token')?.value;
 
     if (!token) {
@@ -42,7 +42,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    // let token = req.cookies.get('cartToken')?.value;
     let token = req.cookies.get('next-auth.session-token')?.value;
 
     if (!token) {
@@ -51,8 +50,6 @@ export async function POST(req: NextRequest) {
 
     const userCart = await findOrCreateCart(token);
 
-    // console.log(userCart)
-    
     const data = (await req.json()) as CreateCartItemDTOValues;
 
     const findCartItem = await prisma.cartItem.findFirst({
@@ -85,7 +82,7 @@ export async function POST(req: NextRequest) {
     const updatedUserCart = await updateCartTotalAmount(token);
 
     const resp = NextResponse.json(updatedUserCart);
-    // resp.cookies.set('cartToken', token);
+
     resp.cookies.set('next-auth.session-token', token);
     return resp;
   } catch (error) {

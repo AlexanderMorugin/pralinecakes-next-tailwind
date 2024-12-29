@@ -1,7 +1,8 @@
 'use client';
 
-import { OrderStatus } from '@prisma/client';
 import { type FC } from 'react';
+
+import { OrderStatus } from '@prisma/client';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui';
 import { useOrderStore } from '@/store/order';

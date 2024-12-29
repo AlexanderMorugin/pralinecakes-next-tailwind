@@ -1,5 +1,6 @@
-import { Footer, Header } from '@/components/shared';
 import React, { Suspense } from 'react';
+
+import { Footer, Header } from '@/components/shared';
 
 export const metadata = {
   title: 'Checkout Pralinecakes Next Tailwind',

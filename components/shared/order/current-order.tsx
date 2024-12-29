@@ -1,6 +1,8 @@
+import { useState, type FC } from 'react';
+
 import { cn } from '@/lib/utils';
 import { Order, OrderStatus } from '@prisma/client';
-import { useState, type FC } from 'react';
+
 import { CurrentOrderModal } from './current-order-modal';
 
 interface Props {

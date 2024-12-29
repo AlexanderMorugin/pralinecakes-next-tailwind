@@ -1,12 +1,14 @@
+import { type FC } from 'react';
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { type FC } from 'react';
 import { cn } from '@/lib/utils';
 import { OrderStatus } from '@prisma/client';
+
 import { OrderChangeStatusForm } from './order-change-status-form';
 
 interface Props {

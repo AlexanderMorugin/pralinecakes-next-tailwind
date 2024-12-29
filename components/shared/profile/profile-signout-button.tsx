@@ -1,8 +1,9 @@
 'use client';
 
-import { Button } from '@/components/ui';
-import { signOut } from 'next-auth/react';
 import React from 'react';
+import { signOut } from 'next-auth/react';
+
+import { Button } from '@/components/ui';
 
 export const ProfileSignoutButton = () => {
   const onClickSignOut = () => {

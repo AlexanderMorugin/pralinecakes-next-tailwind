@@ -1,8 +1,10 @@
 'use client';
 
+import { useState, type FC } from 'react';
+
 import { cn } from '@/lib/utils';
 import { Order, OrderStatus } from '@prisma/client';
-import { useState, type FC } from 'react';
+
 import { CurrentOrderModal } from '../order/current-order-modal';
 
 interface Props {
@@ -21,7 +23,7 @@ export const ProfileCurrentOrder: FC<Props> = ({ item }) => {
   const handleShowCurrentOrderModal = () => {
     setShowCurrentOrderModal(true);
   };
-  // console.log(item);
+
   return (
     <>
       {/** Модальное окно с кнопками подтверждения */}
@@ -59,7 +61,6 @@ export const ProfileCurrentOrder: FC<Props> = ({ item }) => {
         </div>
 
         <div className='flex flex-col justify-between items-end'>
-          {/* <span className='text-[10px]'>{item.createdAt.toLocaleDateString()}</span> */}
           <span className='text-[14px]'>
             <b>{item.totalAmount}</b> руб
           </span>

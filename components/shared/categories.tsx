@@ -1,9 +1,11 @@
 'use client';
 
+import { type FC } from 'react';
+
 import { cn } from '@/lib/utils';
 import { categories } from '@/prisma/categories';
 import { useCategoryId } from '@/store/category';
-import { type FC } from 'react';
+
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 
 interface Props {
@@ -21,12 +23,16 @@ export const Categories: FC<Props> = ({ className }) => {
             key={category.id}
             className={cn(
               'text-[#f8f4ff] border-b-2 border-[#a65317]',
-              categoryActiveId === category.id &&
-                'border-b-2 border-[#ddeeff]',
+              categoryActiveId === category.id && 'border-b-2 border-[#ddeeff]',
               className
             )}
           >
-            <a href={`/#${category.name}`} className='text-[12px] md:text-[16px]'>{category.name}</a>
+            <a
+              href={`/#${category.name}`}
+              className='text-[12px] md:text-[16px]'
+            >
+              {category.name}
+            </a>
           </li>
         ))}
       </ul>

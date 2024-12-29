@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { type FC } from 'react';
-import { OrderCard } from './order-card';
+
 import { OrderStatus } from '@prisma/client';
+
+import { OrderCard } from './order-card';
 import { OrderContact } from './order-contact';
 import { OrderContent } from './order-content';
 
@@ -37,10 +40,6 @@ export const OrdersForm: FC<OrderProps> = ({
 }) => {
   const d = new Date(createdAt);
   const date = d.toLocaleString().slice(0, 17);
-
-
-  // console.log(userId)
-
 
   return (
     <OrderCard

@@ -1,13 +1,15 @@
 'use client';
 
-import { Product } from '@prisma/client';
 import { type FC } from 'react';
-import { cn } from '@/lib/utils';
-import { Title } from '.';
-import { Button } from '../ui';
-import { useCartStore } from '@/store';
 import toast from 'react-hot-toast';
 import { ArrowRight } from 'lucide-react';
+
+import { Product } from '@prisma/client';
+import { useCartStore } from '@/store';
+import { cn } from '@/lib/utils';
+
+import { Title } from '.';
+import { Button } from '../ui';
 import { ToastSuccess } from './toast-success';
 
 interface Props {

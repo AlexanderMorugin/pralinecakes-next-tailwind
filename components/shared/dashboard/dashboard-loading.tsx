@@ -1,10 +1,8 @@
-
 import { type FC } from 'react';
 
 export const DashboardLoading: FC = () => {
   return (
     <div className='flex flex-col gap-4 w-full h-full items-center justify-center'>
-      
       <div className='flex items-center justify-center'>
         <svg
           className='animate-spin border-indigo-600'

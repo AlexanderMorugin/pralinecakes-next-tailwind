@@ -1,7 +1,8 @@
+import { NextRequest, NextResponse } from 'next/server';
+
 import { updateCurrentOrderStatus } from '@/lib/update-current-order-status';
 import { prisma } from '@/prisma/prisma-client';
 import { OrderStatus } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(
   req: NextRequest,

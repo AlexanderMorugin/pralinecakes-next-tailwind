@@ -1,8 +1,10 @@
+import { type FC } from 'react';
 import { Minus, Plus } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+
 import { CountButtonProps } from './count-button';
 import { Button } from '../ui/button';
-import { cn } from '@/lib/utils';
-import { type FC } from 'react';
 
 interface IconButtonProps {
   size?: CountButtonProps['size'];

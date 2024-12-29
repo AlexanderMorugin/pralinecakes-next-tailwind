@@ -1,21 +1,16 @@
 'use server';
 
-// import // PayOrderTemplate,
-// // VerificationUserTemplate,
-// '@/components/shared';
-import { CheckoutFormValues } from '@/components/shared/checkout/checkout-form-schema';
-import { getUserSession } from '@/lib/get-user-session';
-// import { sendEmail } from '@/lib/send-email';
-import { prisma } from '@/prisma/prisma-client';
-
-import { OrderStatus, Prisma } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 import { cookies } from 'next/headers';
+
+import { CheckoutFormValues } from '@/components/shared/checkout/checkout-form-schema';
+import { getUserSession } from '@/lib/get-user-session';
+import { prisma } from '@/prisma/prisma-client';
+import { OrderStatus, Prisma } from '@prisma/client';
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
     const cookieStore = cookies();
-    // const cartToken = cookieStore.get('cartToken')?.value;
     const cartToken = cookieStore.get('next-auth.session-token')?.value;
 
     if (!cartToken) {
@@ -37,8 +32,6 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    // console.log(userCart)
-
     /** Если корзина не найдена, возвращаем ошибку */
     if (!userCart) {
       throw new Error('Корзина не найдена');
@@ -50,11 +43,8 @@ export async function createOrder(data: CheckoutFormValues) {
     }
 
     /** Создаем заказ */
-    // const order = await prisma.order.create({ // этот код при использовании сенд имейл
     await prisma.order.create({
       data: {
-        // token: cartToken,
-        // fullName: data.firstName + ' ' + data.lastName,
         userId: data.userId,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -84,20 +74,6 @@ export async function createOrder(data: CheckoutFormValues) {
         cartId: userCart.id,
       },
     });
-
-    // TODO: Сделать создание ссылки оплаты
-
-    /** Отправляем письмо на почту клиенту */
-    // await sendEmail(
-    //   data.email,
-    //   'Кондитерская "Пралине" - Подтверждение оплаты заказа #' + order.id,
-    //   PayOrderTemplate({
-    //     orderId: order.id,
-    //     totalAmount: order.totalAmount,
-    //     paymentUrl: 'https://pralinecakes-next-tailwind.vercel.app/',
-    //     // items: userCart.cartItems,
-    //   })
-    // );
 
     return 'https://pralinecakes-next-tailwind.vercel.app/';
   } catch (error) {
@@ -148,14 +124,9 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     });
 
     if (user) {
-      // if (!user.verified) {
-      //   throw new Error('Почта не подтверждена');
-      // }
-
       throw new Error('Пользователь уже существует');
     }
 
-    // const createdUser = await prisma.user.create({
     await prisma.user.create({
       data: {
         firstName: body.firstName,
@@ -163,27 +134,9 @@ export async function registerUser(body: Prisma.UserCreateInput) {
         phone: body.phone,
         email: body.email,
         password: hashSync(body.password, 10),
-        // password: body.password,
       },
     });
 
-    // const code = Math.floor(100000 + Math.random() * 900000).toString();
-
-    // await prisma.verificationCode.create({
-    //   data: {
-    //     code,
-    //     userId: createdUser.id,
-    //   },
-    // });
-
-    /** Отправляем письмо на почту клиенту */
-    // await sendEmail(
-    //   createdUser.email,
-    //   'Кондитерская "Пралине" - 📝 Подтверждение регистрации',
-    // VerificationUserTemplate({
-    //     code,
-    //   })
-    // );
     return 'https://pralinecakes-next-tailwind.vercel.app/';
   } catch (err) {
     console.log('Error [CREATE_USER]', err);

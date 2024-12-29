@@ -1,7 +1,9 @@
 import { type FC } from 'react';
+
+import { cn } from '@/lib/utils';
+
 import { CheckoutFormValues } from './checkout-form-schema';
 import { CheckoutSendCart, CheckoutSendPersonalForm } from '.';
-import { cn } from '@/lib/utils';
 
 interface Props {
   data: CheckoutFormValues;

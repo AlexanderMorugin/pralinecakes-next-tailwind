@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils';
 import { ReactNode, type FC } from 'react';
+
+import { cn } from '@/lib/utils';
 
 interface Props {
   title?: ReactNode;

@@ -1,7 +1,7 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 
 import { Footer, Header } from '@/components/shared';
-import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Pralinecakes Next Tailwind',

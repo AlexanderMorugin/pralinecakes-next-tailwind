@@ -3,13 +3,10 @@
 import { useEffect, useRef, type FC } from 'react';
 import { useIntersection } from 'react-use';
 
-import {
-  ProductCard,
-  // ProductCardSkeleton,
-  Title,
-} from '.';
 import { useCategoryId } from '@/store/category';
 import { Product } from '@prisma/client';
+
+import { ProductCard, Title } from '.';
 
 export type TProduct = {
   product: Product;
@@ -46,7 +43,6 @@ export const ProductList: FC<Props> = ({ title, products, categoryId }) => {
       />
       <ul className='grid grid-cols-1 gap-x-1 gap-y-2 xs:grid-cols-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-6'>
         {products.map((product) => (
-          // <ProductCardSkeleton key={product.id} />
           <ProductCard key={product.id} product={product} />
         ))}
       </ul>

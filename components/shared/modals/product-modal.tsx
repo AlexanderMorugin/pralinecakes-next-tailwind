@@ -1,15 +1,17 @@
 'use client';
 
+import { type FC } from 'react';
+import { useRouter } from 'next/navigation';
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { type FC } from 'react';
 import { cn } from '@/lib/utils';
 import { Product } from '@prisma/client';
-import { useRouter } from 'next/navigation';
+
 import { ProductForm } from '..';
 
 interface Props {

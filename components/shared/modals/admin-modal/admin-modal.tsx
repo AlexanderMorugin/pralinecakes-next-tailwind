@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { type FC } from 'react';
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { type FC } from 'react';
-import { AdminForm } from './admin-form';
 import { UserRole } from '@prisma/client';
+
+import { AdminForm } from './admin-form';
 
 interface Props {
   open: boolean;
@@ -24,7 +26,6 @@ export const AdminModal: FC<Props> = ({ open, onClose, session }) => {
 
   const adminSession = session?.user.role === UserRole.ADMIN;
   const userSession = session?.user.role === UserRole.USER;
-  // console.log('session  ----', adminSession);
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -33,11 +34,7 @@ export const AdminModal: FC<Props> = ({ open, onClose, session }) => {
         <DialogTitle className='hidden' />
         <DialogDescription className='hidden' />
 
-        <AdminForm
-          // handleClose={handleClose}
-          adminSession={adminSession}
-          userSession={userSession}
-        />
+        <AdminForm adminSession={adminSession} userSession={userSession} />
       </DialogContent>
     </Dialog>
   );

@@ -1,5 +1,8 @@
 'use client';
 
+import { type FC } from 'react';
+import { useRouter } from 'next/navigation';
+
 import {
   Dialog,
   DialogContent,
@@ -7,10 +10,9 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import { type FC } from 'react';
+
 import { CheckoutFormValues } from './checkout-form-schema';
 import { СheckoutSendForm } from '.';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   showModal: boolean;
