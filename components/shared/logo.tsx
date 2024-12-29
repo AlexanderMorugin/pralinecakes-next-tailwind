@@ -20,7 +20,7 @@ export const Logo: FC<Props> = ({ className }) => {
         placeholder='blur'
         className='object-cover'
       />
-      <div className='hidden sm:flex flex-col text-white text-center'>
+      <div className='hidden xs:flex flex-col text-white text-center'>
         <span className='text-sm md:text-xl font-bold uppercase'>Пралине</span>
         <span>кондитерская</span>
       </div>

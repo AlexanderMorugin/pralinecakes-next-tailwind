@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState, type FC } from 'react';
-import { AlignJustify, ChevronLeft, House } from 'lucide-react';
+import { ChevronLeft, House } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CartButton, Container, Logo, ProfileButton, TopBar } from '.';
 import { AuthModal } from './modals/auth-modal';
@@ -83,17 +83,17 @@ export const Header: FC<Props> = ({
             )}
 
             {hasDashboard && (
-              <p className='font-bold text-white'>Панель управления</p>
+              <p className='font-bold text-white'>Панель кондитерской</p>
             )}
           </div>
         ) : (
-          <>
-            <AlignJustify
-              size={30}
-              className='flex md:hidden text-white cursor-pointer'
-            />
+          // <>
+          //   <AlignJustify
+          //     size={30}
+          //     className='flex md:hidden text-white cursor-pointer'
+          //   />
             <Logo />
-          </>
+          // </>
         )}
 
         {/** Средняя часть - инпут поиска десктоп*/}

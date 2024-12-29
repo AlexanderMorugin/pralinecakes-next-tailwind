@@ -69,7 +69,7 @@ export const CurrentUserOrders: FC<Props> = ({
         </SheetHeader>
         <div className='flex-1'>
           <div className='flex flex-col'>
-          <span>ваш id: {userId}</span>
+          {/* <span>ваш id: {userId}</span> */}
             <span>телефон: {userPhone}</span>
             <span>почта: {userEmail}</span>
           </div>

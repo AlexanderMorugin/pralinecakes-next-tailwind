@@ -16,7 +16,7 @@ export const ProfileSignoutButton = () => {
       type='button'
       variant='secondary'
       onClick={onClickSignOut}
-      className='w-full max-w-[400px] text-[16px]'
+      className='w-full max-w-[400px] h-14 text-[16px]'
     >
       Выйти из аккаунта
     </Button>
